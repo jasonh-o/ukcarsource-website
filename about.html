@@ -45,7 +45,7 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 .btn-orange:hover{background:var(--orange-light);transform:translateY(-2px)}
 .cta-group{display:flex;gap:16px;flex-wrap:wrap}
 /* ABOUT SPECIFIC */
-#about-hero .hero-bg{background-image:url('images/about-page-hero.png');background-position:center 40%}
+#about-hero .hero-bg{background-image:url('images/about.png');background-position:center 40%}
 #about-hero .hero-overlay{background:linear-gradient(110deg,rgba(0,0,0,.95) 0%,rgba(0,0,0,.82) 38%,rgba(0,0,0,.28) 62%,rgba(0,0,0,.05) 78%)}
 .about-body{max-width:var(--max);margin:0 auto;padding:clamp(64px,8vw,96px) clamp(22px,6vw,80px)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,80px);align-items:start}
@@ -106,23 +106,34 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .nav-links a.active{border-bottom:none;color:var(--orange)}
   .cred-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:768px){
-  .logo-wrap img{width:130px;max-width:130px}
-  .about-grid{grid-template-columns:1fr}
-  .cred-grid{grid-template-columns:repeat(2,1fr)}
-  .values-grid{grid-template-columns:1fr}
-  footer{flex-direction:column;align-items:flex-start;gap:16px}
-  .cta-group{flex-direction:column}
-  .whatsapp-btn{bottom:18px;right:18px;border-radius:50%;width:52px;height:52px;padding:0;justify-content:center}
-  .whatsapp-btn svg{width:26px;height:26px}
-  .whatsapp-text{display:none}
-}
+
 
   .hero-title{font-size:clamp(1.9rem,8vw,2.5rem) !important}
 }
 
 }
 
+
+@media(max-width:768px){
+  nav{background:rgba(0,0,0,.97)!important;padding:10px 16px!important;min-height:58px!important}
+  .logo-wrap img{width:88px!important;max-width:88px!important}
+  .page-hero{min-height:0!important;height:auto!important;display:block!important;overflow:visible!important}
+  .hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:16/9!important;background-size:cover!important;background-position:60% center!important;margin-top:58px!important}
+  .hero-overlay{display:none!important}
+  .hero-content{position:relative!important;background:#0a0a0a!important;padding:20px 16px 28px!important;width:100%!important;height:auto!important;display:block!important}
+  .hero-title{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important}
+  .hero-sub{font-size:clamp(.84rem,3.4vw,.92rem)!important;max-width:100%!important;color:#bbb!important;text-shadow:none!important}
+  .btn-orange{display:block!important;text-align:center!important;width:100%!important;margin-top:14px!important}
+  .cta-group{flex-direction:column!important;gap:10px!important}
+  .about-body{padding:28px 16px!important}
+  .about-grid{grid-template-columns:1fr!important}
+  .cred-grid{grid-template-columns:repeat(2,1fr)!important}
+  .values-grid{grid-template-columns:1fr!important}
+  footer{flex-direction:column!important;align-items:flex-start!important;gap:12px!important;padding:18px 16px!important}
+  .whatsapp-btn{bottom:14px!important;right:14px!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;justify-content:center!important}
+  .whatsapp-btn svg{width:22px!important;height:22px!important}
+  .whatsapp-text{display:none!important}
+}
 
 /* ═══════════════════════════════════════════
    MOBILE — Image top, text below, logo clear
@@ -243,8 +254,9 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .whatsapp-text{display:none!important}
 }
 
+
 </style>
-  <link rel="preload" as="image" href="images/about-page-hero.png">
+  <link rel="preload" as="image" href="images/about.png">
   <link rel="canonical" href="https://www.ukcarsource.com/about.html">
 </head>
 <body>
@@ -292,7 +304,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
       <a href="contact.html" class="btn-orange" style="margin-top:8px">Speak to Our Team</a>
     </div>
     <div class="about-img">
-      <img src="images/about-page-feature.jpg" alt="UK Car Source — Premium Vehicle Specialists" onerror="this.style.background='#111';this.style.minHeight='400px'">
+      <img src="images/about-home.jpg" alt="UK Car Source — Premium Vehicle Specialists" onerror="this.style.background='#111';this.style.minHeight='400px'">
     </div>
   </div>
 
