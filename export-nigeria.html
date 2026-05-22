@@ -95,128 +95,39 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .country-sidebar{order:-1}
   .shipping-options{grid-template-columns:1fr}
 }
-/* ═══════════════════════════════════════════════
-   ANIMATED EXPORT HERO — UK Car Source
-   Split-screen: LEFT=text, RIGHT=animated map
-═══════════════════════════════════════════════ */
 
-.export-hero{
-  min-height:70vh;
-  position:relative;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  overflow:hidden;
-  background:#060606;
-}
-
-/* LEFT PANEL */
-.eh-left{
-  position:relative;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  padding:clamp(90px,12vh,130px) clamp(28px,6vw,72px) clamp(56px,8vh,80px);
-  background:linear-gradient(to right,#060606 70%,rgba(6,6,6,0) 100%);
-}
-.eh-left-inner{max-width:520px}
-.eh-breadcrumb{font-size:.68rem;color:#555;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
-.eh-breadcrumb a{color:#555;text-decoration:none;transition:color .2s}
-.eh-breadcrumb a:hover{color:var(--orange)}
-.eh-breadcrumb span{margin:0 8px;color:#333}
-.eh-flag-card{
-  display:inline-flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
-  backdrop-filter:blur(8px);
-  border-radius:6px;
-  padding:8px 14px;
-  margin-bottom:20px;
-}
-.eh-flag-emoji{font-size:1.6rem;line-height:1}
-.eh-flag-label{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#aaa;font-weight:500}
-.eh-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(2.4rem,5vw,4.2rem);
-  font-weight:700;
-  text-transform:uppercase;
-  line-height:1.02;
-  margin-bottom:8px;
-  color:#fff;
-}
-.eh-title span{color:var(--orange)}
-.eh-subtitle{
-  font-size:clamp(.78rem,.9vw,.84rem);
-  font-weight:600;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--orange);
-  margin-bottom:16px;
-}
-.eh-desc{
-  font-size:clamp(.88rem,1vw,.93rem);
-  color:#aaa;
-  line-height:1.78;
-  margin-bottom:28px;
-  max-width:460px;
-}
-.eh-transport-cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.eh-tc{
-  display:flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:4px;
-  padding:7px 12px;
-  font-size:.7rem;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:#999;
-}
-.eh-tc svg{width:14px;height:14px;stroke:var(--orange);fill:none;stroke-width:1.8;flex-shrink:0}
-.eh-cta{
-  display:inline-block;
-  background:var(--orange);
-  color:#fff;
-  text-decoration:none;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(.9rem,1.1vw,.98rem);
-  font-weight:700;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  padding:14px 36px;
-  border-radius:3px;
-  transition:background .2s,transform .15s;
-}
-.eh-cta:hover{background:var(--orange-light);transform:translateY(-2px)}
-
-/* RIGHT PANEL — MAP */
-.eh-right{
-  position:relative;
-  overflow:hidden;
-  background:#080c10;
-}
-.eh-map-canvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-}
-
-/* MOBILE */
-@media(max-width:900px){
-  .export-hero{grid-template-columns:1fr;min-height:0}
-  .eh-left{
-    background:#060606;
-    padding:clamp(90px,12vh,120px) clamp(20px,5vw,40px) 32px;
-  }
-  .eh-right{height:280px;position:relative}
-  .eh-transport-cards{gap:6px}
-  .eh-tc{font-size:.66rem;padding:6px 10px}
-  .eh-title{font-size:clamp(2rem,8vw,2.8rem)}
-  .eh-cta{display:block;text-align:center;width:100%}
-}
-@media(max-width:480px){
-  .eh-right{height:220px}
+/* ── COUNTRY HERO ── */
+.country-hero{min-height:65vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.country-hero-bg{position:absolute;inset:0;background-image:url('images/export-page-trucks.jpg');background-size:cover;background-position:center}
+.country-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.62) 50%,rgba(0,0,0,.25) 100%)}
+.country-hero-content{position:relative;z-index:2;padding:clamp(60px,8vh,100px) clamp(22px,6vw,80px) clamp(48px,6vh,80px);width:100%;max-width:var(--max)}
+.breadcrumb{font-size:.7rem;color:#666;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.breadcrumb a{color:#555;text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--orange)}
+.breadcrumb span{color:#444;margin:0 8px}
+.country-flag-large{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:14px;display:block}
+.country-hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.2rem,5vw,4.5rem);font-weight:700;text-transform:uppercase;line-height:1.02;margin-bottom:14px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.country-hero p{font-size:clamp(.9rem,1.2vw,1rem);color:#ccc;max-width:min(560px,90vw);line-height:1.78;margin-bottom:24px}
+.btn-primary{display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-size:clamp(.88rem,1.1vw,.96rem);font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 32px;border-radius:3px;transition:background .2s,transform .15s}
+.btn-primary:hover{background:var(--orange-light);transform:translateY(-2px)}
+@media(max-width:768px){
+  nav{background:rgba(0,0,0,.97)!important;padding:10px 16px!important;min-height:58px!important}
+  .logo-wrap img{width:88px!important;max-width:88px!important}
+  .country-hero{min-height:0!important;height:auto!important;display:block!important;padding-top:0!important;overflow:visible!important}
+  .country-hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:16/9!important;background-size:cover!important;background-position:55% center!important;margin-top:58px}
+  .country-hero-overlay{display:none!important}
+  .country-hero-content{position:relative!important;background:#0a0a0a!important;padding:18px 16px 24px!important;width:100%!important;max-width:100%!important}
+  .country-flag-large{font-size:1.8rem!important;margin-bottom:8px!important}
+  .country-hero h1{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;text-shadow:none!important}
+  .country-hero p{font-size:clamp(.82rem,3.2vw,.9rem)!important;max-width:100%!important;color:#bbb!important}
+  .country-grid{grid-template-columns:1fr!important}
+  .country-sidebar{order:-1!important}
+  .shipping-options{grid-template-columns:1fr!important}
+  footer{flex-direction:column!important;align-items:flex-start!important;gap:12px!important;padding:18px 16px!important}
+  .flinks{gap:10px!important}
+  .whatsapp-btn{bottom:14px!important;right:14px!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;justify-content:center!important}
+  .whatsapp-btn svg{width:22px!important;height:22px!important}
+  .whatsapp-text{display:none!important}
 }
 
 </style>
@@ -242,44 +153,19 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   </ul>
 </nav>
 
-<!-- ANIMATED EXPORT HERO -->
-<section class="export-hero" id="country-hero">
-  <div class="eh-left">
-    <div class="eh-left-inner">
-      <div class="eh-breadcrumb">
-        <a href="index.html">Home</a><span>›</span>
-        <a href="export.html">Export</a><span>›</span>
-        Nigeria
-      </div>
-      <div class="eh-flag-card">
-        <span class="eh-flag-emoji">🇳🇬</span>
-        <span class="eh-flag-label">Nigeria</span>
-      </div>
-      <h1 class="eh-title">Export Cars<br>to <span>Nigeria</span></h1>
-      <p class="eh-subtitle">Vehicle Export Services from the UK</p>
-      <p class="eh-desc">UK Car Source provides professional vehicle export services to Nigeria for private buyers, dealerships and trade customers. We manage the complete process from vehicle sourcing and documentation through to international shipping via Lagos.</p>
-      <div class="eh-transport-cards">
-        <div class="eh-tc">
-          <svg viewBox="0 0 24 24"><path d="M3 9h18v8a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M3 9l2-4h14l2 4"/><circle cx="7" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>
-          RoRo Shipping
-        </div>
-        <div class="eh-tc">
-          <svg viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="10" rx="2"/><path d="M6 8V6a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>
-          Container
-        </div>
-        <div class="eh-tc">
-          <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
-          Air Freight
-        </div>
-      </div>
-      <a href="#country-enquiry" class="eh-cta">Request Export Quote</a>
-    </div>
-  </div>
-  <div class="eh-right">
-    <canvas id="eh-map" class="eh-map-canvas"></canvas>
+
+<!-- COUNTRY HERO -->
+<section class="country-hero">
+  <div class="country-hero-bg"></div>
+  <div class="country-hero-overlay"></div>
+  <div class="country-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="export.html">Export</a><span>›</span>Nigeria</div>
+    <span class="country-flag-large">🇳🇬</span>
+    <h1>Export Cars to <span>Nigeria</span></h1>
+    <p>UK Car Export ships premium vehicles from the UK to Nigeria. We manage the full process from vehicle sourcing and DVLA documentation through to sea freight and customs clearance at Lagos (Apapa) Port.</p>
+    <a href="#country-enquiry" class="btn-primary">Request Export Quote</a>
   </div>
 </section>
-<script>window.EXPORT_COUNTRY = {lat:9.1,lon:8.7,name:"Nigeria"};</script>
 
 <div class="country-body">
   <div class="country-grid">
@@ -438,228 +324,6 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   }
 })();
 </script>
-<script>
-/* ═══════════════════════════════════════════════
-   ANIMATED MAP HERO — UK Car Source
-   Canvas-based: world map + animated routes
-═══════════════════════════════════════════════ */
-(function(){
-  var canvas = document.getElementById('eh-map');
-  if(!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var W, H;
 
-  // Country data — lat/lon destination coords
-  var DEST = window.EXPORT_COUNTRY || {lat:17.0,lon:-61.8};
-  var UK = {lat:51.5,lon:-0.1};
-
-  function resize(){
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-
-  // Mercator projection
-  function project(lat, lon){
-    var x = (lon + 180) / 360 * W;
-    var latRad = lat * Math.PI / 180;
-    var mercN = Math.log(Math.tan(Math.PI/4 + latRad/2));
-    var y = H/2 - (H * mercN / (2 * Math.PI));
-    return {x:x, y:y};
-  }
-
-  // Simple world map outlines — key landmasses as polylines
-  var LAND = [
-    // British Isles
-    [[51.5,-5],[58,5],[60,1],[61,-2],[58,-6],[55,-6],[53,-4],[51.5,-5]],
-    // Europe rough
-    [[36,5],[44,28],[55,28],[60,25],[65,15],[60,5],[51,2],[44,-8],[36,5]],
-    // Africa
-    [[37,10],[35,25],[22,37],[12,43],[0,42],[-10,40],[-26,33],[-35,20],[-34,26],[-22,35],[-17,37],[-10,40],[0,10],[5,-5],[5,10],[10,15],[15,12],[22,37]],
-    // Americas rough
-    [[60,-140],[65,-85],[60,-65],[45,-60],[35,-75],[25,-80],[10,-75],[0,-50],[-5,-35],[-15,-40],[-35,-58],[-55,-65],[-55,-70],[-35,-72],[-18,-70],[-5,-35],[10,-62],[25,-77],[30,-82],[45,-66],[52,-56],[55,-60],[60,-64],[65,-85],[60,-140]],
-    // Asia / Middle East
-    [[55,28],[40,28],[36,36],[22,40],[12,44],[8,50],[15,55],[22,58],[25,57],[25,68],[28,72],[22,80],[8,77],[5,80],[1,104],[5,115],[22,114],[38,121],[52,142],[55,135],[60,140],[65,180],[70,170],[72,140],[68,100],[60,80],[65,60],[55,50],[50,35],[55,28]],
-    // Australia
-    [[-15,129],[-15,136],[-20,149],[-28,153],[-38,148],[-38,140],[-32,134],[-26,114],[-22,114],[-15,129]],
-  ];
-
-  var t = 0;
-
-  // Animated dots along a curved path
-  var shipDots = [];
-  var planeDots = [];
-  var NUM_DOTS = 5;
-
-  function initDots(){
-    shipDots = [];
-    planeDots = [];
-    for(var i=0;i<NUM_DOTS;i++){
-      shipDots.push({progress: i/NUM_DOTS, speed: 0.0008});
-      planeDots.push({progress: i/NUM_DOTS + 0.1, speed: 0.0014});
-    }
-  }
-
-  function bezierPoint(p0, p1, cp, progress){
-    var t = progress;
-    var x = (1-t)*(1-t)*p0.x + 2*(1-t)*t*cp.x + t*t*p1.x;
-    var y = (1-t)*(1-t)*p0.y + 2*(1-t)*t*cp.y + t*t*p1.y;
-    return {x:x, y:y};
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-
-    // Dark ocean background
-    ctx.fillStyle = '#080c10';
-    ctx.fillRect(0,0,W,H);
-
-    // Subtle grid lines
-    ctx.strokeStyle = 'rgba(255,255,255,.03)';
-    ctx.lineWidth = 0.5;
-    for(var gx=0;gx<W;gx+=W/12){
-      ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,H); ctx.stroke();
-    }
-    for(var gy=0;gy<H;gy+=H/8){
-      ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(W,gy); ctx.stroke();
-    }
-
-    // Draw landmasses
-    LAND.forEach(function(poly){
-      ctx.beginPath();
-      poly.forEach(function(pt, i){
-        var p = project(pt[0], pt[1]);
-        if(i===0) ctx.moveTo(p.x, p.y);
-        else ctx.lineTo(p.x, p.y);
-      });
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(40,50,60,.7)';
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(80,100,120,.4)';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-    });
-
-    var ukPt = project(UK.lat, UK.lon);
-    var destPt = project(DEST.lat, DEST.lon);
-
-    // Control point for curved routes
-    var midX = (ukPt.x + destPt.x)/2;
-    var midY = Math.min(ukPt.y, destPt.y) - H*0.18;
-    var shipCP = {x: midX - W*0.04, y: midY + H*0.12};
-    var planeCP = {x: midX + W*0.04, y: midY - H*0.04};
-
-    // Draw static route lines (dashed)
-    // Ship route
-    ctx.beginPath();
-    ctx.moveTo(ukPt.x, ukPt.y);
-    ctx.quadraticCurveTo(shipCP.x, shipCP.y, destPt.x, destPt.y);
-    ctx.strokeStyle = 'rgba(100,140,180,.25)';
-    ctx.lineWidth = 1.5;
-    ctx.setLineDash([4,6]);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Plane route
-    ctx.beginPath();
-    ctx.moveTo(ukPt.x, ukPt.y);
-    ctx.quadraticCurveTo(planeCP.x, planeCP.y, destPt.x, destPt.y);
-    ctx.strokeStyle = 'rgba(224,123,32,.2)';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([2,8]);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Animated ship dots (blue)
-    shipDots.forEach(function(d){
-      d.progress += d.speed;
-      if(d.progress > 1) d.progress -= 1;
-      var pt = bezierPoint(ukPt, destPt, shipCP, d.progress);
-      var alpha = 0.4 + 0.6 * Math.sin(d.progress * Math.PI);
-      var r = 2.5 + 1.5 * Math.sin(d.progress * Math.PI);
-      ctx.beginPath();
-      ctx.arc(pt.x, pt.y, r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(100,160,220,' + alpha + ')';
-      ctx.fill();
-    });
-
-    // Animated plane dots (orange)
-    planeDots.forEach(function(d){
-      d.progress += d.speed;
-      if(d.progress > 1) d.progress -= 1;
-      var pt = bezierPoint(ukPt, destPt, planeCP, d.progress);
-      var alpha = 0.5 + 0.5 * Math.sin(d.progress * Math.PI);
-      var r = 2 + Math.sin(d.progress * Math.PI);
-      ctx.beginPath();
-      ctx.arc(pt.x, pt.y, r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(224,123,32,' + alpha + ')';
-      ctx.fill();
-    });
-
-    // UK marker — pulsing
-    var pulse = 0.5 + 0.5 * Math.sin(t * 0.05);
-    ctx.beginPath();
-    ctx.arc(ukPt.x, ukPt.y, 4 + pulse*3, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(224,123,32,0.15)';
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(ukPt.x, ukPt.y, 4, 0, Math.PI*2);
-    ctx.fillStyle = '#e07b20';
-    ctx.fill();
-    // UK label
-    ctx.font = 'bold 9px Barlow, sans-serif';
-    ctx.fillStyle = 'rgba(255,255,255,.7)';
-    ctx.letterSpacing = '0.1em';
-    ctx.fillText('UK', ukPt.x + 8, ukPt.y + 3);
-
-    // Destination marker — pulsing
-    var pulse2 = 0.5 + 0.5 * Math.sin(t * 0.05 + 1.5);
-    ctx.beginPath();
-    ctx.arc(destPt.x, destPt.y, 5 + pulse2*4, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(224,123,32,0.12)';
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(destPt.x, destPt.y, 5, 0, Math.PI*2);
-    ctx.fillStyle = '#e07b20';
-    ctx.fill();
-
-    // Destination label
-    if(window.EXPORT_COUNTRY && window.EXPORT_COUNTRY.name){
-      ctx.font = 'bold 9px Barlow, sans-serif';
-      ctx.fillStyle = 'rgba(255,255,255,.7)';
-      ctx.fillText(window.EXPORT_COUNTRY.name, destPt.x + 8, destPt.y + 3);
-    }
-
-    // Route labels
-    var shipMid = bezierPoint(ukPt, destPt, shipCP, 0.5);
-    ctx.font = '8px Barlow, sans-serif';
-    ctx.fillStyle = 'rgba(100,160,220,.6)';
-    ctx.fillText('SEA', shipMid.x - 10, shipMid.y - 6);
-
-    var planeMid = bezierPoint(ukPt, destPt, planeCP, 0.5);
-    ctx.fillStyle = 'rgba(224,123,32,.6)';
-    ctx.fillText('AIR', planeMid.x - 8, planeMid.y - 6);
-
-    t++;
-    requestAnimationFrame(draw);
-  }
-
-  function init(){
-    resize();
-    initDots();
-    draw();
-  }
-
-  window.addEventListener('resize', function(){
-    resize();
-  });
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-
-</script>
 </body>
 </html>
