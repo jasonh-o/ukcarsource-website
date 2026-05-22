@@ -120,6 +120,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 
 
 @media(max-width:768px){
+
   /* NAV */
   nav{background:rgba(0,0,0,.97)!important;padding:10px 16px!important;min-height:58px!important}
   .logo-wrap img{width:88px!important;max-width:88px!important}
@@ -128,27 +129,45 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .nav-links li{border-bottom:1px solid #1a1a1a}
   .nav-links a{display:block;padding:14px 24px;font-size:.88rem}
 
-  /* HERO — image on top, text below */
-  .page-hero{min-height:0!important;height:auto!important;display:block!important;overflow:visible!important}
-  .hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:16/9!important;background-size:cover!important;background-position:55% center!important;margin-top:58px!important}
-  .hero-overlay{display:none!important}
-  .hero-content{position:relative!important;background:#0a0a0a!important;padding:20px 16px 28px!important;width:100%!important;height:auto!important;display:block!important}
-  .hero-title{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important}
-  .hero-sub{font-size:clamp(.84rem,3.4vw,.92rem)!important;max-width:100%!important;color:#bbb!important;text-shadow:none!important}
-  .hero-body{display:block!important;font-size:clamp(.8rem,3vw,.86rem)!important;color:#888!important;margin-bottom:10px!important}
-  .eyebrow{margin-bottom:6px!important}
-  .divider{margin:8px 0 14px!important}
-  .btn-primary,.btn-orange,.hero-cta{display:block!important;text-align:center!important;width:100%!important;margin-top:14px!important}
-  .btn-secondary,.btn-ghost{display:block!important;text-align:center!important;width:100%!important;margin-top:10px!important}
+  /* PARTS HERO — image on top, text below */
+  #parts-hero{
+    min-height:0!important;
+    height:auto!important;
+    display:block!important;
+    overflow:visible!important;
+    padding-top:0!important;
+    align-items:unset!important;
+  }
+  #parts-hero .hero-bg{
+    display:block!important;
+    position:relative!important;
+    inset:unset!important;
+    width:100%!important;
+    aspect-ratio:16/9!important;
+    background-size:cover!important;
+    background-position:55% center!important;
+    margin-top:58px!important;
+  }
+  #parts-hero .hero-overlay{display:none!important}
+  #parts-hero .hero-content{
+    position:relative!important;
+    background:#0a0a0a!important;
+    padding:20px 16px 28px!important;
+    width:100%!important;
+    height:auto!important;
+    display:block!important;
+  }
+  #parts-hero .hero-title{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important}
+  #parts-hero .hero-sub{font-size:clamp(.84rem,3.4vw,.92rem)!important;max-width:100%!important;color:#bbb!important;text-shadow:none!important}
+  .btn-orange,.btn-ghost{display:block!important;text-align:center!important;width:100%!important;margin-top:10px!important}
   .cta-group{flex-direction:column!important;gap:10px!important}
 
-  /* PARTS SPECIFIC */
+  /* PARTS SECTIONS */
   .parts-body{padding:28px 16px!important}
   .trust-row{grid-template-columns:repeat(2,1fr)!important}
   .tr-item:nth-child(2){border-right:none!important}
   .tr-item:nth-child(3){border-top:1px solid #1a1a1a!important}
-  .tr-item{padding:18px 10px!important}
-  .parts-grid{grid-template-columns:1fr!important;gap:10px!important}
+  .parts-grid{grid-template-columns:1fr!important}
   .brands-grid{grid-template-columns:repeat(2,1fr)!important}
   .services-grid{grid-template-columns:1fr!important}
   .parts-cta{padding:40px 16px!important}
@@ -176,7 +195,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="arrivals.html">Arrivals</a></li><li><a href="sourcing.html">Sourcing</a></li><li><a href="export.html">Export</a></li><li><a href="how-it-works.html">How It Works</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="parts.html" class="active">Parts</a></li></ul>
 </nav>
 
-<section id="parts-hero" class="page-hero" style="min-height:70vh">
+<section id="parts-hero" class="page-hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
