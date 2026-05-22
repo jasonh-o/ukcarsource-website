@@ -173,13 +173,15 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 
 }
 
-/* mobile-export-fix */
-
+/* ── MOBILE LANDSCAPE HERO ── */
 @media(max-width:768px){
-  .hero-bg{background-position:center center!important}
-  #export-hero{min-height:auto}
-  .hero-content{padding-top:100px!important;padding-bottom:48px!important}
-  .hero-title{font-size:clamp(1.9rem,8vw,2.8rem)!important}
+  #export-hero{min-height:0!important;aspect-ratio:16/9}
+  .hero-bg{background-image:url('images/export-container-porsche-cayenne.jpg')!important;background-size:cover;background-position:center center}
+  .hero-overlay{background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.50) 50%,rgba(0,0,0,.15) 100%)!important}
+  .hero-content{padding:clamp(16px,4vw,32px)!important;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+  .hero-title{font-size:clamp(1.6rem,6vw,2.2rem)!important;margin-bottom:8px}
+  .hero-sub,.hero-body{font-size:clamp(.78rem,2.8vw,.88rem)!important;margin-bottom:6px;max-width:100%}
+  .btn-primary,.btn-secondary{display:block;text-align:center;width:100%;margin-top:8px}
 }
 </style>
   <meta property="og:title" content="Vehicle Export Services – UK Car Source">
