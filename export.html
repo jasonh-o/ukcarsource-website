@@ -121,7 +121,7 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.78;margin-bottom:1
 #export-cta{
   position:relative;min-height:60vh;display:flex;align-items:center;overflow:hidden;
 }
-.cta-bg{position:absolute;inset:0;background-image:url('images/export-page-hero.jpg');background-size:cover;background-position:center}
+.cta-bg{position:absolute;inset:0;background-image:url('images/export-container-porsche-cayenne.jpg');background-size:cover;background-position:center}
 .cta-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.75) 50%,rgba(0,0,0,.4) 100%)}
 .cta-content{position:relative;z-index:2;padding:clamp(60px,8vw,100px) clamp(22px,6vw,80px);max-width:min(700px,100%)}
 .cta-content h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:800;text-transform:uppercase;line-height:1.08;margin-bottom:16px}
@@ -173,7 +173,14 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 
 }
 
+/* mobile-export-fix */
 
+@media(max-width:768px){
+  .hero-bg{background-position:center center!important}
+  #export-hero{min-height:auto}
+  .hero-content{padding-top:100px!important;padding-bottom:48px!important}
+  .hero-title{font-size:clamp(1.9rem,8vw,2.8rem)!important}
+}
 /* ═══════════════════════════════════════════
    MOBILE — Image top, text below, logo clear
    Desktop/tablet: unchanged
@@ -293,10 +300,11 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .whatsapp-text{display:none!important}
 }
 
+
 </style>
   <meta property="og:title" content="Vehicle Export Services – UK Car Source">
   <meta property="og:description" content="Professional vehicle export to SE Asia, Africa, Caribbean and 35+ countries worldwide.">
-  <meta property="og:image" content="https://www.ukcarsource.com/images/export-page-hero.jpg">
+  <meta property="og:image" content="https://www.ukcarsource.com/images/export-container-porsche-cayenne.jpg">
   <meta property="og:url" content="https://www.ukcarsource.com/export.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -384,12 +392,12 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   </div>
   <div class="types-grid">
     <div class="type-card">
-      <div class="type-card-img" style="background-image:url('images/export-page-pass.jpg')"></div>
+      <div class="type-card-img" style="background-image:url('images/road-transport-ferrari.jpg')"></div>
       <div class="type-card-overlay"></div>
       <div class="type-card-label"><h3>Passenger Cars</h3><p>Prestige, performance &amp; luxury saloons</p></div>
     </div>
     <div class="type-card">
-      <div class="type-card-img" style="background-image:url('images/export-page-hero.jpg')"></div>
+      <div class="type-card-img" style="background-image:url('images/export-page-suv.jpg')"></div>
       <div class="type-card-overlay"></div>
       <div class="type-card-label"><h3>SUVs &amp; 4x4s</h3><p>Luxury and prestige SUV exports</p></div>
     </div>
@@ -399,19 +407,24 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
       <div class="type-card-label"><h3>Performance &amp; Sports</h3><p>High-value specialist vehicle exports</p></div>
     </div>
     <div class="type-card">
-      <div class="type-card-img" style="background-image:url('images/export-page-trucks.jpg')"></div>
+      <div class="type-card-img" style="background-image:url('images/export-hero-daf-trucks.jpg')"></div>
       <div class="type-card-overlay"></div>
       <div class="type-card-label"><h3>Commercial &amp; Trucks</h3><p>Vans, trucks and commercial vehicles</p></div>
     </div>
     <div class="type-card">
-      <div class="type-card-img" style="background-image:url('images/export-page-sv.jpg')"></div>
+      <div class="type-card-img" style="background-image:url('images/commercial-export-unimog.jpg')"></div>
       <div class="type-card-overlay"></div>
       <div class="type-card-label"><h3>Specialist Vehicles</h3><p>Unimogs, military &amp; specialist equipment</p></div>
     </div>
     <div class="type-card">
-      <div class="type-card-img" style="background-image:url('images/sourcing-page-gallery-2.png')"></div>
+      <div class="type-card-img" style="background-image:url('images/export-page-bikes.jpg')"></div>
       <div class="type-card-overlay"></div>
       <div class="type-card-label"><h3>Motorcycles</h3><p>Bikes, trikes &amp; specialist transport</p></div>
+    </div>
+    <div class="type-card">
+      <div class="type-card-img" style="background-image:url(\'images/export-page-ev.jpg\')"></div>
+      <div class="type-card-overlay"></div>
+      <div class="type-card-label"><h3>Electric Vehicles</h3><p>EV, hybrid &amp; electric SUV exports</p></div>
     </div>
 </section>
 
@@ -457,6 +470,9 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
     <a href="export-sri-lanka.html" class="country-card"><span class="country-flag">🇱🇰</span><span class="country-name">Sri Lanka</span></a>
     <a href="export-pakistan.html" class="country-card"><span class="country-flag">🇵🇰</span><span class="country-name">Pakistan</span></a>
     <a href="export-fiji.html" class="country-card"><span class="country-flag">🇫🇯</span><span class="country-name">Fiji</span></a>
+    <a href="export-nigeria.html" class="country-card"><span class="country-flag">🇳🇬</span><span class="country-name">Nigeria</span></a>
+    <a href="export-ghana.html" class="country-card"><span class="country-flag">🇬🇭</span><span class="country-name">Ghana</span></a>
+    <a href="export-eu.html" class="country-card"><span class="country-flag">🇪🇺</span><span class="country-name">Europe</span></a>
     <a href="export-maldives.html" class="country-card"><span class="country-flag">🇲🇻</span><span class="country-name">Maldives</span></a>
     <a href="export-kenya.html" class="country-card"><span class="country-flag">🇰🇪</span><span class="country-name">Kenya</span></a>
     <a href="export-india.html" class="country-card"><span class="country-flag">🇮🇳</span><span class="country-name">India</span></a>
