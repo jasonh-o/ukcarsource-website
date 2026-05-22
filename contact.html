@@ -80,7 +80,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 }
 
 
-#contact-hero .hero-bg{background-image:url('images/contact.png');background-position:center 60%}
+#contact-hero .hero-bg{background-image:url('images/contact-page-hero.png');background-position:center 60%}
 #contact-hero .hero-overlay{background:linear-gradient(110deg,rgba(0,0,0,.96) 0%,rgba(0,0,0,.82) 40%,rgba(0,0,0,.12) 65%,rgba(0,0,0,0) 78%)}
 .contact-body{max-width:var(--max);margin:0 auto;padding:clamp(56px,7vw,88px) clamp(22px,6vw,80px)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
@@ -115,17 +115,128 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 /* Logo standardised */
 .logo-wrap img{width:clamp(110px,11vw,175px);max-width:175px;height:auto;object-fit:contain;display:block}
 @media(max-width:768px){.logo-wrap img{width:110px;max-width:110px}}
-/* ── MOBILE LANDSCAPE HERO ── */
+
+/* ═══════════════════════════════════════════
+   MOBILE — Image top, text below, logo clear
+   Desktop/tablet: unchanged
+═══════════════════════════════════════════ */
 @media(max-width:768px){
-  #contact-hero{min-height:0!important;aspect-ratio:16/9}
-  #contact-hero .hero-bg{background-size:cover;background-position:center 60%}
-  #contact-hero .hero-overlay{background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.50) 50%,rgba(0,0,0,.15) 100%)}
-  #contact-hero .hero-content{padding:clamp(16px,4vw,32px)!important;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
-  #contact-hero .hero-title{font-size:clamp(1.6rem,6vw,2.2rem)!important;margin-bottom:8px}
-  #contact-hero .hero-sub{font-size:clamp(.78rem,2.8vw,.88rem)!important;max-width:100%}
+
+  /* NAV always solid + visible */
+  nav{background:rgba(0,0,0,.97)!important;padding:10px 16px!important;min-height:58px!important}
+  .logo-wrap img{width:88px!important;max-width:88px!important}
+
+  /* PAGE HERO — image block on top, text block below */
+  .page-hero{min-height:0!important;height:auto!important;display:block!important;padding-top:0!important;overflow:visible!important}
+  .hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:16/9!important;background-size:cover!important;background-position:55% center!important;margin-top:58px}
+  .hero-overlay{display:none!important}
+  .hero-content{position:relative!important;z-index:1!important;background:#0a0a0a!important;padding:20px 16px 28px!important;width:100%!important;height:auto!important;display:block!important}
+  .hero-title{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important;line-height:1.08!important}
+  .hero-sub{font-size:clamp(.84rem,3.4vw,.92rem)!important;max-width:100%!important;margin-bottom:8px!important;color:#bbb!important;text-shadow:none!important}
+  .hero-body{display:block!important;font-size:clamp(.8rem,3vw,.86rem)!important;color:#888!important;margin-bottom:10px!important}
+  .eyebrow{margin-bottom:6px!important}
+  .divider{margin:8px 0 14px!important}
+  .hero-cta,.btn-primary,.btn-orange{display:block!important;text-align:center!important;width:100%!important;margin-top:14px!important}
+  .btn-secondary,.btn-ghost{display:block!important;text-align:center!important;width:100%!important;margin-top:10px!important}
+  .cta-group{flex-direction:column!important;gap:10px!important}
+
+  /* COUNTRY HERO — same pattern */
+  .country-hero{min-height:0!important;height:auto!important;display:block!important;padding-top:0!important;align-items:unset!important;overflow:visible!important}
+  .country-hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:16/9!important;background-size:cover!important;background-position:55% center!important;margin-top:58px}
+  .country-hero-overlay{display:none!important}
+  .country-hero-content{position:relative!important;background:#0a0a0a!important;padding:18px 16px 24px!important;width:100%!important;max-width:100%!important;height:auto!important}
+  .country-flag-large{font-size:1.8rem!important;margin-bottom:8px!important;display:block!important}
+  .country-hero h1{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important}
+  .country-hero p{font-size:clamp(.82rem,3.2vw,.9rem)!important;max-width:100%!important;margin-bottom:12px!important;color:#bbb!important}
+  .breadcrumb{display:block!important;margin-bottom:10px!important;font-size:.66rem!important}
+
+  /* ANIMATED EXPORT HERO */
+  .export-hero{display:block!important;min-height:0!important;padding-top:0!important}
+  .eh-left{background:#0a0a0a!important;padding:18px 16px 22px!important;order:2}
+  .eh-right{height:200px!important;display:block!important;order:1;margin-top:58px}
+  .eh-title{font-size:clamp(1.5rem,6vw,1.9rem)!important}
+  .eh-desc{font-size:clamp(.82rem,3.2vw,.9rem)!important;color:#bbb!important}
+  .eh-subtitle{font-size:.68rem!important;margin-bottom:10px!important}
+  .eh-cta{display:block!important;text-align:center!important;width:100%!important}
+  .eh-transport-cards{gap:5px!important;margin-bottom:18px!important}
+  .eh-tc{font-size:.64rem!important;padding:5px 9px!important}
+  .eh-flag-card{margin-bottom:14px!important}
+  .eh-breadcrumb{margin-bottom:10px!important;font-size:.64rem!important}
+
+  /* QUICK LINKS */
+  .quick-strip{grid-template-columns:repeat(2,1fr)!important}
+  .qs-item:nth-child(2){border-right:none!important}
+  .qs-item:nth-child(3){border-top:1px solid #1a1a1a!important}
+  .qs-item{padding:16px 12px!important}
+  .qs-icon{width:20px!important;height:20px!important;margin-bottom:7px!important}
+  .qs-title{font-size:.86rem!important}
+  .qs-desc{font-size:.7rem!important;line-height:1.4!important}
+  .qs-arrow{font-size:.64rem!important}
+
+  /* TRUST STRIP */
+  .trust-strip{grid-template-columns:repeat(2,1fr)!important}
+  .trust-item:nth-child(2){border-right:none!important}
+  .trust-item:nth-child(3){border-top:1px solid #1e1e1e!important}
+  .trust-item{padding:18px 10px!important}
+  .trust-num{font-size:.88rem!important}
+  .trust-label{font-size:.64rem!important}
+
+  /* TYPOGRAPHY */
+  .section-title,h2{font-size:clamp(1.4rem,5.5vw,1.85rem)!important;line-height:1.1!important}
+  h1{font-size:clamp(1.6rem,7vw,2.2rem)!important}
+  p{font-size:clamp(.84rem,3.2vw,.9rem)!important;line-height:1.68!important}
+  .section-label{font-size:.64rem!important;letter-spacing:.16em!important}
+
+  /* HOME SECTIONS */
+  .home-sourcing{grid-template-columns:1fr!important}
+  .hs-right{display:none!important}
+  .hs-left{padding:28px 16px!important;background:var(--dark)!important}
+  .hs-left h2{font-size:clamp(1.2rem,5vw,1.6rem)!important}
+  .home-about-inner{grid-template-columns:1fr!important}
+  .home-about-img{display:none!important}
+  .home-about-creds{grid-template-columns:1fr 1fr!important}
+
+  /* GALLERY */
+  .gallery-grid{grid-template-columns:repeat(2,1fr)!important;gap:6px!important}
+  .arrivals-inner{padding-left:12px!important;padding-right:12px!important}
+  .arrivals-page{padding-top:80px!important}
+
+  /* ABOUT */
+  .about-grid{grid-template-columns:1fr!important}
+  .about-body{padding:28px 16px!important}
+
+  /* CONTACT */
+  .contact-grid{grid-template-columns:1fr!important;gap:22px!important}
+  .contact-body{padding:28px 16px!important}
+  .features-bar{grid-template-columns:repeat(2,1fr)!important}
+  .feat:nth-child(2){border-right:none!important}
+  .feat:nth-child(3){border-top:1px solid rgba(255,255,255,.07)!important}
+  .feat{padding:12px 8px!important}
+
+  /* COUNTRY PAGES */
+  .country-body{padding:24px 14px!important}
+  .country-grid{grid-template-columns:1fr!important;gap:18px!important}
+  .country-sidebar{order:-1!important}
+  .shipping-options{grid-template-columns:1fr!important;gap:8px!important}
+  .info-table td:first-child{width:36%!important;font-size:.66rem!important}
+  .info-table td{font-size:.82rem!important;padding:10px 0!important}
+  .related-grid{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))!important}
+  .countries-grid{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))!important}
+
+  /* FOOTER */
+  footer{flex-direction:column!important;align-items:flex-start!important;gap:12px!important;padding:18px 16px!important}
+  .flinks{gap:10px!important;flex-wrap:wrap!important}
+  .flinks a{font-size:.66rem!important}
+  .fcopy{font-size:.64rem!important}
+
+  /* WHATSAPP */
+  .whatsapp-btn{bottom:14px!important;right:14px!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;justify-content:center!important}
+  .whatsapp-btn svg{width:22px!important;height:22px!important}
+  .whatsapp-text{display:none!important}
 }
+
 </style>
-  <link rel="preload" as="image" href="images/contact.png">
+  <link rel="preload" as="image" href="images/contact-page-hero.png">
   <link rel="canonical" href="https://www.ukcarsource.com/contact.html">
 </head>
 <body>
