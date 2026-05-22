@@ -43,7 +43,7 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 
 /* ── HERO ── */
 #export-hero{
-  min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;
+  min-height:100vh;position:relative;display:flex;align-items:flex-start;overflow:hidden;
 }
 .hero-bg{
   position:absolute;inset:0;
@@ -52,9 +52,9 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 }
 .hero-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to right,rgba(0,0,0,.92) 0%,rgba(0,0,0,.88) 22%,rgba(0,0,0,.65) 40%,rgba(0,0,0,.2) 58%,rgba(0,0,0,0) 72%);
+  background:linear-gradient(to right,rgba(0,0,0,.78) 0%,rgba(0,0,0,.68) 25%,rgba(0,0,0,.38) 43%,rgba(0,0,0,.10) 58%,rgba(0,0,0,0) 66%);
 }
-.hero-content{position:relative;z-index:2;padding:clamp(80px,10vh,120px) clamp(22px,6vw,80px) clamp(60px,8vh,100px);max-width:var(--max)}
+.hero-content{position:relative;z-index:2;padding:clamp(110px,14vh,150px) clamp(22px,6vw,80px) clamp(80px,10vh,120px);max-width:var(--max);width:100%}
 .hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.4rem,6vw,5.5rem);font-weight:700;line-height:1.02;text-transform:uppercase;letter-spacing:.02em;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
 .hero-sub{font-size:clamp(.9rem,1.3vw,1.05rem);font-weight:400;color:#ddd;max-width:min(560px,90vw);line-height:1.72;margin-bottom:12px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
 .hero-body{font-size:clamp(.84rem,1vw,.9rem);color:#bbb;max-width:min(520px,90vw);line-height:1.75;margin-bottom:32px}
@@ -168,11 +168,6 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 /* Logo standardised */
 .logo-wrap img{width:clamp(110px,11vw,175px);max-width:175px;height:auto;object-fit:contain;display:block}
 @media(max-width:768px){.logo-wrap img{width:110px;max-width:110px}}
-
-  .hero-title{font-size:clamp(1.9rem,8vw,2.5rem) !important}
-}
-
-}
 
 /* mobile-export-fix — image top, text below, matches home/about/contact */
 @media(max-width:768px){
@@ -315,8 +310,8 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 <!-- ── NAV ── -->
 <nav id="main-nav">
   <a href="index.html" class="logo-wrap" aria-label="UK Car Source">
-    <img src="images/logo-export.jpg" alt="UK Car Export" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'">
-    <span class="logo-fallback">UK<em>CAR</em> EXPORT</span>
+    <img src="images/logo.png" alt="UK Car Source" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'">
+    <span class="logo-fallback">UK<em>CAR</em> SOURCE</span>
   </a>
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -436,7 +431,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
     <a href="parts.html" class="type-card" style="text-decoration:none;display:block">
       <div class="type-card-img" style="background-image:url('images/logo-parts.jpg')"></div>
       <div class="type-card-overlay" style="background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(14,8,0,.5) 60%,rgba(224,123,32,.12) 100%)"></div>
-      <div class="type-card-label"><h3>OEM Parts</h3><p>Genuine parts exported worldwide — <span style="color:var(--orange)">parts.html</span></p></div>
+      <div class="type-card-label"><h3 style="color:#fff">OEM Parts</h3><p style="color:#aaa">Genuine parts exported worldwide</p></div>
     </a>
 </section>
 
