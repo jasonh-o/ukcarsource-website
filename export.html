@@ -161,73 +161,39 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 .logo-wrap img{width:clamp(110px,11vw,175px);max-width:175px;height:auto;object-fit:contain;display:block}
 
 
-  .hero-title{font-size:clamp(1.9rem,8vw,2.5rem) !important}
-}
-
-}
-
-/* mobile-export-fix */
+  
 
 
-/* ═══════════════════════════════════════════
-   MOBILE — Image top, text below, logo clear
-   Desktop/tablet: unchanged
-═══════════════════════════════════════════ */
+
+
+
+
+
 
 
 
 
 @media(max-width:768px){
-
-  /* NAV */
   nav{background:rgba(0,0,0,.97)!important;padding:10px 16px!important;min-height:58px!important}
   .logo-wrap img{width:88px!important;max-width:88px!important}
   .nav-links{display:none;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:rgba(0,0,0,.99);border-top:1px solid #222;z-index:999}
   .nav-links.open{display:flex}
   .nav-links li{border-bottom:1px solid #1a1a1a}
   .nav-links a{display:block;padding:14px 24px;font-size:.88rem}
-
-  /* EXPORT HERO — image on top, text below */
-  #export-hero{
-    min-height:0!important;
-    height:auto!important;
-    display:block!important;
-    overflow:visible!important;
-    padding-top:0!important;
-    align-items:unset!important;
-  }
-  #export-hero .hero-bg{
-    display:block!important;
-    position:relative!important;
-    inset:unset!important;
-    width:100%!important;
-    aspect-ratio:16/9!important;
-    background-size:cover!important;
-    background-position:55% center!important;
-    margin-top:58px!important;
-  }
+  #export-hero{min-height:0!important;height:auto!important;display:block!important;overflow:visible!important;padding-top:0!important;align-items:unset!important}
+  #export-hero .hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:16/9!important;background-size:cover!important;background-position:55% center!important;margin-top:58px!important}
   #export-hero .hero-overlay{display:none!important}
-  #export-hero .hero-content{
-    position:relative!important;
-    background:#0a0a0a!important;
-    padding:20px 16px 28px!important;
-    width:100%!important;
-    height:auto!important;
-    display:block!important;
-    max-width:100%!important;
-  }
+  #export-hero .hero-content{position:relative!important;background:#0a0a0a!important;padding:20px 16px 28px!important;width:100%!important;height:auto!important;display:block!important;max-width:100%!important}
   #export-hero .hero-title{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important;line-height:1.08!important}
   #export-hero .hero-sub{font-size:clamp(.84rem,3.4vw,.92rem)!important;max-width:100%!important;color:#bbb!important;text-shadow:none!important}
   #export-hero .hero-body{display:block!important;font-size:clamp(.8rem,3vw,.86rem)!important;color:#888!important;margin-bottom:10px!important}
   .btn-primary,.btn-secondary{display:block!important;text-align:center!important;width:100%!important;margin-top:10px!important}
   .cta-group{flex-direction:column!important;gap:10px!important}
-
-  /* SECTIONS */
-  .type-cards{grid-template-columns:1fr 1fr!important}
+  .types-grid{grid-template-columns:1fr 1fr!important}
   .countries-grid{grid-template-columns:repeat(auto-fill,minmax(75px,1fr))!important}
   .services-grid{grid-template-columns:1fr!important}
-
-  /* FOOTER */
+  .sources-grid{grid-template-columns:1fr 1fr!important}
+  .why-grid{grid-template-columns:1fr!important}
   footer{flex-direction:column!important;align-items:flex-start!important;gap:12px!important;padding:18px 16px!important}
   .whatsapp-btn{bottom:14px!important;right:14px!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;justify-content:center!important}
   .whatsapp-btn svg{width:22px!important;height:22px!important}
