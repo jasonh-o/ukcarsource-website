@@ -76,7 +76,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 /* Parts page uses its own logo-parts.jpg */
 .parts-logo img{content:url('images/logo-parts.jpg')}
 #parts-hero .hero-bg{background:#000;background-image:url('images/parts-page-hero.jpg')}
-#parts-hero .hero-overlay{background:linear-gradient(110deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.82) 42%,rgba(0,0,0,.38) 66%,rgba(0,0,0,.08) 84%)}
+#parts-hero .hero-overlay{background:none}
 .parts-body{max-width:var(--max);margin:0 auto;padding:clamp(56px,7vw,88px) clamp(22px,6vw,80px)}
 .parts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(14px,2vw,20px);margin-top:clamp(32px,4vw,48px)}
 .part-card{background:var(--dark3);border:1px solid #1e1e1e;border-radius:3px;padding:clamp(20px,2.5vw,28px);transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
@@ -124,10 +124,6 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .nav-links.open{display:flex}
   .nav-links li{border-bottom:1px solid #1a1a1a}
   .nav-links a{display:block;padding:14px 24px;font-size:.88rem}
-  #parts-hero{min-height:0!important;height:auto!important;display:block!important;overflow:visible!important;padding-top:0!important;align-items:unset!important}
-  #parts-hero .hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:16/9!important;background-size:cover!important;background-position:55% center!important;margin-top:58px!important}
-  #parts-hero .hero-overlay{display:none!important}
-  #parts-hero .hero-content{position:relative!important;background:#0a0a0a!important;padding:20px 16px 28px!important;width:100%!important;height:auto!important;display:block!important}
   #parts-hero .hero-title{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important}
   #parts-hero .hero-sub{font-size:clamp(.84rem,3.4vw,.92rem)!important;max-width:100%!important;color:#bbb!important;text-shadow:none!important}
   .btn-orange,.btn-ghost{display:block!important;text-align:center!important;width:100%!important;margin-top:10px!important}
@@ -148,6 +144,13 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .whatsapp-text{display:none!important}
 }
 
+/* ── Parts hero: image-on-top stacked layout (mobile) ── */
+@media(max-width:768px){
+  #parts-hero{display:flex!important;flex-direction:column!important;min-height:0!important;height:auto!important;overflow:visible!important;padding:0!important;align-items:stretch!important}
+  #parts-hero>.hero-bg{position:relative!important;inset:unset!important;flex:none!important;width:100%!important;height:75vw!important;margin-top:58px!important;background-size:cover!important;background-position:center center!important}
+  #parts-hero>.hero-overlay{display:none!important}
+  #parts-hero>.hero-content{position:relative!important;flex:none!important;width:100%!important;height:auto!important;padding:20px 16px 28px!important;background:#0a0a0a!important;z-index:1!important}
+}
 </style>
   <link rel="preload" as="image" href="images/parts-page-hero.jpg">
   <link rel="canonical" href="https://www.ukcarsource.com/parts.html">
