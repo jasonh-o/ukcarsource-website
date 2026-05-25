@@ -56,8 +56,19 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 .cta-group{display:flex;gap:16px;flex-wrap:wrap}
 
 /* HOME HERO */
-#home-hero .hero-bg{background-image:url('images/home-page-hero.jpg');filter:brightness(1.6)}
-#home-hero .hero-overlay{background:linear-gradient(to right,rgba(0,0,0,.65) 0%,rgba(0,0,0,.3) 35%,rgba(0,0,0,0) 62%)}
+#home-hero .hero-bg{
+  background-image:url('images/home-page-hero.jpg');
+  filter:brightness(1.15);
+}
+#home-hero .hero-overlay{
+  background:linear-gradient(
+    to right,
+    rgba(0,0,0,.78) 0%,
+    rgba(0,0,0,.58) 32%,
+    rgba(0,0,0,.25) 55%,
+    rgba(0,0,0,0) 75%
+  );
+}
 
 /* QUICK LINKS STRIP */
 .quick-strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark2);border-top:1px solid #1a1a1a}
