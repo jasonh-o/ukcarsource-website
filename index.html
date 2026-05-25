@@ -195,6 +195,8 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .hero-bg{display:block!important;position:relative!important;inset:unset!important;width:100%!important;aspect-ratio:4/3!important;background-size:cover!important;background-position:center top!important;margin-top:58px}
   /* Home hero is 1448×758 (~19:10) — override to show full width without cropping */
   #home-hero .hero-bg{aspect-ratio:724/379!important;background-position:center!important;filter:brightness(1.6)!important}
+  /* Home hero — very light left gradient on mobile */
+  #home-hero .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.45) 0%,rgba(0,0,0,.25) 35%,rgba(0,0,0,.08) 60%,rgba(0,0,0,0) 78%)}
   .hero-overlay{display:none!important}
   .hero-content{position:relative!important;z-index:1!important;background:#0a0a0a!important;padding:20px 16px 28px!important;width:100%!important;height:auto!important;display:block!important}
   .hero-title{font-size:clamp(1.6rem,6.5vw,2.1rem)!important;margin-bottom:8px!important;text-shadow:none!important;line-height:1.08!important}
