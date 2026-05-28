@@ -63,6 +63,12 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 }
 
 </style>
+  <meta property="og:title" content="Vehicle Reviews & Market Insights | UK Car Source">
+  <meta property="og:description" content="Curated reviews and market updates on the premium vehicles UK Car Source supplies. Stay informed on the latest prestige models, values and market trends.">
+  <meta property="og:image" content="https://www.ukcarsource.com/images/home-page-hero.jpg">
+  <meta property="og:url" content="https://www.ukcarsource.com/reviews.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.ukcarsource.com/reviews.html">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"UK Car Source","url":"https://www.ukcarsource.com","logo":"https://www.ukcarsource.com/images/logo.png","telephone":"+447831921254","email":"info@ukcarsource.com","address":{"@type":"PostalAddress","addressCountry":"GB"},"sameAs":["https://www.ukcarsource.com"]}
@@ -89,79 +95,10 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   <div class="divider"></div>
   <h1 class="section-title" style="font-size:clamp(2.2rem,4vw,3.5rem);text-transform:uppercase;">Latest Reviews &amp; <span>Market Insights</span></h1>
   <p style="max-width:min(620px,100%);margin-bottom:40px;">Curated automotive reviews, new model updates and market insight relevant to the vehicles we source — Porsche, Bentley, Range Rover, Mercedes-AMG, G Wagon, Land Cruiser and the finest performance and luxury imports.</p>
-  <div class="reviews-feed-container" id="reviews-feed">
-    <div id="feed-loading" style="display:flex;align-items:center;justify-content:center;padding:60px 20px;gap:12px">
-      <div style="width:18px;height:18px;border:2px solid #333;border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite"></div>
-      <span style="color:#555;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase">Loading Feed…</span>
-    </div>
-    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+  <div class="reviews-feed-container">
+    <rssapp-wall id="FaHJCWxt9ndtGbl2"></rssapp-wall>
+    <script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async></script>
   </div>
-  <script>
-  (function(){
-    var FEED='https://rss.app/feeds/FaHJCWxt9ndtGbl2.xml';
-    var container=document.getElementById('reviews-feed');
-    function render(items){
-      if(!items.length){
-        container.innerHTML='<p style="color:#555;text-align:center;padding:48px 20px">No articles available at the moment.</p>';
-        return;
-      }
-      var html='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px">';
-      items.forEach(function(item){
-        var title=item.title||'';
-        var link=item.link||'#';
-        var img=item.thumbnail||'';
-        var date='';
-        if(item.pubDate){try{date=new Date(item.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch(e){}}
-        html+='<a href="'+link+'" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:#1a1a1a;border:1px solid #262626;border-radius:3px;overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor=\'#e07b20\'" onmouseout="this.style.borderColor=\'#262626\'">';
-        if(img){html+='<div style="aspect-ratio:16/9;overflow:hidden;background:#111"><img src="'+img+'" alt="'+title+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" onerror="this.closest(\'a\').querySelector(\'.feed-img-wrap\').style.display=\'none\'"></div>';}
-        html+='<div style="padding:14px 16px">';
-        if(date) html+='<div style="font-size:.62rem;color:#555;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px">'+date+'</div>';
-        html+='<div style="font-family:\'Barlow Condensed\',sans-serif;font-size:clamp(.92rem,1.2vw,1.02rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#eee;line-height:1.28">'+title+'</div>';
-        html+='<div style="font-size:.68rem;color:#e07b20;letter-spacing:.08em;text-transform:uppercase;margin-top:10px;font-weight:600">Read More →</div>';
-        html+='</div></a>';
-      });
-      html+='</div>';
-      container.innerHTML=html;
-    }
-    function parseXML(xml){
-      var items=[];
-      var nodes=xml.querySelectorAll('item');
-      nodes.forEach(function(n){
-        var thumb='';
-        var enc=n.querySelector('enclosure');
-        if(enc&&enc.getAttribute('type')&&enc.getAttribute('type').indexOf('image')>-1) thumb=enc.getAttribute('url')||'';
-        if(!thumb){var med=n.getElementsByTagNameNS('*','thumbnail')[0]||n.getElementsByTagNameNS('*','content')[0];if(med) thumb=med.getAttribute('url')||'';}
-        if(!thumb){var desc=n.querySelector('description');if(desc){var m=(desc.textContent||'').match(/<img[^>]+src=["']([^"']+)["']/i);if(m) thumb=m[1];}}
-        items.push({
-          title:(n.querySelector('title')||{}).textContent||'',
-          link:(n.querySelector('link')||{}).textContent||(n.querySelector('guid')||{}).textContent||'#',
-          pubDate:(n.querySelector('pubDate')||{}).textContent||'',
-          thumbnail:thumb
-        });
-      });
-      return items;
-    }
-    function load(){
-      fetch('https://api.allorigins.win/get?url='+encodeURIComponent(FEED))
-        .then(function(r){return r.json();})
-        .then(function(d){
-          var parser=new DOMParser();
-          var xml=parser.parseFromString(d.contents,'text/xml');
-          render(parseXML(xml));
-        })
-        .catch(function(){
-          /* fallback: rss2json */
-          return fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(FEED)+'&count=24')
-            .then(function(r){return r.json();})
-            .then(function(d){render(d.items||[]);})
-            .catch(function(){
-              container.innerHTML='<p style="color:#555;text-align:center;padding:48px 20px">Unable to load feed. Please check back shortly.</p>';
-            });
-        });
-    }
-    load();
-  })();
-  </script>
 </div>
 <footer>
   <div class="flogo">UK Car Source — Vehicle Sourcing Specialists</div>
