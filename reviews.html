@@ -1,206 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vehicle Reviews & Market Insights | UK Car Source</title>
-  <meta name="description" content="Latest vehicle reviews, import guides and market insights from UK Car Source. Covering Porsche, Bentley, Range Rover, Mercedes, Land Cruiser and premium imports. Updated regularly.">
-  <link rel="canonical" href="https://www.ukcarsource.com/reviews.html">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Vehicle Reviews & Market Insights | UK Car Source">
-  <meta property="og:description" content="Latest vehicle reviews, import guides and market insights for premium sourcing clients. Porsche, Bentley, Range Rover, Mercedes-AMG and more.">
-  <meta property="og:image" content="https://www.ukcarsource.com/images/home-page-hero.jpg">
-  <meta property="og:url" content="https://www.ukcarsource.com/reviews.html">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- JSON-LD: Blog -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "UK Car Source — Vehicle Reviews & Market Insights",
-    "url": "https://www.ukcarsource.com/reviews.html",
-    "description": "Vehicle reviews, import guides and market insights from UK Car Source's specialist team.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "UK Car Source",
-      "url": "https://www.ukcarsource.com/"
-    },
-    "blogPost": [
-      {
-        "@type": "BlogPosting",
-        "headline": "How to Import a Car from Japan to the UK",
-        "description": "A complete guide to importing a vehicle from Japan — from finding the right auction to clearing UK customs.",
-        "url": "https://www.ukcarsource.com/reviews.html#japan-import-guide",
-        "datePublished": "2026-05-01",
-        "author": { "@type": "Organization", "name": "UK Car Source" }
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "What is RoRo Shipping? A Guide for Vehicle Exporters",
-        "description": "Roll-on Roll-off shipping explained — how it works, when to use it, and how it compares to container shipping for vehicle export.",
-        "url": "https://www.ukcarsource.com/reviews.html#roro-guide",
-        "datePublished": "2026-04-15",
-        "author": { "@type": "Organization", "name": "UK Car Source" }
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "2025 Porsche 911 GT3 RS — UK Sourcing Guide",
-        "description": "Everything buyers need to know about sourcing a Porsche 911 GT3 RS through a UK specialist agent.",
-        "url": "https://www.ukcarsource.com/reviews.html#porsche-gt3rs",
-        "datePublished": "2026-03-20",
-        "author": { "@type": "Organization", "name": "UK Car Source" }
-      }
-    ]
-  }
-  </script>
-
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Reviews & Market Insights | UK Car Source</title>
+<meta name="description" content="Curated reviews and market updates on the premium vehicles UK Car Source supplies. Stay informed on the latest prestige models, values and market trends.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--orange:#e07b20;--orange-light:#f08c2a;--dark:#0a0a0a;--dark2:#0d0d0d;--dark3:#141414;--white:#fff;--max:1400px;}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(18px,4vw,48px);background:transparent;transition:background .3s,padding .3s;min-height:72px}
+nav.scrolled{background:rgba(0,0,0,.97);box-shadow:0 2px 24px rgba(0,0,0,.6);padding:12px clamp(18px,4vw,48px)}
+.logo-wrap{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.logo-wrap img{width:clamp(110px,11vw,175px);max-width:175px;height:auto;object-fit:contain;display:block}
+.logo-fallback{display:none;font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:#fff}
+.logo-fallback em{color:var(--orange);font-style:normal}
+.nav-links{display:flex;gap:clamp(10px,1.8vw,22px);list-style:none}
+.nav-links a{font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(.64rem,.8vw,.74rem);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--white);transition:color .2s;white-space:nowrap;padding-bottom:2px}
+.nav-links a:hover,.nav-links a.active{color:var(--orange)}
+.nav-links a.active{border-bottom:2px solid var(--orange)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px 4px;background:none;border:none}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--white);transition:all .3s}
+.divider{width:54px;height:2px;background:var(--orange);margin:14px 0 22px}
+.section-label{font-size:clamp(.62rem,.75vw,.7rem);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;line-height:1.08;margin-bottom:16px}
+.section-title span{color:var(--orange)}
+p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:14px}
+footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,32px) clamp(22px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.flogo{font-family:'Barlow',sans-serif;font-size:clamp(.78rem,1vw,.9rem);font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#fff}
+.fcopy{font-size:.7rem;color:#3a3a3a}
+.flinks{display:flex;gap:clamp(12px,1.5vw,20px);flex-wrap:wrap}
+.flinks a{font-size:.7rem;color:#3a3a3a;text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--orange)}
+.whatsapp-btn{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;padding:12px 18px 12px 14px;border-radius:50px;box-shadow:0 4px 20px rgba(37,211,102,.4);font-family:'Barlow',sans-serif;font-size:.82rem;font-weight:600;transition:transform .2s}
+.whatsapp-btn:hover{transform:translateY(-3px)}
+.whatsapp-btn svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
+.whatsapp-text{white-space:nowrap}
+.reviews-page{padding:clamp(110px,13vh,150px) clamp(22px,6vw,80px) clamp(60px,6vw,80px);max-width:var(--max);margin:0 auto}
+.reviews-feed-container{background:#111;border:1px solid #222;border-radius:4px;padding:clamp(16px,2.5vw,32px);min-height:clamp(260px,30vw,480px);max-width:min(1200px,100%);position:relative;overflow:hidden}
+.reviews-feed-container::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--orange),#f5a623);border-radius:4px 4px 0 0}
+@media(max-width:1000px){
+  .nav-toggle{display:flex}
+  .nav-links{display:none;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:rgba(0,0,0,.99);border-top:1px solid #222;z-index:999}
+  .nav-links.open{display:flex}
+  .nav-links li{border-bottom:1px solid #1a1a1a}
+  .nav-links a{display:block;padding:14px 24px;font-size:.88rem}
+}
+@media(max-width:768px){
+  nav{background:rgba(0,0,0,.97)!important;padding:10px 16px!important;min-height:58px!important}
+  .logo-wrap img{width:88px!important;max-width:88px!important}
+  .reviews-page{padding:80px 16px 40px!important}
+  .section-title,h1{font-size:clamp(1.4rem,6vw,2rem)!important}
+  p{font-size:clamp(.84rem,3.2vw,.9rem)!important}
+  .reviews-feed-container{padding:12px!important}
+  footer{flex-direction:column!important;align-items:flex-start!important;gap:12px!important;padding:18px 16px!important}
+  .whatsapp-btn{bottom:14px!important;right:14px!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;justify-content:center!important}
+  .whatsapp-btn svg{width:22px!important;height:22px!important}
+  .whatsapp-text{display:none!important}
+}
+</style>
+<meta property="og:title" content="Vehicle Reviews & Market Insights | UK Car Source">
+<meta property="og:description" content="Curated reviews and market updates on the premium vehicles UK Car Source supplies. Stay informed on the latest prestige models, values and market trends.">
+<meta property="og:image" content="https://www.ukcarsource.com/images/home-page-hero.jpg">
+<meta property="og:url" content="https://www.ukcarsource.com/reviews.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.ukcarsource.com/reviews.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"UK Car Source","url":"https://www.ukcarsource.com","logo":"https://www.ukcarsource.com/images/logo.png","telephone":"+447831921254","email":"info@ukcarsource.com","address":{"@type":"PostalAddress","addressCountry":"GB"},"sameAs":["https://www.ukcarsource.com"]}
+</script>
 </head>
 <body>
-
-  <header>
-    <nav>
-      <a href="https://www.ukcarsource.com/index.html" class="nav-logo">
-        <img src="https://www.ukcarsource.com/images/logo.png" alt="UK Car Source">
-        UK<em>CAR</em> SOURCE
-      </a>
-      <ul>
-        <li><a href="https://www.ukcarsource.com/index.html">Home</a></li>
-        <li><a href="https://www.ukcarsource.com/about.html">About Us</a></li>
-        <li><a href="https://www.ukcarsource.com/arrivals.html">Arrivals</a></li>
-        <li><a href="https://www.ukcarsource.com/sourcing.html">Sourcing</a></li>
-        <li><a href="https://www.ukcarsource.com/export.html">Export</a></li>
-        <li><a href="https://www.ukcarsource.com/reviews.html" aria-current="page">News</a></li>
-        <li><a href="https://www.ukcarsource.com/contact.html">Contact Us</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section id="news-hero">
-      <h1>Latest Reviews &amp; Market Insights</h1>
-      <p>Curated automotive guides, new model reviews and market insight relevant to the vehicles we source — Porsche, Bentley, Range Rover, Mercedes-AMG, G Wagon, Land Cruiser and the finest premium imports available from the UK and international markets.</p>
-    </section>
-
-    <!-- ===== ARTICLE 1 ===== -->
-    <article id="japan-import-guide">
-      <header>
-        <span class="article-category">Import Guide</span>
-        <h2>How to Import a Car from Japan to the UK</h2>
-        <p class="article-meta">Published May 2026 · UK Car Source</p>
-      </header>
-      <p>Japan remains one of the world's most compelling sources for specialist, performance and collector vehicles — particularly right-hand drive models unavailable elsewhere. Japanese market cars typically have meticulous service histories, lower-than-average mileage and excellent condition, making them sought after by UK buyers seeking something rare or specific.</p>
-      <p>Importing from Japan involves several stages: identifying the vehicle through a trusted auction agent or dealer network, arranging export documentation from Japan, sea freight to a UK port (typically Tilbury, Southampton or Bristol), DVLA registration and any required IVA (Individual Vehicle Approval) testing. The full process typically takes 8–14 weeks depending on the vehicle and logistics.</p>
-      <h3>Key considerations when importing from Japan</h3>
-      <ul>
-        <li><strong>Age restriction:</strong> HMRC requires vehicles to be over 6 months old and have travelled more than 6,000 km to avoid paying VAT on a "new" vehicle basis.</li>
-        <li><strong>IVA testing:</strong> Vehicles not previously type-approved for the UK may require Individual Vehicle Approval. This applies to many Japanese-market cars.</li>
-        <li><strong>Odometer conversion:</strong> Japanese vehicles display kilometres. Ensure all paperwork reflects this accurately for DVLA purposes.</li>
-        <li><strong>Customs duty:</strong> As of 2026, import duty on passenger cars from Japan is 6.5% of CIF value. The UK-Japan CEPA trade agreement may reduce this — confirm current rates at the point of import.</li>
-        <li><strong>Popular models:</strong> Nissan GT-R, Toyota Land Cruiser (domestic spec), Subaru STI, Honda NSX, Mitsubishi EVO, Lexus LFA and various Porsche Japan-spec variants are frequently sought from Japanese sources.</li>
-      </ul>
-      <p>UK Car Source can manage the entire Japan import process on your behalf — from vehicle identification and auction bidding through to UK delivery. <a href="https://www.ukcarsource.com/contact.html">Contact us to discuss your requirements.</a></p>
-    </article>
-
-    <hr>
-
-    <!-- ===== ARTICLE 2 ===== -->
-    <article id="roro-guide">
-      <header>
-        <span class="article-category">Shipping Guide</span>
-        <h2>What is RoRo Shipping? A Guide for Vehicle Exporters</h2>
-        <p class="article-meta">Published April 2026 · UK Car Source</p>
-      </header>
-      <p>Roll-on Roll-off (RoRo) shipping is one of the most common and cost-effective methods for exporting cars internationally. Rather than being lifted by crane into a container, vehicles are driven directly onto a specialist cargo vessel and secured in place for the voyage — much like a multi-deck car ferry on a much larger scale.</p>
-      <h3>How RoRo works</h3>
-      <p>Vehicles are delivered to a designated RoRo terminal — in the UK, the main departure ports for vehicle export include Southampton, Tilbury, Liverpool and Hull. From there, they are driven aboard the vessel by trained handlers, secured with straps and lashing, and shipped to the destination port where they are driven off on arrival.</p>
-      <h3>RoRo vs Container shipping — which is right for your export?</h3>
-      <ul>
-        <li><strong>RoRo</strong> is typically cheaper and faster to load/unload. It suits standard passenger vehicles, SUVs and light commercial vehicles in good, running condition.</li>
-        <li><strong>Container shipping</strong> offers greater security and protection, and is recommended for high-value, classic or prestige vehicles where condition is paramount. A container can be loaded and sealed with only your vehicle inside.</li>
-        <li><strong>Groupage containers</strong> allow multiple vehicles to share a container, reducing cost while maintaining some additional protection over RoRo.</li>
-      </ul>
-      <h3>Destinations served by RoRo from the UK</h3>
-      <p>RoRo services from UK ports cover most major global destinations, including Singapore, Malaysia, Thailand (Laem Chabang), Sri Lanka (Colombo), East Africa (Mombasa, Dar es Salaam), West Africa (Lagos, Tema), the Caribbean (Kingston, Bridgetown) and Australia/New Zealand.</p>
-      <p>UK Car Source works with established freight partners to arrange RoRo and container shipping on your behalf. <a href="https://www.ukcarsource.com/export.html">View all our export destinations</a> or <a href="https://www.ukcarsource.com/contact.html">contact us for a shipping quote.</a></p>
-    </article>
-
-    <hr>
-
-    <!-- ===== ARTICLE 3 ===== -->
-    <article id="porsche-gt3rs">
-      <header>
-        <span class="article-category">Model Guide</span>
-        <h2>Sourcing a Porsche 911 GT3 RS in the UK — What You Need to Know</h2>
-        <p class="article-meta">Published March 2026 · UK Car Source</p>
-      </header>
-      <p>The Porsche 911 GT3 RS remains one of the most desirable driver's cars available — a road-legal racing machine with a naturally aspirated flat-six engine producing 525 PS, a PDK gearbox tuned for circuit performance, and aerodynamic bodywork borrowed directly from Porsche motorsport. Demand consistently outstrips supply, and allocation from Porsche Centre dealers is tightly controlled.</p>
-      <h3>How to secure a GT3 RS through a sourcing agent</h3>
-      <p>For buyers unable to secure factory allocation through a Porsche Centre, working with a specialist sourcing agent offers access to the wider dealer network, including nearly-new examples with low delivery mileage, pre-registered stock and vehicles from other European markets available for UK delivery.</p>
-      <p>UK Car Source works closely with Porsche specialist dealers and main dealer groups to locate GT3 RS examples to client specification — including specific exterior paint, interior trim and optional equipment. Our sourcing network also extends to Porsche Japan, Porsche USA and Porsche Gulf, where specification differences may appeal to collectors.</p>
-      <h3>Key specification points</h3>
-      <ul>
-        <li>4.0-litre naturally aspirated flat-six, 525 PS</li>
-        <li>PDK dual-clutch gearbox (no manual option)</li>
-        <li>Active aerodynamics with DRS-style rear wing</li>
-        <li>Weissach Package available (magnesium wheels, carbon roof, titanium roll cage)</li>
-        <li>Club Sport Package adds full roll cage, fire extinguisher, harness preparation</li>
-      </ul>
-      <p>Interested in sourcing a Porsche GT3 RS or other limited-allocation Porsche model? <a href="https://www.ukcarsource.com/contact.html">Contact our sourcing team</a> with your requirements.</p>
-    </article>
-
-    <hr>
-
-    <!-- ===== ARTICLE 4 ===== -->
-    <article id="vehicle-sourcing-guide">
-      <header>
-        <span class="article-category">Buyer's Guide</span>
-        <h2>Why Use a Vehicle Sourcing Agent? A Buyer's Guide</h2>
-        <p class="article-meta">Published February 2026 · UK Car Source</p>
-      </header>
-      <p>The UK new and nearly-new car market has changed significantly in recent years. Supply constraints, limited dealer stock and high demand for specific models have made it harder than ever for private buyers to secure the exact vehicle they want — at the right price — through a dealer forecourt alone.</p>
-      <p>A vehicle sourcing agent acts as your professional representative in the market. Rather than visiting dealers yourself or trawling listings, an agent taps into their established network — main dealer groups, franchise contacts, specialist suppliers and auction channels — to locate your specific requirement quickly and efficiently.</p>
-      <h3>When does it make sense to use a sourcing agent?</h3>
-      <ul>
-        <li>You want a specific model, colour or specification that isn't readily available</li>
-        <li>You want access to factory-order pricing without dealer wait times</li>
-        <li>You're importing a vehicle from outside the UK</li>
-        <li>You want to buy a high-value vehicle with professional due diligence on its history and condition</li>
-        <li>You're a trade buyer sourcing multiple vehicles and need a reliable supply partner</li>
-        <li>You're based overseas and need a trusted UK representative to handle a purchase and export</li>
-      </ul>
-      <p>UK Car Source provides a fully transparent sourcing service with no hidden fees. We locate your vehicle, provide a full specification report, and manage the process from purchase through to delivery. <a href="https://www.ukcarsource.com/how-it-works.html">See how the process works</a> or <a href="https://www.ukcarsource.com/contact.html">make an enquiry today.</a></p>
-    </article>
-
-    <!-- ===== CTA ===== -->
-    <section id="news-cta">
-      <h2>Looking for a Specific Vehicle?</h2>
-      <p>UK Car Source locates premium vehicles from across the UK and international markets. Tell us what you need — we'll find it.</p>
-      <a href="https://www.ukcarsource.com/contact.html" class="btn-primary">Make an Enquiry</a>
-    </section>
-  </main>
-
-  <footer>
-    <p>UK Car Source — Vehicle Sourcing Specialists</p>
-    <p>© 2025 UK Car Source. All rights reserved.</p>
-    <nav aria-label="Footer navigation">
-      <a href="https://www.ukcarsource.com/index.html">Home</a>
-      <a href="https://www.ukcarsource.com/about.html">About</a>
-      <a href="https://www.ukcarsource.com/arrivals.html">Arrivals</a>
-      <a href="https://www.ukcarsource.com/sourcing.html">Sourcing</a>
-      <a href="https://www.ukcarsource.com/export.html">Export</a>
-      <a href="https://www.ukcarsource.com/reviews.html">Reviews</a>
-      <a href="https://www.ukcarsource.com/contact.html">Contact</a>
-      <a href="https://www.ukcarsource.com/parts.html">Parts</a>
-      <a href="https://www.ukcarsource.com/how-it-works.html">How It Works</a>
-    </nav>
-    <a href="https://wa.me/447831921254">Message us on WhatsApp</a>
-  </footer>
-
+<nav id="main-nav">
+  <a href="index.html" class="logo-wrap">
+    <img src="images/logo.png" alt="UK Car Source — premium vehicle sourcing and export specialists" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'">
+    <span class="logo-fallback">UK<em>CAR</em> SOURCE</span>
+  </a>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="arrivals.html">Arrivals</a></li>
+    <li><a href="sourcing.html">Sourcing</a></li>
+    <li><a href="export.html">Export</a></li>
+    <li><a href="reviews.html" class="active">Reviews</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+</nav>
+<div class="reviews-page">
+  <div class="section-label">Market Intelligence</div>
+  <div class="divider"></div>
+  <h1 class="section-title" style="font-size:clamp(2.2rem,4vw,3.5rem);text-transform:uppercase;">Latest Reviews &amp; <span>Market Insights</span></h1>
+  <p style="max-width:min(620px,100%);margin-bottom:40px;">Curated automotive reviews, new model updates and market insight relevant to the vehicles we source — Porsche, Bentley, Range Rover, Mercedes-AMG, G Wagon, Land Cruiser and the finest performance and luxury imports.</p>
+  <div class="reviews-feed-container">
+    <rssapp-wall id="FaHJCWxt9ndtGbl2"></rssapp-wall>
+    <script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async></script>
+  </div>
+</div>
+<footer>
+  <div class="flogo">UK Car Source — Vehicle Sourcing Specialists</div>
+  <div class="fcopy">&copy; 2025 UK Car Source. All rights reserved.</div>
+  <div class="flinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="arrivals.html">Arrivals</a>
+    <a href="sourcing.html">Sourcing</a>
+    <a href="export.html">Export</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="contact.html">Contact</a>
+    <a href="parts.html">Parts</a>
+    <a href="how-it-works.html">How It Works</a>
+  </div>
+</footer>
+<a href="https://wa.me/447831921254" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="whatsapp-text">Message us on WhatsApp</span>
+</a>
+<script>
+(function(){
+  var nav=document.getElementById('main-nav');
+  if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40)});}
+  var tog=document.getElementById('nav-toggle');
+  var links=document.getElementById('nav-links');
+  if(tog&&links){
+    tog.addEventListener('click',function(){links.classList.toggle('open');});
+    document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');});});
+  }
+})();
+</script>
 </body>
 </html>
