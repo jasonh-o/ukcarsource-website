@@ -1,0 +1,11 @@
+# iCloud placeholders — never commit these
+*.icloud
+.*.icloud
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+
+# Editor files
+.vscode/
+*.swp
