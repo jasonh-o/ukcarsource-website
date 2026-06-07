@@ -1,9 +1,8 @@
-import { db } from '@/lib/db'
+import { db, parseLead } from '@/lib/db'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { LeadsTable } from '@/components/crm/LeadsTable'
 import { LeadFilters } from '@/components/crm/LeadFilters'
 import { AddLeadButton } from '@/components/crm/AddLeadButton'
-import { PRIORITY_MARKETS } from '@/types'
 
 interface PageProps {
   searchParams: { stage?: string; country?: string; search?: string; page?: string }
@@ -18,13 +17,13 @@ export default async function LeadsPage({ searchParams }: PageProps) {
   if (searchParams.country) where.country = searchParams.country
   if (searchParams.search) {
     where.OR = [
-      { companyName: { contains: searchParams.search, mode: 'insensitive' } },
-      { contactName: { contains: searchParams.search, mode: 'insensitive' } },
-      { email: { contains: searchParams.search, mode: 'insensitive' } },
+      { companyName: { contains: searchParams.search } },
+      { contactName: { contains: searchParams.search } },
+      { email: { contains: searchParams.search } },
     ]
   }
 
-  const [leads, total] = await Promise.all([
+  const [rawLeads, total] = await Promise.all([
     db.lead.findMany({
       where,
       orderBy: [{ score: 'desc' }, { updatedAt: 'desc' }],
@@ -35,12 +34,12 @@ export default async function LeadsPage({ searchParams }: PageProps) {
     db.lead.count({ where }),
   ])
 
-  const countries = await db.lead.groupBy({
-    by: ['country'],
-    where: { optedOut: false },
-    _count: true,
-    orderBy: { _count: { country: 'desc' } },
-  })
+  const leads = rawLeads.map(parseLead)
+
+  const allLeads = await db.lead.findMany({ where: { optedOut: false }, select: { country: true } })
+  const countryCounts: Record<string, number> = {}
+  for (const l of allLeads) countryCounts[l.country] = (countryCounts[l.country] || 0) + 1
+  const countries = Object.keys(countryCounts).sort()
 
   return (
     <div className="flex min-h-screen">
@@ -53,8 +52,7 @@ export default async function LeadsPage({ searchParams }: PageProps) {
           </div>
           <AddLeadButton />
         </div>
-
-        <LeadFilters countries={countries.map((c) => c.country)} />
+        <LeadFilters countries={countries} />
         <LeadsTable leads={leads} total={total} page={page} limit={limit} />
       </div>
     </div>

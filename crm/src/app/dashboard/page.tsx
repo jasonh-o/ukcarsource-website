@@ -1,7 +1,7 @@
-import { db } from '@/lib/db'
+import { db, parseLead, parseJsonArray } from '@/lib/db'
 import { STAGE_LABELS } from '@/types'
 import { formatRelative } from '@/lib/utils'
-import { Users, Send, TrendingUp, Globe, Flame, Clock } from 'lucide-react'
+import { Users, Send, TrendingUp, Flame, Clock, Globe } from 'lucide-react'
 
 async function getStats() {
   const [
@@ -10,8 +10,7 @@ async function getStats() {
     contactedThisWeek,
     repliedLeads,
     recentLeads,
-    stageBreakdown,
-    topCountries,
+    allLeads,
     hotLeads,
   ] = await Promise.all([
     db.lead.count({ where: { optedOut: false } }),
@@ -22,24 +21,21 @@ async function getStats() {
         lastContactedAt: { gte: new Date(Date.now() - 7 * 86400000) },
       },
     }),
-    db.lead.count({ where: { optedOut: false, stage: { in: ['REPLIED', 'QUALIFIED', 'NEGOTIATING', 'ACTIVE_BUYER', 'REPEAT_BUYER'] } } }),
+    db.lead.count({
+      where: {
+        optedOut: false,
+        stage: { in: ['REPLIED', 'QUALIFIED', 'NEGOTIATING', 'ACTIVE_BUYER', 'REPEAT_BUYER'] },
+      },
+    }),
     db.lead.findMany({
       where: { optedOut: false },
       orderBy: { createdAt: 'desc' },
       take: 8,
       select: { id: true, companyName: true, country: true, stage: true, score: true, createdAt: true },
     }),
-    db.lead.groupBy({
-      by: ['stage'],
+    db.lead.findMany({
       where: { optedOut: false },
-      _count: true,
-    }),
-    db.lead.groupBy({
-      by: ['country'],
-      where: { optedOut: false },
-      _count: true,
-      orderBy: { _count: { country: 'desc' } },
-      take: 8,
+      select: { stage: true, country: true },
     }),
     db.lead.findMany({
       where: { optedOut: false, score: { gte: 70 } },
@@ -48,6 +44,19 @@ async function getStats() {
       select: { id: true, companyName: true, country: true, score: true, stage: true },
     }),
   ])
+
+  // Compute stage breakdown
+  const stageCounts: Record<string, number> = {}
+  const countryCounts: Record<string, number> = {}
+  for (const l of allLeads) {
+    stageCounts[l.stage] = (stageCounts[l.stage] || 0) + 1
+    countryCounts[l.country] = (countryCounts[l.country] || 0) + 1
+  }
+  const stageBreakdown = Object.entries(stageCounts).map(([stage, count]) => ({ stage, count }))
+  const topCountries = Object.entries(countryCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([country, count]) => ({ country, count }))
 
   return { totalLeads, activeLeads, contactedThisWeek, repliedLeads, recentLeads, stageBreakdown, topCountries, hotLeads }
 }
@@ -69,7 +78,6 @@ export default async function DashboardPage() {
         <p className="text-sm text-neutral-500 mt-0.5">B2B dealer pipeline overview</p>
       </div>
 
-      {/* Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {statCards.map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="card p-4">
@@ -83,29 +91,27 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Pipeline Stages */}
         <div className="card p-4 lg:col-span-2">
           <h2 className="text-sm font-semibold text-neutral-300 mb-4 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-orange-400" /> Pipeline Stages
           </h2>
           <div className="space-y-2">
-            {stats.stageBreakdown.map(({ stage, _count }) => {
+            {stats.stageBreakdown.map(({ stage, count }) => {
               const label = STAGE_LABELS[stage as keyof typeof STAGE_LABELS] || stage
-              const pct = stats.activeLeads > 0 ? Math.round((_count / stats.totalLeads) * 100) : 0
+              const pct = stats.totalLeads > 0 ? Math.round((count / stats.totalLeads) * 100) : 0
               return (
                 <div key={stage} className="flex items-center gap-3">
                   <p className="text-xs text-neutral-400 w-32 shrink-0">{label}</p>
                   <div className="flex-1 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
                     <div className="h-full bg-orange-500 rounded-full" style={{ width: `${pct}%` }} />
                   </div>
-                  <p className="text-xs text-neutral-500 w-8 text-right">{_count}</p>
+                  <p className="text-xs text-neutral-500 w-8 text-right">{count}</p>
                 </div>
               )
             })}
           </div>
         </div>
 
-        {/* Hot Leads */}
         <div className="card p-4">
           <h2 className="text-sm font-semibold text-neutral-300 mb-4 flex items-center gap-2">
             <Flame className="w-4 h-4 text-red-400" /> Hot Leads
@@ -132,22 +138,20 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Top Countries */}
         <div className="card p-4">
           <h2 className="text-sm font-semibold text-neutral-300 mb-4 flex items-center gap-2">
             <Globe className="w-4 h-4 text-blue-400" /> Leads by Country
           </h2>
           <div className="space-y-1.5">
-            {stats.topCountries.map(({ country, _count }) => (
+            {stats.topCountries.map(({ country, count }) => (
               <div key={country} className="flex items-center justify-between">
                 <p className="text-sm text-neutral-300">{country}</p>
-                <span className="badge bg-neutral-800 text-neutral-400">{_count}</span>
+                <span className="badge bg-neutral-800 text-neutral-400">{count}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Recent Leads */}
         <div className="card p-4">
           <h2 className="text-sm font-semibold text-neutral-300 mb-4 flex items-center gap-2">
             <Clock className="w-4 h-4 text-neutral-400" /> Recent Leads

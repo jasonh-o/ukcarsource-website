@@ -1,4 +1,4 @@
-import { db } from '@/lib/db'
+import { db, parseJsonArray } from '@/lib/db'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { STAGE_LABELS, STAGE_COLORS } from '@/types'
 import { cn } from '@/lib/utils'
@@ -7,11 +7,12 @@ import Link from 'next/link'
 const PIPELINE_STAGES = ['NEW', 'ENRICHED', 'CONTACTED', 'REPLIED', 'QUALIFIED', 'NEGOTIATING', 'ACTIVE_BUYER'] as const
 
 export default async function PipelinePage() {
-  const leads = await db.lead.findMany({
+  const rawLeads = await db.lead.findMany({
     where: { optedOut: false, stage: { in: [...PIPELINE_STAGES] } },
     orderBy: { score: 'desc' },
     select: { id: true, companyName: true, country: true, stage: true, score: true, vehicleSpecialty: true, lastContactedAt: true },
   })
+  const leads = rawLeads.map(l => ({ ...l, vehicleSpecialty: parseJsonArray(l.vehicleSpecialty) }))
 
   const byStage = PIPELINE_STAGES.reduce<Record<string, typeof leads>>((acc, s) => {
     acc[s] = leads.filter((l) => l.stage === s)

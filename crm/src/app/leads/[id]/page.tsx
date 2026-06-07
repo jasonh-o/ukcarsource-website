@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
-import { db } from '@/lib/db'
+import { db, parseLead } from '@/lib/db'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { LeadDetail } from '@/components/crm/LeadDetail'
 
 export default async function LeadDetailPage({ params }: { params: { id: string } }) {
-  const lead = await db.lead.findUnique({
+  const raw = await db.lead.findUnique({
     where: { id: params.id },
     include: {
       activities: { orderBy: { createdAt: 'desc' }, take: 50 },
@@ -13,7 +13,9 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
     },
   })
 
-  if (!lead) notFound()
+  if (!raw) notFound()
+
+  const lead = parseLead(raw)
 
   return (
     <div className="flex min-h-screen">

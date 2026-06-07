@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { db } from '@/lib/db'
+import { db, parseLead, stringifyArray } from '@/lib/db'
 import { scoreLead } from '@/lib/ai'
 
 const createLeadSchema = z.object({
@@ -8,15 +8,15 @@ const createLeadSchema = z.object({
   contactName: z.string().optional(),
   country: z.string().min(1),
   city: z.string().optional(),
-  website: z.string().url().optional().or(z.literal('')),
-  email: z.string().email().optional().or(z.literal('')),
+  website: z.string().optional(),
+  email: z.string().optional(),
   whatsapp: z.string().optional(),
   phone: z.string().optional(),
   facebookPage: z.string().optional(),
   linkedinPage: z.string().optional(),
   vehicleSpecialty: z.array(z.string()).default([]),
-  estimatedSize: z.enum(['SMALL', 'MEDIUM', 'LARGE', 'ENTERPRISE']).optional(),
-  source: z.enum(['MANUAL', 'GOOGLE_MAPS', 'LINKEDIN', 'FACEBOOK', 'DIRECTORY', 'REFERRAL', 'WEBSITE', 'TRADE_SHOW']).default('MANUAL'),
+  estimatedSize: z.string().optional(),
+  source: z.string().default('MANUAL'),
   tags: z.array(z.string()).default([]),
   notes: z.string().optional(),
 })
@@ -34,13 +34,13 @@ export async function GET(req: NextRequest) {
   if (country) where.country = country
   if (search) {
     where.OR = [
-      { companyName: { contains: search, mode: 'insensitive' } },
-      { contactName: { contains: search, mode: 'insensitive' } },
-      { email: { contains: search, mode: 'insensitive' } },
+      { companyName: { contains: search } },
+      { contactName: { contains: search } },
+      { email: { contains: search } },
     ]
   }
 
-  const [leads, total] = await Promise.all([
+  const [rawLeads, total] = await Promise.all([
     db.lead.findMany({
       where,
       orderBy: [{ score: 'desc' }, { updatedAt: 'desc' }],
@@ -51,6 +51,7 @@ export async function GET(req: NextRequest) {
     db.lead.count({ where }),
   ])
 
+  const leads = rawLeads.map(parseLead)
   return NextResponse.json({ leads, total, page, limit })
 }
 
@@ -60,19 +61,31 @@ export async function POST(req: NextRequest) {
 
   const lead = await db.lead.create({
     data: {
-      ...data,
+      companyName: data.companyName,
+      contactName: data.contactName,
+      country: data.country,
+      city: data.city,
       website: data.website || null,
       email: data.email || null,
+      whatsapp: data.whatsapp,
+      phone: data.phone,
+      facebookPage: data.facebookPage,
+      linkedinPage: data.linkedinPage,
+      vehicleSpecialty: stringifyArray(data.vehicleSpecialty),
+      estimatedSize: data.estimatedSize,
+      source: data.source,
+      tags: stringifyArray(data.tags),
+      notes: data.notes,
     },
   })
 
-  // Auto-score in background (don't block response)
+  // Auto-score in background
   scoreLead({
     companyName: lead.companyName,
     contactName: lead.contactName,
     country: lead.country,
     city: lead.city,
-    vehicleSpecialty: lead.vehicleSpecialty,
+    vehicleSpecialty: data.vehicleSpecialty,
     website: lead.website,
     notes: lead.notes,
     stage: lead.stage,
@@ -80,5 +93,5 @@ export async function POST(req: NextRequest) {
     .then(({ score }) => db.lead.update({ where: { id: lead.id }, data: { score } }))
     .catch(console.error)
 
-  return NextResponse.json(lead, { status: 201 })
+  return NextResponse.json(parseLead(lead), { status: 201 })
 }
