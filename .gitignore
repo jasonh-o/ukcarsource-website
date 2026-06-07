@@ -9,3 +9,10 @@
 # Editor files
 .vscode/
 *.swp
+
+# CRM — Next.js build output (never commit these)
+crm/.next/
+crm/node_modules/
+crm/.env
+crm/.env.local
+crm/next-env.d.ts
