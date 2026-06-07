@@ -1,0 +1,229 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(MEMBER)
+  accounts      Account[]
+  sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Lead {
+  id               String      @id @default(cuid())
+  companyName      String
+  contactName      String?
+  country          String
+  city             String?
+  website          String?
+  email            String?
+  whatsapp         String?
+  phone            String?
+  facebookPage     String?
+  linkedinPage     String?
+  vehicleSpecialty String[]
+  estimatedSize    DealerSize?
+  stage            LeadStage   @default(NEW)
+  score            Int         @default(0)
+  tags             String[]
+  notes            String?     @db.Text
+  optedOut         Boolean     @default(false)
+  optedOutAt       DateTime?
+  source           LeadSource  @default(MANUAL)
+  assignedToId     String?
+  lastContactedAt  DateTime?
+  nextFollowUpAt   DateTime?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  activities   Activity[]
+  outreachLogs OutreachLog[]
+  enquiries    Enquiry[]
+
+  @@index([country, stage])
+  @@index([stage])
+  @@index([score])
+}
+
+model Activity {
+  id        String       @id @default(cuid())
+  leadId    String
+  type      ActivityType
+  note      String?      @db.Text
+  createdAt DateTime     @default(now())
+  lead      Lead         @relation(fields: [leadId], references: [id], onDelete: Cascade)
+}
+
+model OutreachLog {
+  id          String        @id @default(cuid())
+  leadId      String
+  channel     Channel
+  subject     String?
+  body        String        @db.Text
+  status      OutreachStatus @default(PENDING)
+  sentAt      DateTime?
+  openedAt    DateTime?
+  repliedAt   DateTime?
+  messageId   String?
+  templateId  String?
+  createdAt   DateTime      @default(now())
+  lead        Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  template    Template?     @relation(fields: [templateId], references: [id])
+}
+
+model Template {
+  id          String   @id @default(cuid())
+  name        String
+  channel     Channel
+  subject     String?
+  body        String   @db.Text
+  variables   String[]
+  tags        String[]
+  isActive    Boolean  @default(true)
+  useCount    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  outreachLogs OutreachLog[]
+}
+
+model Enquiry {
+  id          String        @id @default(cuid())
+  leadId      String?
+  name        String
+  email       String
+  company     String?
+  country     String?
+  message     String        @db.Text
+  vehicleType String?
+  budget      String?
+  status      EnquiryStatus @default(NEW)
+  source      String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  lead        Lead?         @relation(fields: [leadId], references: [id])
+}
+
+model StockAlert {
+  id          String   @id @default(cuid())
+  email       String
+  company     String?
+  country     String?
+  vehicleTypes String[]
+  makes       String[]
+  priceMax    Int?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+enum LeadStage {
+  NEW
+  ENRICHED
+  CONTACTED
+  REPLIED
+  QUALIFIED
+  NEGOTIATING
+  ACTIVE_BUYER
+  REPEAT_BUYER
+  INACTIVE
+}
+
+enum DealerSize {
+  SMALL
+  MEDIUM
+  LARGE
+  ENTERPRISE
+}
+
+enum LeadSource {
+  MANUAL
+  GOOGLE_MAPS
+  LINKEDIN
+  FACEBOOK
+  DIRECTORY
+  REFERRAL
+  WEBSITE
+  TRADE_SHOW
+}
+
+enum ActivityType {
+  NOTE
+  EMAIL_SENT
+  EMAIL_OPENED
+  EMAIL_REPLIED
+  WHATSAPP_SENT
+  WHATSAPP_REPLIED
+  LINKEDIN_CONNECTED
+  CALL
+  MEETING
+  STAGE_CHANGED
+  SCORE_UPDATED
+}
+
+enum Channel {
+  EMAIL
+  WHATSAPP
+  LINKEDIN
+  FACEBOOK
+  SMS
+}
+
+enum OutreachStatus {
+  PENDING
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  REPLIED
+  BOUNCED
+  FAILED
+}
+
+enum EnquiryStatus {
+  NEW
+  REVIEWED
+  CONVERTED
+  CLOSED
+}

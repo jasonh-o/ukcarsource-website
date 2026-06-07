@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --orange: #e07b20;
+    --orange-light: #f08c2a;
+  }
+
+  * {
+    @apply border-neutral-800;
+  }
+
+  body {
+    @apply bg-neutral-950 text-neutral-100;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-700 rounded-full;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-neutral-900 border border-neutral-800 rounded-lg;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white text-sm font-medium rounded-md transition-colors;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-100 text-sm font-medium rounded-md transition-colors;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 hover:bg-neutral-800 text-neutral-400 hover:text-neutral-100 text-sm rounded-md transition-colors;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-md text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent;
+  }
+
+  .label {
+    @apply block text-xs font-medium text-neutral-400 mb-1 uppercase tracking-wide;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+}
