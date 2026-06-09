@@ -23,3 +23,6 @@ crm/prisma/*.db
 
 # Native binary modules (can be 100MB+)
 *.node
+
+# Claude Code config — may contain API keys
+.claude/
