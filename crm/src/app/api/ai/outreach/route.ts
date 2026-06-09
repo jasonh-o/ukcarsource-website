@@ -1,35 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { z } from 'zod'
-import { db } from '@/lib/db'
+import { db, parseLead } from '@/lib/db'
 import { generateOutreach } from '@/lib/ai'
 
-const schema = z.object({
-  leadId: z.string(),
-  channel: z.enum(['email', 'whatsapp', 'linkedin']),
-  tone: z.enum(['formal', 'friendly', 'direct']).optional(),
-  angle: z.string().optional(),
-})
-
 export async function POST(req: NextRequest) {
-  const body = await req.json()
-  const { leadId, channel, tone, angle } = schema.parse(body)
+  try {
+    const { leadId, channel, tone, angle } = await req.json()
 
-  const lead = await db.lead.findUnique({ where: { id: leadId } })
-  if (!lead) return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
+    const raw = await db.lead.findUnique({ where: { id: leadId } })
+    if (!raw) return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
 
-  const result = await generateOutreach(
-    {
-      companyName: lead.companyName,
-      contactName: lead.contactName,
-      country: lead.country,
-      city: lead.city,
-      vehicleSpecialty: lead.vehicleSpecialty,
-      website: lead.website,
-      notes: lead.notes,
-      stage: lead.stage,
-    },
-    { channel, tone, angle }
-  )
+    const lead = parseLead(raw)
 
-  return NextResponse.json(result)
+    const result = await generateOutreach(
+      {
+        companyName: lead.companyName,
+        contactName: lead.contactName,
+        country: lead.country,
+        city: lead.city,
+        vehicleSpecialty: lead.vehicleSpecialty as string[],
+        website: lead.website,
+        notes: lead.notes,
+        stage: lead.stage,
+      },
+      { channel: channel || 'email', tone: tone || 'friendly', angle }
+    )
+
+    return NextResponse.json(result)
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error'
+    console.error('AI outreach error:', message)
+    return NextResponse.json(
+      { error: 'AI generation failed. Check ANTHROPIC_API_KEY in .env file.', detail: message },
+      { status: 500 }
+    )
+  }
 }

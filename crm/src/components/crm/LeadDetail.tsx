@@ -51,13 +51,16 @@ export function LeadDetail({ lead }: { lead: Lead }) {
   const [aiTone, setAiTone] = useState<'formal' | 'friendly' | 'direct'>('friendly')
   const [aiResult, setAiResult] = useState<{ subject?: string; body: string } | null>(null)
   const [aiLoading, setAiLoading] = useState(false)
+  const [aiError, setAiError] = useState('')
   const [sendLoading, setSendLoading] = useState(false)
+  const [sendError, setSendError] = useState('')
   const [stage, setStage] = useState(lead.stage)
 
   const { label: scoreText, color: scoreColor } = scoreLabel(lead.score)
 
   async function generateAI() {
     setAiLoading(true)
+    setAiError('')
     try {
       const res = await fetch('/api/ai/outreach', {
         method: 'POST',
@@ -65,7 +68,13 @@ export function LeadDetail({ lead }: { lead: Lead }) {
         body: JSON.stringify({ leadId: lead.id, channel: aiChannel, tone: aiTone }),
       })
       const data = await res.json()
-      setAiResult(data)
+      if (!res.ok || data.error) {
+        setAiError(data.error || 'Generation failed — check your Anthropic API key')
+      } else {
+        setAiResult(data)
+      }
+    } catch {
+      setAiError('Could not reach AI service. Is the server running?')
     } finally {
       setAiLoading(false)
     }
@@ -74,6 +83,26 @@ export function LeadDetail({ lead }: { lead: Lead }) {
   async function sendOutreach() {
     if (!aiResult) return
     setSendLoading(true)
+    setSendError('')
+
+    // WhatsApp — open click-to-chat (sends FROM your business WhatsApp when logged in)
+    if (aiChannel === 'whatsapp') {
+      const num = (lead.whatsapp || '').replace(/\D/g, '')
+      if (num) {
+        // Opens WhatsApp Web — make sure your business number (07831921254) is logged in
+        window.open(`https://web.whatsapp.com/send?phone=${num}&text=${encodeURIComponent(aiResult.body)}`, '_blank')
+        // Log it
+        fetch('/api/outreach/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ leadId: lead.id, channel: 'WHATSAPP', body: aiResult.body }),
+        }).catch(() => {})
+        setAiResult(null)
+        setSendLoading(false)
+        return
+      }
+    }
+
     try {
       const res = await fetch('/api/outreach/send', {
         method: 'POST',
@@ -86,12 +115,15 @@ export function LeadDetail({ lead }: { lead: Lead }) {
         }),
       })
       const data = await res.json()
-
-      // WhatsApp: open click-to-chat in new tab
-      if (data.whatsappUrl) window.open(data.whatsappUrl, '_blank')
-
-      setAiResult(null)
-      router.refresh()
+      if (!res.ok) {
+        setSendError(data.error || 'Send failed')
+      } else {
+        if (data.whatsappUrl) window.open(data.whatsappUrl, '_blank')
+        setAiResult(null)
+        router.refresh()
+      }
+    } catch {
+      setSendError('Could not send — check the server is running')
     } finally {
       setSendLoading(false)
     }
@@ -261,6 +293,12 @@ export function LeadDetail({ lead }: { lead: Lead }) {
               <Sparkles className="w-4 h-4 text-orange-400" />
               <h3 className="text-sm font-semibold text-neutral-200">AI Outreach Writer</h3>
             </div>
+            {aiChannel === 'whatsapp' && (
+              <div className="bg-green-900/20 border border-green-800/40 rounded-md p-2.5 text-xs text-green-300 flex items-start gap-2">
+                <MessageCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                <span>Make sure <strong>07831 921254</strong> is logged into WhatsApp Web before clicking Send — messages will go from your business number.</span>
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="label">Channel</label>
@@ -282,6 +320,9 @@ export function LeadDetail({ lead }: { lead: Lead }) {
             <button onClick={generateAI} disabled={aiLoading} className="btn-primary w-full justify-center">
               {aiLoading ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating…</> : <><Sparkles className="w-4 h-4" /> Generate with AI</>}
             </button>
+            {aiError && (
+              <p className="text-xs text-red-400 bg-red-900/20 border border-red-800/40 rounded p-2">{aiError}</p>
+            )}
           </div>
 
           {aiResult && (
@@ -306,15 +347,16 @@ export function LeadDetail({ lead }: { lead: Lead }) {
               </div>
               <div className="flex gap-3">
                 <button onClick={sendOutreach} disabled={sendLoading} className="btn-primary flex-1 justify-center">
-                  {sendLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Send className="w-4 h-4" /> Send {aiChannel === 'whatsapp' ? '(Opens WhatsApp)' : ''}</>}
+                  {sendLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Send className="w-4 h-4" /> {aiChannel === 'whatsapp' ? 'Open in WhatsApp' : aiChannel === 'linkedin' ? 'Copy & Go to LinkedIn' : 'Send Email'}</>}
                 </button>
                 <button onClick={() => setAiResult(null)} className="btn-secondary">Discard</button>
               </div>
+              {sendError && <p className="text-xs text-red-400 bg-red-900/20 border border-red-800/40 rounded p-2">{sendError}</p>}
               {!lead.email && aiChannel === 'email' && (
-                <p className="text-xs text-amber-400">⚠️ No email on record — add an email address to send.</p>
+                <p className="text-xs text-amber-400 bg-amber-900/20 border border-amber-800/40 rounded p-2">⚠️ No email address saved for this lead. Edit the lead to add one first.</p>
               )}
               {!lead.whatsapp && aiChannel === 'whatsapp' && (
-                <p className="text-xs text-amber-400">⚠️ No WhatsApp number on record.</p>
+                <p className="text-xs text-amber-400 bg-amber-900/20 border border-amber-800/40 rounded p-2">⚠️ No WhatsApp number saved. Edit the lead to add one.</p>
               )}
             </div>
           )}

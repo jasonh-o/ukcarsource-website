@@ -1,8 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk'
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-})
+// Instantiate lazily so env vars are always loaded at call time
+function getClient() {
+  const apiKey = process.env.ANTHROPIC_API_KEY
+  if (!apiKey) throw new Error('ANTHROPIC_API_KEY is not set in .env file')
+  return new Anthropic({ apiKey })
+}
 
 interface LeadContext {
   companyName: string
@@ -61,7 +64,7 @@ ${options.angle ? `Angle: ${options.angle}` : ''}
 
 ${options.channel === 'email' ? 'Return JSON: { "subject": "...", "body": "..." }' : 'Return JSON: { "body": "..." }'}`
 
-  const response = await anthropic.messages.create({
+  const response = await getClient().messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 600,
     system: systemPrompt,
@@ -81,7 +84,7 @@ ${options.channel === 'email' ? 'Return JSON: { "subject": "...", "body": "..." 
 }
 
 export async function scoreLead(lead: LeadContext): Promise<{ score: number; reasoning: string }> {
-  const response = await anthropic.messages.create({
+  const response = await getClient().messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 300,
     system: `You are a B2B automotive export lead scoring expert for UK Car Source. Score dealer/importer leads 0-100 based on: market potential, vehicle specialty alignment, country priority, company size indicators, and buying intent signals.
@@ -118,7 +121,7 @@ export async function suggestFollowUp(
   lastMessage: string,
   daysSinceContact: number
 ): Promise<string> {
-  const response = await anthropic.messages.create({
+  const response = await getClient().messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 200,
     messages: [
