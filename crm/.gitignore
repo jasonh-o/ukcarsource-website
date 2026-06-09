@@ -9,3 +9,9 @@ prisma/dev.db
 prisma/*.db
 package-lock.json
 postcss.config.js
+prisma/dev.db
+prisma/dev.db-journal
+.env
+.env.local
+.next/
+node_modules/

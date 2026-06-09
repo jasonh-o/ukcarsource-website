@@ -3,7 +3,7 @@ import { Sidebar } from '@/components/layout/Sidebar'
 import { STAGE_LABELS } from '@/types'
 import { formatRelative, cn } from '@/lib/utils'
 import Link from 'next/link'
-import { Mail, MessageCircle, Clock, AlertCircle, CheckCircle, Send } from 'lucide-react'
+import { Mail, MessageCircle, Clock, AlertCircle, CheckCircle, Send, Zap } from 'lucide-react'
 
 export default async function OutreachPage() {
   // Leads that need first contact (New or Enriched with email or whatsapp)
@@ -45,9 +45,14 @@ export default async function OutreachPage() {
     <div className="flex min-h-screen">
       <Sidebar />
       <div className="flex-1 p-6 space-y-6">
-        <div>
-          <h1 className="text-xl font-bold text-white">Outreach</h1>
-          <p className="text-sm text-neutral-500">Who to contact today</p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-white">Outreach</h1>
+            <p className="text-sm text-neutral-500">Who to contact today</p>
+          </div>
+          <Link href="/outreach/bulk" className="btn-primary gap-2">
+            <Zap className="w-4 h-4" /> Bulk Send
+          </Link>
         </div>
 
         {/* Stats */}
