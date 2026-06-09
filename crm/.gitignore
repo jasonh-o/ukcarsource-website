@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.env
+.env.local
+.env*.local
+next-env.d.ts
+*.node
+prisma/dev.db
+prisma/*.db
+package-lock.json
+postcss.config.js

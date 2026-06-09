@@ -16,3 +16,10 @@ crm/node_modules/
 crm/.env
 crm/.env.local
 crm/next-env.d.ts
+crm/package-lock.json
+crm/postcss.config.js
+crm/prisma/dev.db
+crm/prisma/*.db
+
+# Native binary modules (can be 100MB+)
+*.node
