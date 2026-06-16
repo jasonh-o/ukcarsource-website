@@ -53,9 +53,9 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 /* FOOTER */
 footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,32px) clamp(22px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .flogo{font-family:'Barlow',sans-serif;font-size:clamp(.78rem,1vw,.9rem);font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#fff}
-.fcopy{font-size:.7rem;color:#3a3a3a}
+.fcopy{font-size:.7rem;color:#888}
 .flinks{display:flex;gap:clamp(12px,1.5vw,20px);flex-wrap:wrap}
-.flinks a{font-size:.7rem;color:#3a3a3a;text-decoration:none;transition:color .2s}
+.flinks a{font-size:.7rem;color:#888;text-decoration:none;transition:color .2s}
 .flinks a:hover{color:var(--orange)}
 /* WHATSAPP */
 .whatsapp-btn{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;padding:12px 18px 12px 14px;border-radius:50px;box-shadow:0 4px 20px rgba(37,211,102,.4);font-family:'Barlow',sans-serif;font-size:.82rem;font-weight:600;transition:transform .2s}
@@ -241,7 +241,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 <!-- ── NAV ── -->
 <nav id="main-nav">
   <a href="index.html" class="logo-wrap" aria-label="UK Car Export">
-    <img src="images/logo-export.webp" alt="UK Car Export" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'">
+    <img src="images/logo-export.webp" alt="UK Car Export" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'" width="175" height="116">
     <span class="logo-fallback">UK<em>CAR</em> EXPORT</span>
   </a>
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -258,6 +258,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   </ul>
 </nav>
 
+<main>
 <!-- ── HERO ── -->
 <section id="exports-hero" class="page-hero" style="min-height:65vh">
   <div class="hero-bg"></div>
@@ -306,11 +307,11 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
     </div>
   </div>
   <div class="src-centre">
-    <img src="images/export-page-main.webp" alt="Luxury Saloon export" loading="lazy">
+    <img src="images/export-page-main.webp" alt="Luxury Saloon export" loading="lazy" width="1030" height="1527">
   </div>
   <div class="src-right-stack">
-    <div><img src="images/export-page-small1.webp" alt="Defender vehicle export" loading="lazy"></div>
-    <div><img src="images/export-page-small2.webp" alt="BMW motorcycle export" loading="lazy"></div>
+    <div><img src="images/export-page-small1.webp" alt="Defender vehicle export" loading="lazy" width="1282" height="1182"></div>
+    <div><img src="images/export-page-small2.webp" alt="BMW motorcycle export" loading="lazy" width="1448" height="1086"></div>
   </div>
 </div>
 
@@ -692,6 +693,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 </section>
 
 <!-- ── FOOTER ── -->
+</main>
 <footer>
   <div class="flogo">UK Car Source — Vehicle Sourcing &amp; Export Specialists</div>
   <div class="fcopy">&copy; 2026 UK Car Source. All rights reserved.</div>

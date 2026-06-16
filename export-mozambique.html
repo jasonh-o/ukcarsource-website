@@ -106,9 +106,9 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 .rel-card span:first-child{font-size:1.6rem}
 footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,32px) clamp(22px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .flogo{font-family:'Barlow',sans-serif;font-size:clamp(.78rem,1vw,.9rem);font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#fff}
-.fcopy{font-size:.7rem;color:#3a3a3a}
+.fcopy{font-size:.7rem;color:#888}
 .flinks{display:flex;gap:clamp(12px,1.5vw,20px);flex-wrap:wrap}
-.flinks a{font-size:.7rem;color:#3a3a3a;text-decoration:none;transition:color .2s}
+.flinks a{font-size:.7rem;color:#888;text-decoration:none;transition:color .2s}
 .flinks a:hover{color:var(--orange)}
 .whatsapp-btn{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;background:#25D366;color:#fff;text-decoration:none;padding:0;border-radius:50%;width:52px;height:52px;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s}
 .whatsapp-btn:hover{transform:translateY(-3px)}
@@ -243,8 +243,8 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 </head>
 <body>
 <nav id="main-nav">
-  <a href="index.html" class="logo-wrap"><img src="images/logo-export.webp" alt="UK Car Export" onerror="this.src='images/logo.png'"><span class="logo-fallback">UK<em>CAR</em> EXPORT</span></a>
-  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+  <a href="index.html" class="logo-wrap"><img src="images/logo-export.webp" alt="UK Car Export" onerror="this.src='images/logo.png'" width="175" height="116"><span class="logo-fallback">UK<em>CAR</em> EXPORT</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <ul class="nav-links" id="nav-links">    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About Us</a></li>
     <li><a href="arrivals.html">Arrivals</a></li>
@@ -255,6 +255,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
     <li><a href="contact.html">Contact Us</a></li>
   </ul>
 </nav>
+<main>
 <section class="country-hero">
   <div class="country-hero-bg"></div>
   <div class="country-hero-overlay"></div>
@@ -404,6 +405,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   <div class="divider"></div>
   <div class="related-grid"><a href="export-south-africa.html" class="rel-card"><span>🇿🇦</span><span>South Africa</span></a><a href="export-zimbabwe.html" class="rel-card"><span>🇿🇼</span><span>Zimbabwe</span></a><a href="export-tanzania.html" class="rel-card"><span>🇹🇿</span><span>Tanzania</span></a><a href="export-zambia.html" class="rel-card"><span>🇿🇲</span><span>Zambia</span></a><a href="export-kenya.html" class="rel-card"><span>🇰🇪</span><span>Kenya</span></a><a href="export-namibia.html" class="rel-card"><span>🇳🇦</span><span>Namibia</span></a><a href="export-botswana.html" class="rel-card"><span>🇧🇼</span><span>Botswana</span></a><a href="export-uganda.html" class="rel-card"><span>🇺🇬</span><span>Uganda</span></a></div>
 </div>
+</main>
 <footer>
   <div class="flogo">UK Car Export — International Vehicle Export Specialists</div>
   <div class="fcopy">&copy; 2026 UK Car Source. All rights reserved.</div>

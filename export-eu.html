@@ -87,9 +87,9 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 .rel-card span:first-child{font-size:1.6rem}
 footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,32px) clamp(22px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .flogo{font-family:'Barlow',sans-serif;font-size:clamp(.78rem,1vw,.9rem);font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#fff}
-.fcopy{font-size:.7rem;color:#3a3a3a}
+.fcopy{font-size:.7rem;color:#888}
 .flinks{display:flex;gap:clamp(12px,1.5vw,20px);flex-wrap:wrap}
-.flinks a{font-size:.7rem;color:#3a3a3a;text-decoration:none;transition:color .2s}
+.flinks a{font-size:.7rem;color:#888;text-decoration:none;transition:color .2s}
 .flinks a:hover{color:var(--orange)}
 .whatsapp-btn{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;padding:12px 18px 12px 14px;border-radius:50px;box-shadow:0 4px 20px rgba(37,211,102,.4);font-family:'Barlow',sans-serif;font-size:.82rem;font-weight:600;transition:transform .2s}
 .whatsapp-btn:hover{transform:translateY(-3px)}
@@ -149,10 +149,10 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 <body>
 <nav id="main-nav">
   <a href="index.html" class="logo-wrap">
-    <img src="images/logo.webp" alt="UK Car Source — premium vehicle sourcing and export specialists" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'">
+    <img src="images/logo.webp" alt="UK Car Source — premium vehicle sourcing and export specialists" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'" width="175" height="116">
     <span class="logo-fallback">UK<em>CAR</em> SOURCE</span>
   </a>
-  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <ul class="nav-links" id="nav-links">    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About Us</a></li>
     <li><a href="arrivals.html">Arrivals</a></li>
@@ -165,6 +165,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 </nav>
 
 
+<main>
 <!-- COUNTRY HERO -->
 <section class="country-hero">
   <div class="country-hero-bg"></div>
@@ -339,6 +340,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   </div>
 </div>
 
+</main>
 <footer>
   <div class="flogo">UK Car Source — Vehicle Sourcing Specialists</div>
   <div class="fcopy">&copy; 2026 UK Car Source. All rights reserved.</div>
