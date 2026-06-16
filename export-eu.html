@@ -109,8 +109,8 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 
 /* ── COUNTRY HERO ── */
 .country-hero{min-height:65vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
-.country-hero-bg{position:absolute;inset:0;background-image:url('images/export-page-trucks.jpg');background-size:cover;background-position:center}
-.country-hero-overlay{position:absolute;inset:0;background:none}
+.country-hero-bg{position:absolute;inset:0;background-image:url('images/port-hero-countries.webp');background-size:cover;background-position:center}
+.country-hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.82) 0%,rgba(0,0,0,.58) 35%,rgba(0,0,0,.2) 62%,rgba(0,0,0,0) 78%)}
 .country-hero-content{position:relative;z-index:2;padding:clamp(60px,8vh,100px) clamp(22px,6vw,80px) clamp(48px,6vh,80px);width:100%;max-width:var(--max)}
 .breadcrumb{font-size:.7rem;color:#666;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
 .breadcrumb a{color:#555;text-decoration:none;transition:color .2s}
@@ -270,6 +270,35 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
           <span>Insurance Certificate</span>
         </div></div>
       </div>
+
+      <div class="info-section">
+        <div class="section-label">Tax &amp; Duties</div><div class="divider"></div>
+        <h2>Import Tax <span>Breakdown</span></h2>
+        <table class="info-table">
+          <tr><td>EU Common Customs Tariff</td><td>6.5% of CIF value (UK is a third country post-Brexit). Vehicles meeting UK Rules of Origin under TCA may qualify for 0% — confirm per model</td></tr>
+          <tr><td>VAT (varies by country)</td><td>Germany 19% · France 20% · Netherlands 21% · Spain 21% · Italy 22% · Belgium 21% · Poland 23%</td></tr>
+          <tr><td>Registration Tax</td><td>Varies significantly: Germany — none. France — CV tax by emissions. Spain — up to 14.75% by CO2. Netherlands — BPM (significant for high-CO2 vehicles)</td></tr>
+          <tr><td>Emissions Compliance</td><td>Euro 6d required for all EU registrations. UK post-2020 vehicles typically compliant — confirm per spec</td></tr>
+          <tr><td>Type Approval</td><td>UK UKCA type approval no longer valid in EU post-Brexit. EU CoC or Individual Vehicle Approval (IVA) required</td></tr>
+          <tr><td>Drive Configuration</td><td>Most EU countries require LHD registration. RHD permitted in some countries (Ireland, Malta, Cyprus) but not mainland EU for general road use</td></tr>
+        </table>
+        <p style="font-size:.8rem;color:#666;font-style:italic">Tax rates are indicative and subject to change. Verify with local customs authority before shipping.</p>
+      </div>
+
+      <div class="info-section">
+        <div class="section-label">Port Guide</div><div class="divider"></div>
+        <h2>Port <span>Guide</span></h2>
+        <p>The primary crossing routes from the UK to Europe are Dover–Calais (P&O / DFDS ferry, 90 minutes), the Channel Tunnel via Eurotunnel Le Shuttle (35 minutes), and Harwich–Hook of Holland for the Netherlands. For central Europe and Germany, RoRo shipping via Zeebrugge (Belgium) or direct lorry transport is commonly used. For Spain, Santander and Bilbao have direct UK ferry connections (Brittany Ferries, 24–36 hours). For Scandinavia, Newcastle–Amsterdam or Tilbury–Gothenburg are established routes.</p>
+        <p>EU customs clearance post-Brexit requires a full customs declaration (import and export) for all commercial vehicle movements. EORI numbers are required for the importer. Pre-lodgement of customs entries via the relevant national customs system (CHIEF/CDS in UK; NCTS/AES at destination) is required. Budget 1–3 working days for customs processing at the border. A licensed EU customs agent is strongly recommended at destination.</p>
+      </div>
+
+      <div class="info-section">
+        <div class="section-label">Market Advice</div><div class="divider"></div>
+        <h2>Local Market <span>Advice</span></h2>
+        <p>The most important consideration for EU export is drive configuration: the vast majority of EU countries require left-hand drive (LHD) vehicles for registration. UK RHD vehicles are not registrable as standard road vehicles in France, Germany, Spain, Italy, Netherlands, Belgium, or most other EU markets. LHD vehicles sourced from UK dealer networks, European supply, or factory order are the appropriate option. The exceptions are Ireland, Malta and Cyprus, which drive on the left and accept RHD.</p>
+        <p>Germany is the most active market for UK-to-EU vehicle exports of prestige marques — particularly Rolls-Royce, Bentley and Porsche, where UK pricing (even after 6.5% duty) can be competitive versus German list prices on certain spec combinations. France and Belgium are active for prestige SUV exports. The Netherlands BPM tax makes high-emission vehicles very expensive to register there — diesel and petrol over 200g CO2/km attract significant BPM levies. Hybrid and electric vehicles are the most commercially viable for NL import.</p>
+      </div>
+
     </div>
     <div class="country-sidebar">
       <div class="sidebar-card" id="country-enquiry">
@@ -313,7 +342,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 
 <footer>
   <div class="flogo">UK Car Source — Vehicle Sourcing Specialists</div>
-  <div class="fcopy">&copy; 2025 UK Car Source. All rights reserved.</div>
+  <div class="fcopy">&copy; 2026 UK Car Source. All rights reserved.</div>
     <div class="flinks">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -324,6 +353,12 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
     <a href="contact.html">Contact</a>
     <a href="parts.html">Parts</a>
     <a href="how-it-works.html">How It Works</a>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="https://www.instagram.com/ukcarsource" target="_blank" rel="noopener" aria-label="Instagram" style="color:#444;transition:color .2s;display:flex" onmouseover="this.style.color='#e07b20'" onmouseout="this.style.color='#444'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    <a href="https://www.facebook.com/ukcarsource" target="_blank" rel="noopener" aria-label="Facebook" style="color:#444;transition:color .2s;display:flex" onmouseover="this.style.color='#e07b20'" onmouseout="this.style.color='#444'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+    <a href="https://www.linkedin.com/company/uk-car-source" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:#444;transition:color .2s;display:flex" onmouseover="this.style.color='#e07b20'" onmouseout="this.style.color='#444'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="https://www.youtube.com/@ukcarsource" target="_blank" rel="noopener" aria-label="YouTube" style="color:#444;transition:color .2s;display:flex" onmouseover="this.style.color='#e07b20'" onmouseout="this.style.color='#444'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
   </div>
 </footer>
 
