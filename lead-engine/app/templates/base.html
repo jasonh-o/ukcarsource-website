@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}UK Car Source — Lead Engine{% endblock %}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --surface2: #242424;
+      --border: #2e2e2e;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #c9a84c;
+      --accent-dim: #7a6230;
+      --green: #4caf7e;
+      --red: #e05555;
+      --blue: #4a9eff;
+      --radius: 8px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; display: flex; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px; min-height: 100vh; background: var(--surface);
+      border-right: 1px solid var(--border); padding: 24px 0; flex-shrink: 0;
+      display: flex; flex-direction: column;
+    }
+    .sidebar-logo {
+      padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .sidebar-logo span { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
+    .sidebar-logo strong { font-size: 15px; color: var(--accent); letter-spacing: 0.3px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 20px;
+      color: var(--muted); font-size: 14px; transition: all .15s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { color: var(--text); background: var(--surface2); text-decoration: none; }
+    .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(201,168,76,.07); }
+    .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+    .nav-badge {
+      margin-left: auto; background: var(--accent); color: #000; font-size: 11px;
+      font-weight: 700; padding: 1px 6px; border-radius: 10px;
+    }
+
+    /* Main */
+    .main { flex: 1; overflow-x: auto; }
+    .page-header {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 20px 32px; display: flex; align-items: center; gap: 16px;
+    }
+    .page-header h1 { font-size: 20px; font-weight: 600; }
+    .page-header .subtitle { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .page-body { padding: 28px 32px; }
+
+    /* Cards */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .card-title { font-size: 12px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-bottom: 8px; }
+    .stat-value { font-size: 32px; font-weight: 700; color: var(--text); }
+    .stat-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Grid */
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 900px) { .grid-4, .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:hover td { background: var(--surface2); }
+    tr:last-child td { border-bottom: none; }
+
+    /* Score badge */
+    .score {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      font-size: 12px; font-weight: 700;
+    }
+    .score-high { background: rgba(76,175,126,.2); color: var(--green); }
+    .score-mid  { background: rgba(201,168,76,.2); color: var(--accent); }
+    .score-low  { background: rgba(224,85,85,.15); color: var(--red); }
+
+    /* Status badges */
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;
+    }
+    .badge-new       { background: rgba(74,158,255,.15); color: var(--blue); }
+    .badge-qualified { background: rgba(76,175,126,.15); color: var(--green); }
+    .badge-rejected  { background: rgba(224,85,85,.15); color: var(--red); }
+    .badge-pending   { background: rgba(201,168,76,.15); color: var(--accent); }
+    .badge-approved  { background: rgba(76,175,126,.15); color: var(--green); }
+    .badge-sent      { background: rgba(74,158,255,.15); color: var(--blue); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: var(--radius); font-size: 13px;
+      font-weight: 600; cursor: pointer; border: none; transition: opacity .15s;
+    }
+    .btn:hover { opacity: .85; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-ghost   { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .btn-danger  { background: rgba(224,85,85,.15); color: var(--red); border: 1px solid rgba(224,85,85,.3); }
+    .btn-green   { background: rgba(76,175,126,.15); color: var(--green); border: 1px solid rgba(76,175,126,.3); }
+    .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+    /* Forms */
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+    input[type=text], input[type=number], input[type=email], input[type=url],
+    select, textarea {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); padding: 9px 12px; border-radius: var(--radius);
+      font-size: 13px; font-family: var(--font); outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    textarea { min-height: 120px; resize: vertical; }
+
+    /* Alert */
+    .alert { padding: 12px 16px; border-radius: var(--radius); font-size: 13px; margin-bottom: 16px; }
+    .alert-info    { background: rgba(74,158,255,.1); border: 1px solid rgba(74,158,255,.3); color: var(--blue); }
+    .alert-success { background: rgba(76,175,126,.1); border: 1px solid rgba(76,175,126,.3); color: var(--green); }
+    .alert-warn    { background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.3); color: var(--accent); }
+    .alert-error   { background: rgba(224,85,85,.1); border: 1px solid rgba(224,85,85,.3); color: var(--red); }
+
+    /* Misc */
+    .mt-4 { margin-top: 16px; }
+    .mt-6 { margin-top: 24px; }
+    .mb-4 { margin-bottom: 16px; }
+    .flex { display: flex; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .text-muted { color: var(--muted); }
+    .text-sm { font-size: 12px; }
+    .text-green { color: var(--green); }
+    .text-red { color: var(--red); }
+    .section-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 12px; }
+  </style>
+  {% block head %}{% endblock %}
+</head>
+<body>
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <strong>🇬🇧 UK Car Source</strong>
+    <span>Lead Engine v1.0</span>
+  </div>
+  <a href="/" class="nav-item {% if request.url.path == '/' %}active{% endif %}">
+    <span class="nav-icon">📊</span> Dashboard
+  </a>
+  <a href="/buyers" class="nav-item {% if '/buyers' in request.url.path %}active{% endif %}">
+    <span class="nav-icon">👥</span> Buyers
+  </a>
+  <a href="/discovery" class="nav-item {% if '/discovery' in request.url.path %}active{% endif %}">
+    <span class="nav-icon">🔍</span> Discovery
+  </a>
+  <a href="/offers" class="nav-item {% if '/offers' in request.url.path %}active{% endif %}">
+    <span class="nav-icon">🚗</span> Offers
+  </a>
+  <a href="/queue" class="nav-item {% if '/queue' in request.url.path %}active{% endif %}">
+    <span class="nav-icon">📬</span> Approval Queue
+    {% if pending_count is defined and pending_count > 0 %}
+      <span class="nav-badge">{{ pending_count }}</span>
+    {% endif %}
+  </a>
+  <a href="/rules" class="nav-item {% if '/rules' in request.url.path %}active{% endif %}">
+    <span class="nav-icon">⚙️</span> Rules
+  </a>
+  <a href="/stock" class="nav-item {% if '/stock' in request.url.path %}active{% endif %}">
+    <span class="nav-icon">🚘</span> Current Stock
+  </a>
+  <a href="/settings" class="nav-item {% if '/settings' in request.url.path %}active{% endif %}">
+    <span class="nav-icon">🔑</span> Settings
+  </a>
+</nav>
+<div class="main">
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

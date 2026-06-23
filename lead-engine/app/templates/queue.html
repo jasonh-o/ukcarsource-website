@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Approval Queue — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Approval Queue</h1>
+    <div class="subtitle">{{ pending_count }} messages awaiting approval — nothing is sent until you approve it</div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- Filters -->
+  <form method="get" class="flex gap-2 mb-4">
+    <select name="channel" onchange="this.form.submit()">
+      <option value="" {% if not channel %}selected{% endif %}>All Channels</option>
+      <option value="email"    {% if channel=='email'    %}selected{% endif %}>📧 Email</option>
+      <option value="whatsapp" {% if channel=='whatsapp' %}selected{% endif %}>💬 WhatsApp</option>
+    </select>
+    <select name="status" onchange="this.form.submit()">
+      <option value="pending"  {% if status=='pending'  %}selected{% endif %}>Pending</option>
+      <option value="approved" {% if status=='approved' %}selected{% endif %}>Approved</option>
+      <option value="rejected" {% if status=='rejected' %}selected{% endif %}>Rejected</option>
+      <option value=""         {% if not status        %}selected{% endif %}>All</option>
+    </select>
+  </form>
+
+  {% if messages %}
+
+  <!-- Bulk approve -->
+  {% if status == 'pending' %}
+  <form method="post" action="/queue/bulk-approve" id="bulk-form" class="mb-4">
+    <input type="hidden" name="ids" id="bulk-ids">
+    <div class="flex gap-2 items-center">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+        <input type="checkbox" id="select-all" onchange="toggleAll(this)"> Select all visible
+      </label>
+      <button type="button" onclick="bulkApprove()" class="btn btn-green btn-sm">✓ Approve Selected</button>
+    </div>
+  </form>
+  {% endif %}
+
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    {% for msg in messages %}
+    <div class="card" style="border-left: 3px solid {% if msg.channel == 'email' %}var(--blue){% else %}var(--green){% endif %};">
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex gap-2 items-center">
+          {% if status == 'pending' %}
+          <input type="checkbox" class="msg-check" value="{{ msg.id }}">
+          {% endif %}
+          <span class="badge {% if msg.channel == 'email' %}badge-new{% else %}badge-qualified{% endif %}">
+            {{ '📧 Email' if msg.channel == 'email' else '💬 WhatsApp' }}
+          </span>
+          <span class="text-muted text-sm">{{ msg.message_type }}</span>
+          <a href="/buyers/{{ msg.buyer_id }}" style="font-size:13px;">{{ msg.buyer.company_name }}</a>
+          <span class="text-muted text-sm">· {{ msg.buyer.country or '' }}</span>
+        </div>
+        <div class="flex gap-2 items-center">
+          <span class="badge badge-{{ msg.status }}">{{ msg.status }}</span>
+          <span class="text-muted text-sm">{{ msg.created_at.strftime('%d %b %H:%M') }}</span>
+        </div>
+      </div>
+
+      {% if msg.subject %}
+      <div style="font-weight:600;margin-bottom:8px;font-size:13px;">{{ msg.subject }}</div>
+      {% endif %}
+
+      <div style="background:var(--surface2);border-radius:6px;padding:12px;font-size:13px;white-space:pre-wrap;line-height:1.6;max-height:200px;overflow:hidden;" id="body-{{ msg.id }}">{{ msg.body }}</div>
+      <button onclick="toggleExpand({{ msg.id }})" class="btn btn-ghost btn-sm mt-4" id="expand-btn-{{ msg.id }}">Show full message</button>
+
+      {% if msg.status == 'pending' %}
+      <div class="flex gap-2 mt-4" style="flex-wrap:wrap;">
+        <form method="post" action="/queue/{{ msg.id }}/approve">
+          <button class="btn btn-green btn-sm">✓ Approve</button>
+        </form>
+        <form method="post" action="/queue/{{ msg.id }}/reject">
+          <button class="btn btn-danger btn-sm">✕ Reject</button>
+        </form>
+        <button onclick="toggleEdit({{ msg.id }})" class="btn btn-ghost btn-sm">✏ Edit</button>
+        {% if msg.channel == 'whatsapp' %}
+        <button onclick="copyWhatsApp({{ msg.id }})" class="btn btn-ghost btn-sm" id="copy-btn-{{ msg.id }}">
+          📋 Copy Message
+        </button>
+        {% if msg.buyer and msg.buyer.whatsapp %}
+        <a href="https://wa.me/{{ msg.buyer.whatsapp | replace('+','') | replace(' ','') }}" target="_blank" class="btn btn-green btn-sm">
+          💬 Open WhatsApp
+        </a>
+        {% endif %}
+        {% endif %}
+      </div>
+
+      <!-- Inline edit -->
+      <div id="edit-{{ msg.id }}" style="display:none;margin-top:12px;">
+        <form method="post" action="/queue/{{ msg.id }}/edit">
+          {% if msg.channel == 'email' %}
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" name="subject" value="{{ msg.subject or '' }}">
+          </div>
+          {% endif %}
+          <div class="form-group">
+            <label>Body</label>
+            <textarea name="body" style="min-height:180px;">{{ msg.body }}</textarea>
+          </div>
+          <div class="flex gap-2">
+            <button class="btn btn-primary btn-sm" type="submit">Save Changes</button>
+            <button type="button" onclick="toggleEdit({{ msg.id }})" class="btn btn-ghost btn-sm">Cancel</button>
+          </div>
+        </form>
+      </div>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="alert alert-info">
+    {% if status == 'pending' %}
+      No messages pending approval. Run a discovery or add a vehicle offer to generate messages.
+    {% else %}
+      No messages found for these filters.
+    {% endif %}
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+function toggleAll(cb) {
+  document.querySelectorAll('.msg-check').forEach(el => el.checked = cb.checked);
+}
+function bulkApprove() {
+  const ids = [...document.querySelectorAll('.msg-check:checked')].map(el => el.value);
+  if (!ids.length) { alert('Select at least one message.'); return; }
+  document.getElementById('bulk-ids').value = ids.join(',');
+  document.getElementById('bulk-form').submit();
+}
+function toggleEdit(id) {
+  const el = document.getElementById('edit-' + id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+function toggleExpand(id) {
+  const body = document.getElementById('body-' + id);
+  const btn = document.getElementById('expand-btn-' + id);
+  if (body.style.maxHeight === 'none') {
+    body.style.maxHeight = '200px';
+    btn.textContent = 'Show full message';
+  } else {
+    body.style.maxHeight = 'none';
+    btn.textContent = 'Collapse';
+  }
+}
+function copyWhatsApp(id) {
+  const body = document.getElementById('body-' + id);
+  const text = body.innerText || body.textContent;
+  navigator.clipboard.writeText(text.trim()).then(() => {
+    const btn = document.getElementById('copy-btn-' + id);
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✅ Copied!';
+    btn.style.color = 'var(--green)';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+  }).catch(() => {
+    // Fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = (body.innerText || body.textContent).trim();
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copy-btn-' + id);
+    btn.innerHTML = '✅ Copied!';
+    setTimeout(() => { btn.innerHTML = '📋 Copy Message'; }, 2000);
+  });
+}
+</script>
+{% endblock %}

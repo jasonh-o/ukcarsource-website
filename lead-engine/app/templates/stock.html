@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block title %}Current Stock — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Current Stock</h1>
+    <div class="subtitle">Vehicles auto-included in outreach messages — update here and all future emails reflect it instantly</div>
+  </div>
+  <button onclick="document.getElementById('add-modal').style.display='flex'" class="btn btn-primary" style="margin-left:auto;">+ Add Vehicle</button>
+</div>
+
+<div class="page-body">
+
+  <!-- LHD Stock -->
+  <div class="section-title mb-4">🇪🇺 LHD Stock — included in emails to UAE, Saudi, Qatar, Kuwait etc.</div>
+  {% if lhd_stock %}
+  <div class="grid grid-3 mb-4">
+    {% for item in lhd_stock %}
+    <div class="card" style="border-left: 3px solid {% if item.stock_type == 'physical' %}var(--green){% elif item.stock_type == 'allocation' %}var(--accent){% else %}var(--blue){% endif %};">
+      <div class="flex justify-between items-center mb-4">
+        <span class="badge {% if item.stock_type == 'physical' %}badge-approved{% elif item.stock_type == 'allocation' %}badge-pending{% else %}badge-new{% endif %}">
+          {{ item.stock_type|title }}
+        </span>
+        <span class="badge badge-new">{{ item.drive }}</span>
+      </div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:4px;">
+        {{ item.year or '' }} {{ item.make }} {{ item.model }}
+      </div>
+      {% if item.variant %}
+      <div style="font-size:13px;color:var(--accent);margin-bottom:8px;">{{ item.variant }}</div>
+      {% endif %}
+      <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+        {% if item.mileage %}<div>{{ '{:,}'.format(item.mileage) }} miles</div>{% endif %}
+        {% if item.colour %}<div>{{ item.colour }}</div>{% endif %}
+        {% if item.interior %}<div>{{ item.interior }} interior</div>{% endif %}
+        {% if item.price_gbp %}<div>£{{ '{:,.0f}'.format(item.price_gbp) }}</div>{% endif %}
+        {% if item.location %}<div>📍 {{ item.location }}</div>{% endif %}
+        {% if item.notes %}<div style="color:var(--text);">{{ item.notes }}</div>{% endif %}
+      </div>
+      <form method="post" action="/stock/{{ item.id }}/deactivate" style="margin-top:12px;">
+        <button class="btn btn-ghost btn-sm">Archive</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-info mb-4">No active LHD stock. Add vehicles above and they'll appear in all LHD outreach emails.</div>
+  {% endif %}
+
+  <!-- RHD Stock -->
+  <div class="section-title mb-4 mt-6">🇬🇧 RHD Stock — included in emails to Kenya, Jamaica, Singapore etc.</div>
+  {% if rhd_stock %}
+  <div class="grid grid-3 mb-4">
+    {% for item in rhd_stock %}
+    <div class="card" style="border-left: 3px solid {% if item.stock_type == 'physical' %}var(--green){% elif item.stock_type == 'allocation' %}var(--accent){% else %}var(--blue){% endif %};">
+      <div class="flex justify-between items-center mb-4">
+        <span class="badge {% if item.stock_type == 'physical' %}badge-approved{% elif item.stock_type == 'allocation' %}badge-pending{% else %}badge-new{% endif %}">
+          {{ item.stock_type|title }}
+        </span>
+        <span class="badge badge-qualified">{{ item.drive }}</span>
+      </div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:4px;">
+        {{ item.year or '' }} {{ item.make }} {{ item.model }}
+      </div>
+      {% if item.variant %}
+      <div style="font-size:13px;color:var(--accent);margin-bottom:8px;">{{ item.variant }}</div>
+      {% endif %}
+      <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+        {% if item.mileage %}<div>{{ '{:,}'.format(item.mileage) }} miles</div>{% endif %}
+        {% if item.colour %}<div>{{ item.colour }}</div>{% endif %}
+        {% if item.interior %}<div>{{ item.interior }} interior</div>{% endif %}
+        {% if item.price_gbp %}<div>£{{ '{:,.0f}'.format(item.price_gbp) }}</div>{% endif %}
+        {% if item.location %}<div>📍 {{ item.location }}</div>{% endif %}
+        {% if item.notes %}<div style="color:var(--text);">{{ item.notes }}</div>{% endif %}
+      </div>
+      <form method="post" action="/stock/{{ item.id }}/deactivate" style="margin-top:12px;">
+        <button class="btn btn-ghost btn-sm">Archive</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-info mb-4">No active RHD stock.</div>
+  {% endif %}
+
+  <!-- Archived -->
+  {% if inactive_stock %}
+  <div class="section-title mb-4 mt-6" style="color:var(--muted);">📦 Archived Stock (sold / no longer available)</div>
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Vehicle</th><th>Drive</th><th>Type</th><th>Notes</th><th></th></tr></thead>
+        <tbody>
+          {% for item in inactive_stock %}
+          <tr>
+            <td>{{ item.year or '' }} {{ item.make }} {{ item.model }} {% if item.variant %}<span class="text-muted text-sm">{{ item.variant }}</span>{% endif %}</td>
+            <td>{{ item.drive }}</td>
+            <td>{{ item.stock_type }}</td>
+            <td class="text-muted text-sm">{{ item.notes or '—' }}</td>
+            <td class="flex gap-2">
+              <form method="post" action="/stock/{{ item.id }}/activate">
+                <button class="btn btn-ghost btn-sm">Restore</button>
+              </form>
+              <form method="post" action="/stock/{{ item.id }}/delete" onsubmit="return confirm('Delete permanently?')">
+                <button class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+<!-- Add vehicle modal -->
+<div id="add-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;">
+  <div class="card" style="width:560px;max-height:92vh;overflow-y:auto;">
+    <div class="flex justify-between items-center mb-4">
+      <strong>Add Vehicle to Stock</strong>
+      <button onclick="document.getElementById('add-modal').style.display='none'" class="btn btn-ghost btn-sm">✕</button>
+    </div>
+    <form method="post" action="/stock/add">
+      <div class="grid grid-2">
+        <div class="form-group">
+          <label>Make *</label>
+          <input type="text" name="make" placeholder="Rolls-Royce" required>
+        </div>
+        <div class="form-group">
+          <label>Model *</label>
+          <input type="text" name="model" placeholder="Cullinan" required>
+        </div>
+        <div class="form-group">
+          <label>Year</label>
+          <input type="number" name="year" placeholder="2026">
+        </div>
+        <div class="form-group">
+          <label>Variant / Edition</label>
+          <input type="text" name="variant" placeholder="Black Badge, 110 Ans Edition…">
+        </div>
+        <div class="form-group">
+          <label>Drive Side</label>
+          <select name="drive">
+            <option value="LHD">LHD — Left Hand Drive</option>
+            <option value="RHD">RHD — Right Hand Drive</option>
+            <option value="Both">Both LHD & RHD</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Stock Type</label>
+          <select name="stock_type">
+            <option value="physical">Physical Stock — in hand now</option>
+            <option value="allocation">Confirmed Allocation</option>
+            <option value="factory-order">Available to Factory Order</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mileage</label>
+          <input type="text" name="mileage" placeholder="4000">
+        </div>
+        <div class="form-group">
+          <label>Price (£ GBP)</label>
+          <input type="text" name="price_gbp" placeholder="450000">
+        </div>
+        <div class="form-group">
+          <label>Colour</label>
+          <input type="text" name="colour" placeholder="French Racing Blue / Atlantic Blue">
+        </div>
+        <div class="form-group">
+          <label>Interior</label>
+          <input type="text" name="interior" placeholder="Cognac">
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" name="location" placeholder="UK / USA / Europe">
+        </div>
+        <div class="form-group" style="grid-column:span 2">
+          <label>Notes (shown in emails)</label>
+          <textarea name="notes" style="min-height:70px;" placeholder="US titled | 1 of 20 | Factory Goodwood order available…"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Add to Stock</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

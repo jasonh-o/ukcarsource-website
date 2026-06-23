@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block title %}Settings — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Settings &amp; API Diagnostics</h1>
+    <div class="subtitle">Check your API keys and connections are working</div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <div class="grid grid-2">
+
+    <!-- Google Search -->
+    <div class="card">
+      <div class="section-title">🔍 Google Custom Search API</div>
+      <table style="width:100%;margin-bottom:16px;">
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;width:160px;">GOOGLE_SEARCH_API_KEY</td>
+          <td>
+            {% if google_status.api_key_set %}
+              <span class="text-green">✓ Set</span>
+            {% else %}
+              <span class="text-red">✗ Not set</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;">GOOGLE_SEARCH_ENGINE_ID</td>
+          <td>
+            {% if google_status.engine_id_set %}
+              <span class="text-green">✓ Set</span>
+            {% else %}
+              <span class="text-red">✗ Not set</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;">API Test</td>
+          <td>
+            {% if google_status.working %}
+              <span class="text-green">✓ Working — test search succeeded</span>
+            {% elif google_status.error %}
+              <span class="text-red">✗ {{ google_status.error }}</span>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+
+      <div class="alert alert-info text-sm">
+        <strong>How to set up:</strong><br>
+        1. Go to <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a><br>
+        2. Enable <strong>Custom Search JSON API</strong><br>
+        3. Create an API key → set as <code>GOOGLE_SEARCH_API_KEY</code><br>
+        4. Go to <a href="https://programmablesearchengine.google.com" target="_blank">programmablesearchengine.google.com</a><br>
+        5. Create a search engine (search the whole web) → copy the ID → set as <code>GOOGLE_SEARCH_ENGINE_ID</code><br>
+        6. Free tier: 100 queries/day. Paid: $5 per 1,000 additional.
+      </div>
+    </div>
+
+    <!-- Anthropic (Claude) -->
+    <div class="card">
+      <div class="section-title">🤖 Claude AI (Anthropic)</div>
+      <table style="width:100%;margin-bottom:16px;">
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;width:160px;">ANTHROPIC_API_KEY</td>
+          <td>
+            {% if anthropic_set %}
+              <span class="text-green">✓ Set</span>
+              <span class="text-muted text-sm" style="margin-left:8px;">{{ anthropic_preview }}</span>
+            {% else %}
+              <span class="text-red">✗ Not set — AI qualification and message generation unavailable</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;">Model</td>
+          <td class="text-muted text-sm">claude-sonnet-4-6</td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;">Fallback</td>
+          <td class="text-sm text-muted">Template messages used if key not set</td>
+        </tr>
+      </table>
+      <div class="alert alert-info text-sm">
+        Get your API key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+        Set as <code>ANTHROPIC_API_KEY</code> in your <code>.env</code> file.
+      </div>
+    </div>
+
+    <!-- Resend (Email) -->
+    <div class="card">
+      <div class="section-title">📧 Email (Resend)</div>
+      <table style="width:100%;margin-bottom:16px;">
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;width:160px;">RESEND_API_KEY</td>
+          <td>
+            {% if resend_set %}
+              <span class="text-green">✓ Set</span>
+              <span class="text-muted text-sm" style="margin-left:8px;">{{ resend_preview }}</span>
+            {% else %}
+              <span class="text-red">✗ Not set</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;">FROM_EMAIL</td>
+          <td class="text-sm">{{ from_email }}</td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted);font-size:12px;padding:6px 0;">Auto-send</td>
+          <td class="text-sm"><span class="text-red">Disabled</span> — all messages go to approval queue first</td>
+        </tr>
+      </table>
+      <div class="alert alert-info text-sm">
+        Get your API key at <a href="https://resend.com" target="_blank">resend.com</a>.
+        Set <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code> in <code>.env</code>.
+      </div>
+    </div>
+
+    <!-- Env file reference -->
+    <div class="card">
+      <div class="section-title">📄 .env File Reference</div>
+      <div style="background:var(--surface2);border-radius:6px;padding:14px;font-family:monospace;font-size:12px;line-height:2;">
+        <div style="color:var(--muted)"># AI</div>
+        <div>ANTHROPIC_API_KEY=sk-ant-...</div>
+        <div style="color:var(--muted);margin-top:8px"># Google Search</div>
+        <div>GOOGLE_SEARCH_API_KEY=AIza...</div>
+        <div>GOOGLE_SEARCH_ENGINE_ID=abc123...</div>
+        <div style="color:var(--muted);margin-top:8px"># Email</div>
+        <div>RESEND_API_KEY=re_...</div>
+        <div>FROM_EMAIL=outreach@ukcarsource.com</div>
+        <div style="color:var(--muted);margin-top:8px"># Scheduler</div>
+        <div>DISCOVERY_RUN_TIME=08:00</div>
+        <div>DISCOVERY_MAX_RESULTS_PER_QUERY=10</div>
+      </div>
+      <div class="alert alert-warn text-sm mt-4">
+        Never commit <code>.env</code> to git. It is listed in <code>.gitignore</code>.
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

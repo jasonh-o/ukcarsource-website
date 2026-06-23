@@ -1,0 +1,67 @@
+{
+  "base_score": 10,
+  "factors": {
+    "imports_vehicles": 35,
+    "exports_vehicles": 35,
+    "grey_market_signal": 20,
+    "rhd_country": 15,
+    "no_official_rr_dealer": 12,
+    "has_direct_email": 12,
+    "has_whatsapp": 12,
+    "sells_uk_vehicles": 8,
+    "sells_luxury_brands": 8,
+    "sells_priority_models": 8,
+    "has_website": 3,
+    "has_phone": 3,
+    "has_contact_form": 2,
+    "ai_confidence_high": 5,
+    "ai_confidence_medium": 2,
+    "country_luxury_market_bonus": 3
+  },
+  "penalties": {
+    "no_email_no_whatsapp": -20,
+    "no_website": -5,
+    "no_phone": -2,
+    "regular_dealer": -50,
+    "lhd_only_country": -10,
+    "non_target_country": -15
+  },
+  "buyer_type_multipliers": {
+    "importer": 1.6,
+    "exporter": 1.5,
+    "wholesaler": 1.2,
+    "luxury dealer": 0.4,
+    "mainstream dealer": 0.1,
+    "fleet buyer": 0.5,
+    "unknown": 0.7
+  },
+  "max_score": 100,
+
+  "target_buyer_types": ["importer", "exporter", "wholesaler"],
+
+  "grey_market_keywords": [
+    "import", "imports", "importing", "importer",
+    "export", "exports", "exporting", "exporter",
+    "grey market", "gray market", "parallel import",
+    "used car trader", "vehicle trader", "car trader",
+    "wholesale", "wholesaler", "trade only", "trade cars",
+    "international", "overseas", "cross border",
+    "sourcing", "procurement", "vehicle sourcing",
+    "uk cars", "british cars", "european cars",
+    "independent dealer", "independent importer"
+  ],
+
+  "rhd_countries": [
+    "Kenya", "Uganda", "Tanzania", "Zambia", "Zimbabwe", "Botswana",
+    "South Africa", "Mauritius", "Seychelles", "Cyprus", "Malta",
+    "Singapore", "Hong Kong", "Macao", "New Zealand", "Brunei",
+    "Maldives", "Barbados", "Jamaica", "Trinidad and Tobago", "Guyana",
+    "Thailand", "Sri Lanka", "Indonesia", "Oman"
+  ],
+
+  "countries_without_official_rr_dealer": [
+    "Uganda", "Tanzania", "Zambia", "Zimbabwe", "Botswana", "Seychelles",
+    "Maldives", "Brunei", "Guyana", "Barbados", "Jamaica",
+    "Trinidad and Tobago", "Mauritius", "Sri Lanka", "Malta", "Cyprus"
+  ]
+}

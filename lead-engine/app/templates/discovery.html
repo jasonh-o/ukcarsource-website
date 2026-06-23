@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Discovery — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Buyer Discovery</h1>
+    <div class="subtitle">Run searches to find new buyers automatically</div>
+  </div>
+  {% if running %}
+  <div style="margin-left:auto;" class="alert alert-warn" style="margin:0;">
+    ⏳ Discovery is currently running…
+  </div>
+  {% endif %}
+</div>
+
+<div class="page-body">
+
+  {% if request.query_params.get('started') %}
+  <div class="alert alert-success mb-4">✓ Discovery started in background. Results will appear below as they come in.</div>
+  {% endif %}
+  {% if request.query_params.get('purged') %}
+  <div class="alert alert-success mb-4">🗑 Removed {{ request.query_params.get('purged') }} rejected buyers.</div>
+  {% endif %}
+  {% if request.query_params.get('error') == 'already_running' %}
+  <div class="alert alert-warn mb-4">⚠ A discovery run is already in progress. Please wait for it to finish.</div>
+  {% endif %}
+
+  <div class="grid grid-2 mb-4">
+
+    <!-- Run controls -->
+    <div class="card">
+      <div class="section-title">Run Discovery Now</div>
+      <p class="text-muted text-sm mb-4">Searches Google for car dealers and importers across all target countries, visits their websites, scores and qualifies each one, and adds them to the CRM.</p>
+      <form method="post" action="/discovery/run">
+        <div class="form-group">
+          <label>Limit to specific countries (optional)</label>
+          <input type="text" name="countries" placeholder="UAE, Kenya, Singapore — leave blank for all">
+          <div class="text-sm text-muted" style="margin-top:4px;">Comma-separated. Leave blank to run across all 30+ target countries.</div>
+        </div>
+        <button class="btn btn-primary" type="submit" {% if running %}disabled{% endif %}>
+          {% if running %}⏳ Running…{% else %}🔍 Start Discovery Run{% endif %}
+        </button>
+      </form>
+    </div>
+
+    <!-- Purge rejected -->
+    <div class="card">
+      <div class="section-title">🗑 Clean Up Rejected Buyers</div>
+      <p class="text-muted text-sm">Permanently delete all buyers you have marked as Rejected. This also happens automatically at the start of every 8am discovery run.</p>
+      <form method="post" action="/discovery/purge-rejected" style="margin-top:16px;">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Permanently delete all rejected buyers?')">
+          Delete All Rejected Buyers Now
+        </button>
+      </form>
+    </div>
+
+    <!-- Scheduler info -->
+    <div class="card">
+      <div class="section-title">Automatic Schedule</div>
+      <p class="text-muted text-sm">Discovery runs automatically every morning at the time set in your <code>.env</code> file.</p>
+      <div style="margin-top:12px;padding:12px;background:var(--surface2);border-radius:6px;font-size:13px;">
+        <strong>DISCOVERY_RUN_TIME</strong> = {{ request.app.extra.get('run_time', '08:00') if request.app.extra else '08:00 (default)' }}
+      </div>
+      <p class="text-muted text-sm mt-4">Change this in <code>.env</code> and restart the server to update the schedule.</p>
+    </div>
+
+  </div>
+
+  <!-- Run history -->
+  <div class="card">
+    <div class="section-title">Discovery Run History</div>
+    {% if runs %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Started</th>
+            <th>Finished</th>
+            <th>Status</th>
+            <th>Queries</th>
+            <th>Results</th>
+            <th>New Buyers</th>
+            <th>Duplicates</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in runs %}
+          <tr>
+            <td>{{ r.started_at.strftime('%d %b %Y %H:%M') }}</td>
+            <td>{{ r.finished_at.strftime('%H:%M') if r.finished_at else '—' }}</td>
+            <td>
+              <span class="badge {% if r.status == 'completed' %}badge-approved{% elif r.status == 'running' %}badge-pending{% else %}badge-rejected{% endif %}">
+                {{ r.status }}
+              </span>
+            </td>
+            <td>{{ r.queries_run }}</td>
+            <td>{{ r.results_found }}</td>
+            <td class="text-green">+{{ r.new_buyers_added }}</td>
+            <td class="text-muted">{{ r.duplicates_skipped }}</td>
+            <td><a href="/discovery/run/{{ r.id }}" class="btn btn-ghost btn-sm">View Log</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">No discovery runs yet. Click "Start Discovery Run" above to begin.</div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

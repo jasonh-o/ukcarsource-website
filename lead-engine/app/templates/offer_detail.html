@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}{{ offer.make }} {{ offer.model }} — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <a href="/offers" class="btn btn-ghost btn-sm">← Offers</a>
+  <div>
+    <h1>{{ offer.year or '' }} {{ offer.make }} {{ offer.model }}</h1>
+    <div class="subtitle">
+      {% if offer.mileage %}{{ '{:,}'.format(offer.mileage) }} miles · {% endif %}
+      {% if offer.price_gbp %}£{{ '{:,.0f}'.format(offer.price_gbp) }} · {% endif %}
+      {{ offer.colour or '' }} · {{ offer.condition or '' }}
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="grid grid-2">
+
+    <!-- Vehicle details -->
+    <div class="card">
+      <div class="section-title">Vehicle Details</div>
+      <table style="width:100%;">
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;width:120px;">Make</td><td>{{ offer.make }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Model</td><td>{{ offer.model }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Year</td><td>{{ offer.year or '—' }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Mileage</td><td>{{ '{:,}'.format(offer.mileage) + ' miles' if offer.mileage else '—' }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Price</td><td>{% if offer.price_gbp %}£{{ '{:,.0f}'.format(offer.price_gbp) }} ex-UK{% else %}—{% endif %}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Fuel</td><td>{{ offer.fuel or '—' }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Gearbox</td><td>{{ offer.gearbox or '—' }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Colour</td><td>{{ offer.colour or '—' }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Condition</td><td>{{ offer.condition or '—' }}</td></tr>
+        <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Location</td><td>{{ offer.location or '—' }}</td></tr>
+      </table>
+      {% if offer.description %}
+      <div class="mt-4">
+        <div class="text-muted text-sm mb-4">Description</div>
+        <div style="font-size:13px;line-height:1.6;">{{ offer.description }}</div>
+      </div>
+      {% endif %}
+      {% if offer.spec_highlights %}
+      <div class="mt-4">
+        <div class="text-muted text-sm mb-4">Spec Highlights</div>
+        <ul style="font-size:13px;padding-left:16px;line-height:2;">
+          {% for s in offer.spec_highlights %}<li>{{ s }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Matched buyers -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <div class="section-title">{{ matches|length }} Matched Buyers</div>
+        {% if matches %}
+        <!-- Bulk queue form -->
+        <form method="post" action="/offers/{{ offer.id }}/queue-messages" id="bulk-form">
+          <input type="hidden" name="buyer_ids" id="selected-ids">
+          <div class="flex justify-between items-center mb-4">
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;">
+              <input type="checkbox" id="select-all" onchange="toggleAll(this)"> Select all
+            </label>
+            <button type="button" onclick="queueSelected()" class="btn btn-primary btn-sm">📬 Queue Messages for Selected</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th></th><th>Company</th><th>Country</th><th>Match Score</th><th>Reasons</th><th></th></tr>
+              </thead>
+              <tbody>
+                {% for m in matches %}
+                <tr>
+                  <td><input type="checkbox" class="buyer-check" value="{{ m.buyer_id }}"></td>
+                  <td><a href="/buyers/{{ m.buyer_id }}">{{ m.buyer.company_name }}</a></td>
+                  <td>{{ m.buyer.country or '—' }}</td>
+                  <td>
+                    {% set s = m.match_score %}
+                    <span class="score {% if s >= 50 %}score-high{% elif s >= 25 %}score-mid{% else %}score-low{% endif %}">{{ s|int }}</span>
+                  </td>
+                  <td class="text-sm text-muted">{{ (m.match_reasons or [])[:2]|join(', ') }}</td>
+                  <td><a href="/buyers/{{ m.buyer_id }}" class="btn btn-ghost btn-sm">View</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+        {% else %}
+        <div class="alert alert-info">No buyers matched this vehicle yet. Make sure buyers are in the CRM.</div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function toggleAll(cb) {
+  document.querySelectorAll('.buyer-check').forEach(el => el.checked = cb.checked);
+}
+function queueSelected() {
+  const ids = [...document.querySelectorAll('.buyer-check:checked')].map(el => el.value);
+  if (!ids.length) { alert('Select at least one buyer.'); return; }
+  document.getElementById('selected-ids').value = ids.join(',');
+  document.getElementById('bulk-form').submit();
+}
+</script>
+{% endblock %}

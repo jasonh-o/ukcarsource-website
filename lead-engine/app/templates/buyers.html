@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}Buyers — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Buyers</h1>
+    <div class="subtitle">{{ total }} buyers found</div>
+  </div>
+  <div style="margin-left:auto;" class="flex gap-2">
+    <button onclick="document.getElementById('add-modal').style.display='flex'" class="btn btn-primary">+ Add Buyer</button>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- Quick type filters -->
+  <div class="flex gap-2 mb-4" style="flex-wrap:wrap;">
+    <a href="/buyers?buyer_type=&sort={{ sort }}" class="btn {% if not buyer_type %}btn-primary{% else %}btn-ghost{% endif %} btn-sm">All ({{ total_all }})</a>
+    <a href="/buyers?buyer_type=importer&sort={{ sort }}" class="btn {% if buyer_type=='importer' %}btn-primary{% else %}btn-ghost{% endif %} btn-sm">🚢 Importers</a>
+    <a href="/buyers?buyer_type=exporter&sort={{ sort }}" class="btn {% if buyer_type=='exporter' %}btn-primary{% else %}btn-ghost{% endif %} btn-sm">📦 Exporters</a>
+    <a href="/buyers?buyer_type=luxury dealer&sort={{ sort }}" class="btn {% if buyer_type=='luxury dealer' %}btn-primary{% else %}btn-ghost{% endif %} btn-sm">💎 Luxury Dealers</a>
+    <a href="/buyers?buyer_type=mainstream dealer&sort={{ sort }}" class="btn {% if buyer_type=='mainstream dealer' %}btn-primary{% else %}btn-ghost{% endif %} btn-sm">🚗 Mainstream Dealers</a>
+    <a href="/buyers?buyer_type=wholesaler&sort={{ sort }}" class="btn {% if buyer_type=='wholesaler' %}btn-primary{% else %}btn-ghost{% endif %} btn-sm">🏭 Wholesalers</a>
+    <a href="/buyers?buyer_type=fleet buyer&sort={{ sort }}" class="btn {% if buyer_type=='fleet buyer' %}btn-primary{% else %}btn-ghost{% endif %} btn-sm">🚐 Fleet Buyers</a>
+  </div>
+
+  <!-- Filters -->
+  <form method="get" class="flex gap-2 mb-4" style="flex-wrap:wrap;">
+    <input type="hidden" name="buyer_type" value="{{ buyer_type }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search name, email, website…" style="width:260px;">
+    <select name="country">
+      <option value="">All Countries</option>
+      {% for c in countries %}
+        <option value="{{ c }}" {% if c == country %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+    <select name="status">
+      <option value="">All Statuses</option>
+      {% for s in ['new','qualified','contacted','rejected'] %}
+        <option value="{{ s }}" {% if s == status %}selected{% endif %}>{{ s|capitalize }}</option>
+      {% endfor %}
+    </select>
+    <select name="sort">
+      <option value="score" {% if sort=='score' %}selected{% endif %}>Sort: Score</option>
+      <option value="date"  {% if sort=='date'  %}selected{% endif %}>Sort: Date</option>
+      <option value="name"  {% if sort=='name'  %}selected{% endif %}>Sort: Name</option>
+    </select>
+    <button class="btn btn-ghost" type="submit">Filter</button>
+    <a href="/buyers" class="btn btn-ghost">Clear</a>
+  </form>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Country</th>
+            <th>Buyer Type</th>
+            <th>Brands</th>
+            <th>Email</th>
+            <th>WhatsApp</th>
+            <th>Score</th>
+            <th>Status</th>
+            <th>Found</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for b in buyers %}
+          <tr>
+            <td>
+              <a href="/buyers/{{ b.id }}">{{ b.company_name }}</a>
+              {% if b.website %}
+                <a href="{{ b.website }}" target="_blank" style="color:var(--muted);font-size:11px;margin-left:4px;">↗</a>
+              {% endif %}
+            </td>
+            <td>{{ b.country or '—' }}</td>
+            <td class="text-sm text-muted">{{ b.buyer_type or '—' }}</td>
+            <td class="text-sm text-muted">{{ (b.brands_sold or [])[:2]|join(', ') or '—' }}</td>
+            <td class="text-sm">{% if b.email %}<a href="mailto:{{ b.email }}">{{ b.email[:28] }}{% if b.email|length > 28 %}…{% endif %}</a>{% else %}<span class="text-muted">—</span>{% endif %}</td>
+            <td>{% if b.whatsapp %}<span class="text-green text-sm">✓</span>{% else %}<span class="text-muted">—</span>{% endif %}</td>
+            <td>
+              {% set s = b.lead_score %}
+              <span class="score {% if s >= 70 %}score-high{% elif s >= 40 %}score-mid{% else %}score-low{% endif %}">{{ s|int }}</span>
+            </td>
+            <td><span class="badge badge-{{ b.status }}">{{ b.status }}</span></td>
+            <td class="text-sm text-muted">{{ b.discovery_date.strftime('%d %b') }}</td>
+            <td><a href="/buyers/{{ b.id }}" class="btn btn-ghost btn-sm">View</a></td>
+          </tr>
+          {% else %}
+          <tr><td colspan="10" style="text-align:center;padding:40px;color:var(--muted);">No buyers found. Adjust filters or run a discovery.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Add buyer modal -->
+<div id="add-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;">
+  <div class="card" style="width:520px;max-height:90vh;overflow-y:auto;">
+    <div class="flex justify-between items-center mb-4">
+      <strong>Add Buyer Manually</strong>
+      <button onclick="document.getElementById('add-modal').style.display='none'" class="btn btn-ghost btn-sm">✕</button>
+    </div>
+    <form method="post" action="/buyers/add">
+      <div class="grid grid-2">
+        <div class="form-group" style="grid-column:span 2">
+          <label>Company Name *</label>
+          <input type="text" name="company_name" required>
+        </div>
+        <div class="form-group">
+          <label>Website</label>
+          <input type="url" name="website" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" name="country">
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" name="city">
+        </div>
+        <div class="form-group">
+          <label>Contact Person</label>
+          <input type="text" name="contact_person">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" name="phone">
+        </div>
+        <div class="form-group" style="grid-column:span 2">
+          <label>WhatsApp</label>
+          <input type="text" name="whatsapp" placeholder="+1 868 123 4567">
+        </div>
+        <div class="form-group" style="grid-column:span 2">
+          <label>Notes</label>
+          <textarea name="notes" style="min-height:80px;"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Add Buyer</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

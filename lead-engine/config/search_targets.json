@@ -1,0 +1,140 @@
+{
+  "target_countries": [
+    "UAE", "Saudi Arabia", "Qatar", "Kuwait", "Oman",
+    "Kenya", "Uganda", "Tanzania", "Zambia", "Zimbabwe",
+    "Botswana", "South Africa", "Mauritius", "Seychelles",
+    "Cyprus", "Malta",
+    "Singapore", "Hong Kong", "Macao",
+    "New Zealand", "Brunei", "Maldives",
+    "Bahamas", "Barbados", "Jamaica", "Trinidad and Tobago", "Guyana",
+    "Thailand", "Sri Lanka", "Indonesia"
+  ],
+  "search_queries": [
+    "car importer",
+    "vehicle importer",
+    "luxury car importer",
+    "prestige car importer",
+    "vehicle exporter",
+    "car exporter",
+    "used car importer",
+    "parallel import cars",
+    "grey market car importer",
+    "UK car importer",
+    "British car importer",
+    "vehicle import export",
+    "car wholesale trader",
+    "vehicle wholesale",
+    "Rolls-Royce importer",
+    "Bentley importer",
+    "Range Rover importer",
+    "UK vehicles importer",
+    "imported Rolls-Royce",
+    "imported Range Rover",
+    "import used luxury car",
+    "independent car importer"
+  ],
+  "marketplace_sites": {
+    "South Africa": [
+      "autotrader.co.za",
+      "webuycars.co.za",
+      "cars.co.za"
+    ],
+    "Jamaica": [
+      "jamaicoauto.com",
+      "autoadsjamaica.com"
+    ],
+    "Trinidad and Tobago": [
+      "pin.tt",
+      "trinidadcarsale.com"
+    ],
+    "Bahamas": [
+      "bahamaslocal.com"
+    ],
+    "Guyana": [
+      "guyanacars.com"
+    ],
+    "Kenya": [
+      "cheki.co.ke",
+      "jiji.co.ke"
+    ],
+    "Uganda": [
+      "cheki.co.ug",
+      "jiji.ug"
+    ],
+    "Tanzania": [
+      "jiji.co.tz",
+      "zoomtanzania.com"
+    ],
+    "Zambia": [
+      "jiji.co.zm"
+    ],
+    "Zimbabwe": [
+      "zimcartrader.com"
+    ],
+    "Botswana": [
+      "botswanacars.co.bw"
+    ],
+    "Nigeria": [
+      "jiji.ng",
+      "cars45.com"
+    ],
+    "Ghana": [
+      "tonaton.com",
+      "jiji.com.gh"
+    ],
+    "Sri Lanka": [
+      "ikman.lk"
+    ],
+    "Malaysia": [
+      "mudah.my",
+      "carlist.my"
+    ],
+    "Singapore": [
+      "sgcarmart.com"
+    ],
+    "Thailand": [
+      "one2car.com"
+    ],
+    "Indonesia": [
+      "olx.co.id",
+      "mobil123.com"
+    ],
+    "Hong Kong": [
+      "28car.com"
+    ],
+    "New Zealand": [
+      "trademe.co.nz/motors"
+    ],
+    "Mauritius": [
+      "mycar.mu"
+    ],
+    "Maldives": [
+      "ibay.mv"
+    ],
+    "Cyprus": [
+      "bazaraki.com"
+    ],
+    "Malta": [
+      "maltapark.com"
+    ],
+    "Namibia": [
+      "namcars.com",
+      "my.na"
+    ],
+    "Mozambique": [
+      "olx.co.mz"
+    ],
+    "Japan": [
+      "beforward.jp"
+    ]
+  },
+  "marketplace_dealer_patterns": [
+    "/dealer/",
+    "/dealership/",
+    "/showroom/",
+    "/cars-for-sale/",
+    "/vehicle-importer/",
+    "/used-cars/",
+    "/imports/"
+  ]
+}

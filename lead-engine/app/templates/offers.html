@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Offers — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Vehicle Offers</h1>
+    <div class="subtitle">Add a vehicle and instantly see which buyers match</div>
+  </div>
+  <button onclick="document.getElementById('add-offer-modal').style.display='flex'" class="btn btn-primary" style="margin-left:auto;">+ Add Vehicle</button>
+</div>
+
+<div class="page-body">
+
+  {% if errors is defined and errors %}
+  <div class="alert alert-error mb-4">
+    {% for e in errors %}<div>{{ e }}</div>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if offers %}
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Vehicle</th>
+            <th>Year</th>
+            <th>Mileage</th>
+            <th>Price (GBP)</th>
+            <th>Colour</th>
+            <th>Condition</th>
+            <th>Status</th>
+            <th>Added</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for o in offers %}
+          <tr>
+            <td><a href="/offers/{{ o.id }}">{{ o.make }} {{ o.model }}</a></td>
+            <td>{{ o.year or '—' }}</td>
+            <td>{{ '{:,}'.format(o.mileage) if o.mileage else '—' }} mi</td>
+            <td>{% if o.price_gbp %}£{{ '{:,.0f}'.format(o.price_gbp) }}{% else %}—{% endif %}</td>
+            <td>{{ o.colour or '—' }}</td>
+            <td>{{ o.condition or '—' }}</td>
+            <td><span class="badge badge-{{ 'approved' if o.status == 'active' else 'rejected' }}">{{ o.status }}</span></td>
+            <td class="text-muted text-sm">{{ o.created_at.strftime('%d %b') }}</td>
+            <td><a href="/offers/{{ o.id }}" class="btn btn-ghost btn-sm">Matches →</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% else %}
+  <div class="alert alert-info">No vehicle offers yet. Click "+ Add Vehicle" to enter one and find matching buyers.</div>
+  {% endif %}
+
+</div>
+
+<!-- Add offer modal -->
+<div id="add-offer-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;">
+  <div class="card" style="width:580px;max-height:92vh;overflow-y:auto;">
+    <div class="flex justify-between items-center mb-4">
+      <strong>Add Vehicle Offer</strong>
+      <button onclick="document.getElementById('add-offer-modal').style.display='none'" class="btn btn-ghost btn-sm">✕</button>
+    </div>
+    <form method="post" action="/offers/add">
+      <div class="grid grid-2">
+        <div class="form-group">
+          <label>Make *</label>
+          <input type="text" name="make" placeholder="Range Rover" required>
+        </div>
+        <div class="form-group">
+          <label>Model *</label>
+          <input type="text" name="model" placeholder="Autobiography" required>
+        </div>
+        <div class="form-group">
+          <label>Year</label>
+          <input type="number" name="year" placeholder="2022" min="1990" max="2030">
+        </div>
+        <div class="form-group">
+          <label>Mileage (miles)</label>
+          <input type="text" name="mileage" placeholder="12000">
+        </div>
+        <div class="form-group">
+          <label>Price (£ GBP)</label>
+          <input type="text" name="price_gbp" placeholder="95000">
+        </div>
+        <div class="form-group">
+          <label>Colour</label>
+          <input type="text" name="colour" placeholder="Santorini Black">
+        </div>
+        <div class="form-group">
+          <label>Fuel</label>
+          <select name="fuel">
+            <option value="">Select…</option>
+            <option>Petrol</option>
+            <option>Diesel</option>
+            <option>Hybrid</option>
+            <option>Electric</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Gearbox</label>
+          <select name="gearbox">
+            <option value="">Select…</option>
+            <option>Automatic</option>
+            <option>Manual</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Condition</label>
+          <select name="condition">
+            <option>Used</option>
+            <option>Nearly New</option>
+            <option>New</option>
+            <option>Salvage</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Location (UK)</label>
+          <input type="text" name="location" placeholder="Birmingham, UK">
+        </div>
+        <div class="form-group" style="grid-column:span 2">
+          <label>Description</label>
+          <textarea name="description" style="min-height:80px;" placeholder="Key features, full service history, one owner…"></textarea>
+        </div>
+        <div class="form-group" style="grid-column:span 2">
+          <label>Spec Highlights (one per line)</label>
+          <textarea name="spec_highlights" style="min-height:80px;" placeholder="Panoramic roof&#10;Head-up display&#10;Meridian sound system"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Add Vehicle &amp; Match Buyers</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

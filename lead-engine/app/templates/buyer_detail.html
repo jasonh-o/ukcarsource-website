@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block title %}{{ buyer.company_name }} — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <a href="/buyers" class="btn btn-ghost btn-sm">← Buyers</a>
+  <div>
+    <h1>{{ buyer.company_name }}</h1>
+    <div class="subtitle">{{ buyer.country }}{% if buyer.city %}, {{ buyer.city }}{% endif %} · Added {{ buyer.discovery_date.strftime('%d %b %Y') }}</div>
+  </div>
+  <div style="margin-left:auto;" class="flex gap-2">
+    {% set s = buyer.lead_score %}
+    <span class="score {% if s >= 70 %}score-high{% elif s >= 40 %}score-mid{% else %}score-low{% endif %}" style="font-size:18px;padding:6px 14px;">
+      {{ s|int }} / 100
+    </span>
+    <span class="badge badge-{{ buyer.status }}" style="font-size:13px;padding:6px 12px;">{{ buyer.status }}</span>
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="grid grid-2">
+
+    <!-- Left column -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- Contact details -->
+      <div class="card">
+        <div class="section-title">Contact Details</div>
+        <table style="width:100%;">
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;width:130px;">Website</td>
+              <td>{% if buyer.website %}<a href="{{ buyer.website }}" target="_blank">{{ buyer.website }}</a>{% else %}—{% endif %}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Email</td>
+              <td>{% if buyer.email %}<a href="mailto:{{ buyer.email }}">{{ buyer.email }}</a>{% else %}—{% endif %}
+                  {% if buyer.email_secondary %}<br><a href="mailto:{{ buyer.email_secondary }}" class="text-sm text-muted">{{ buyer.email_secondary }}</a>{% endif %}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Phone</td>
+              <td>{{ buyer.phone or '—' }}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">WhatsApp</td>
+              <td>{% if buyer.whatsapp %}<span class="text-green">✓ {{ buyer.whatsapp }}</span>{% else %}—{% endif %}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Contact</td>
+              <td>{{ buyer.contact_person or '—' }}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Source</td>
+              <td>{% if buyer.source_url %}<a href="{{ buyer.source_url }}" target="_blank" class="text-sm">↗ Source</a>{% else %}—{% endif %}</td></tr>
+        </table>
+        {% if buyer.linkedin_url or buyer.facebook_url or buyer.instagram_url %}
+        <div class="flex gap-2 mt-4">
+          {% if buyer.linkedin_url %}<a href="{{ buyer.linkedin_url }}" target="_blank" class="btn btn-ghost btn-sm">LinkedIn</a>{% endif %}
+          {% if buyer.facebook_url %}<a href="{{ buyer.facebook_url }}" target="_blank" class="btn btn-ghost btn-sm">Facebook</a>{% endif %}
+          {% if buyer.instagram_url %}<a href="{{ buyer.instagram_url }}" target="_blank" class="btn btn-ghost btn-sm">Instagram</a>{% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Vehicle intelligence -->
+      <div class="card">
+        <div class="section-title">Vehicle Intelligence</div>
+        <table style="width:100%;">
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;width:130px;">Buyer Type</td>
+              <td>{{ buyer.buyer_type or '—' }}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Brands Sold</td>
+              <td>{{ (buyer.brands_sold or [])|join(', ') or '—' }}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Segment</td>
+              <td>{{ buyer.vehicle_segment or '—' }}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Drive Side</td>
+              <td>{{ (buyer.rhd_preference or '—')|upper }}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Wholesale</td>
+              <td>{% if buyer.sells_wholesale %}<span class="text-green">Yes</span>{% else %}No{% endif %}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Retail</td>
+              <td>{% if buyer.sells_retail %}<span class="text-green">Yes</span>{% else %}No{% endif %}</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">AI Confidence</td>
+              <td>{{ (buyer.ai_confidence_score * 100)|int }}%</td></tr>
+          <tr><td style="color:var(--muted);font-size:12px;padding:5px 0;">Payment Pref.</td>
+              <td>{{ buyer.preferred_payment or '—' }}</td></tr>
+        </table>
+      </div>
+
+      <!-- Outreach history -->
+      <div class="card">
+        <div class="section-title">Outreach Signals</div>
+        <div class="flex gap-3" style="flex-wrap:wrap;">
+          <div>
+            <div class="text-muted text-sm">Emails sent</div>
+            <div style="font-size:20px;font-weight:700;">{{ buyer.email_sent_count }}</div>
+          </div>
+          <div>
+            <div class="text-muted text-sm">WhatsApps</div>
+            <div style="font-size:20px;font-weight:700;">{{ buyer.whatsapp_sent_count }}</div>
+          </div>
+          <div>
+            <div class="text-muted text-sm">Replied</div>
+            <div style="font-size:20px;font-weight:700;">{% if buyer.replied %}<span class="text-green">Yes</span>{% else %}No{% endif %}</div>
+          </div>
+          <div>
+            <div class="text-muted text-sm">Positive</div>
+            <div style="font-size:20px;font-weight:700;">{% if buyer.positive_response %}<span class="text-green">Yes</span>{% else %}No{% endif %}</div>
+          </div>
+          <div>
+            <div class="text-muted text-sm">Purchased</div>
+            <div style="font-size:20px;font-weight:700;">{% if buyer.purchased %}<span class="text-green">Yes</span>{% else %}No{% endif %}</div>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4" style="flex-wrap:wrap;">
+          <form method="post" action="/buyers/{{ buyer.id }}/event">
+            <input type="hidden" name="event_type" value="reply">
+            <button class="btn btn-ghost btn-sm">Mark Replied</button>
+          </form>
+          <form method="post" action="/buyers/{{ buyer.id }}/event">
+            <input type="hidden" name="event_type" value="positive_response">
+            <button class="btn btn-green btn-sm">Mark Positive</button>
+          </form>
+          <form method="post" action="/buyers/{{ buyer.id }}/event">
+            <input type="hidden" name="event_type" value="purchase">
+            <button class="btn btn-primary btn-sm">Mark Purchased</button>
+          </form>
+          <form method="post" action="/buyers/{{ buyer.id }}/rescore">
+            <button class="btn btn-ghost btn-sm">🔄 Re-score</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Status update -->
+      <div class="card">
+        <div class="section-title">Update Status</div>
+        <form method="post" action="/buyers/{{ buyer.id }}/status" class="flex gap-2">
+          <select name="status" style="flex:1;">
+            {% for s in ['new','qualified','contacted','rejected'] %}
+              <option value="{{ s }}" {% if s == buyer.status %}selected{% endif %}>{{ s|capitalize }}</option>
+            {% endfor %}
+          </select>
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Right column -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- Notes -->
+      <div class="card">
+        <div class="section-title">Notes</div>
+        <form method="post" action="/buyers/{{ buyer.id }}/notes">
+          <textarea name="notes" style="min-height:100px;">{{ buyer.notes or '' }}</textarea>
+          <button class="btn btn-ghost btn-sm mt-4">Save Notes</button>
+        </form>
+      </div>
+
+      <!-- Outreach messages -->
+      <div class="card">
+        <div class="section-title">Outreach Messages <a href="/queue?status=" class="btn btn-ghost btn-sm" style="margin-left:8px;">All Queue →</a></div>
+        {% if buyer.messages %}
+          {% for msg in buyer.messages|sort(attribute='created_at', reverse=True) %}
+          <div style="border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:10px;">
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex gap-2 items-center">
+                <span class="badge badge-{{ msg.channel == 'email' and 'new' or 'qualified' }}">
+                  {{ '📧' if msg.channel == 'email' else '💬' }} {{ msg.channel }}
+                </span>
+                <span class="text-sm text-muted">{{ msg.message_type }}</span>
+              </div>
+              <span class="badge badge-{{ msg.status }}">{{ msg.status }}</span>
+            </div>
+            {% if msg.subject %}<div style="font-weight:600;font-size:13px;margin-bottom:6px;">{{ msg.subject }}</div>{% endif %}
+            <div style="font-size:12px;color:var(--muted);white-space:pre-wrap;max-height:120px;overflow:hidden;">{{ msg.body[:400] }}{% if msg.body|length > 400 %}…{% endif %}</div>
+            <div class="text-sm text-muted mt-4">{{ msg.created_at.strftime('%d %b %Y %H:%M') }}</div>
+            {% if msg.status == 'pending' %}
+            <div class="flex gap-2 mt-4">
+              <form method="post" action="/queue/{{ msg.id }}/approve">
+                <button class="btn btn-green btn-sm">✓ Approve</button>
+              </form>
+              <form method="post" action="/queue/{{ msg.id }}/reject">
+                <button class="btn btn-danger btn-sm">✕ Reject</button>
+              </form>
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="text-muted text-sm">No messages generated yet.</div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

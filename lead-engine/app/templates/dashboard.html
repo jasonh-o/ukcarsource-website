@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — UK Car Source Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <div class="subtitle">{{ today.strftime('%A, %d %B %Y') }}</div>
+  </div>
+  <div style="margin-left:auto;" class="flex gap-2">
+    <a href="/discovery" class="btn btn-ghost">🔍 Run Discovery</a>
+    <a href="/offers" class="btn btn-primary">+ Add Vehicle Offer</a>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- Stats row -->
+  <div class="grid grid-4 mb-4">
+    <div class="card">
+      <div class="card-title">Total Buyers</div>
+      <div class="stat-value">{{ total_buyers }}</div>
+      <div class="stat-sub">in CRM</div>
+    </div>
+    <div class="card">
+      <div class="card-title">New Today</div>
+      <div class="stat-value" style="color:var(--green)">{{ new_today }}</div>
+      <div class="stat-sub">discovered today</div>
+    </div>
+    <div class="card">
+      <div class="card-title">This Week</div>
+      <div class="stat-value">{{ new_this_week }}</div>
+      <div class="stat-sub">new this week</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Awaiting Approval</div>
+      <div class="stat-value" style="color:var(--accent)">{{ pending_queue }}</div>
+      <div class="stat-sub"><a href="/queue">review queue →</a></div>
+    </div>
+  </div>
+
+  <div class="grid grid-2 mt-6">
+
+    <!-- Top 20 prospects -->
+    <div class="card" style="grid-column: span 2;">
+      <div class="section-title">🏆 Best 20 Prospects Today</div>
+      {% if top_prospects %}
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Company</th>
+              <th>Country</th>
+              <th>Buyer Type</th>
+              <th>Brands</th>
+              <th>Score</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for b in top_prospects %}
+            <tr>
+              <td class="text-muted">{{ loop.index }}</td>
+              <td><a href="/buyers/{{ b.id }}">{{ b.company_name }}</a></td>
+              <td>{{ b.country or '—' }}</td>
+              <td>{{ b.buyer_type or '—' }}</td>
+              <td class="text-sm text-muted">{{ (b.brands_sold or [])[:3]|join(', ') or '—' }}</td>
+              <td>
+                {% set s = b.lead_score %}
+                <span class="score {% if s >= 70 %}score-high{% elif s >= 40 %}score-mid{% else %}score-low{% endif %}">
+                  {{ s|int }}
+                </span>
+              </td>
+              <td><span class="badge badge-{{ b.status }}">{{ b.status }}</span></td>
+              <td><a href="/buyers/{{ b.id }}" class="btn btn-ghost btn-sm">View →</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="alert alert-info">No buyers yet. <a href="/discovery">Run a discovery</a> to find prospects.</div>
+      {% endif %}
+    </div>
+
+    <!-- Buyers by country -->
+    <div class="card">
+      <div class="section-title">🌍 Buyers by Country</div>
+      {% if by_country %}
+        {% for country, cnt in by_country %}
+        <div class="flex items-center justify-between" style="padding: 6px 0; border-bottom: 1px solid var(--border);">
+          <span style="font-size:13px;">{{ country }}</span>
+          <span class="score score-mid">{{ cnt }}</span>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="text-muted text-sm">No data yet.</div>
+      {% endif %}
+    </div>
+
+    <!-- Lookalike prospects -->
+    <div class="card">
+      <div class="section-title">🎯 Lookalike Prospects</div>
+      {% if lookalikes %}
+        {% for item in lookalikes %}
+        <div class="flex items-center justify-between" style="padding: 7px 0; border-bottom: 1px solid var(--border);">
+          <div>
+            <a href="/buyers/{{ item.buyer.id }}" style="font-size:13px;">{{ item.buyer.company_name }}</a>
+            <div class="text-sm text-muted">{{ item.buyer.country }}</div>
+          </div>
+          <span class="score score-high">{{ item.lookalike_score|int }}%</span>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="text-muted text-sm">Lookalike engine needs at least one successful buyer to learn from.</div>
+      {% endif %}
+    </div>
+
+    <!-- Recent discovery runs -->
+    <div class="card" style="grid-column: span 2;">
+      <div class="section-title">🔍 Recent Discovery Runs</div>
+      {% if recent_runs %}
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Started</th><th>Status</th><th>Queries</th><th>Found</th><th>Added</th><th>Dupes</th><th></th></tr>
+          </thead>
+          <tbody>
+            {% for r in recent_runs %}
+            <tr>
+              <td>{{ r.started_at.strftime('%d %b %H:%M') }}</td>
+              <td><span class="badge badge-{{ 'approved' if r.status == 'completed' else 'pending' if r.status == 'running' else 'rejected' }}">{{ r.status }}</span></td>
+              <td>{{ r.queries_run }}</td>
+              <td>{{ r.results_found }}</td>
+              <td class="text-green">+{{ r.new_buyers_added }}</td>
+              <td class="text-muted">{{ r.duplicates_skipped }}</td>
+              <td><a href="/discovery/run/{{ r.id }}" class="btn btn-ghost btn-sm">Log →</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <div class="alert alert-info">No discovery runs yet. <a href="/discovery">Start one now.</a></div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

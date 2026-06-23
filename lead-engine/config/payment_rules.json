@@ -1,0 +1,76 @@
+{
+  "methods": {
+    "TT": {
+      "name": "Telegraphic Transfer",
+      "description": "Bank wire transfer. Most common for export deals.",
+      "deposit_percent": 30,
+      "balance_trigger": "on_shipping_docs",
+      "risk_level": "medium",
+      "notes": "Request 30% deposit, balance against copy BL or before release."
+    },
+    "LC": {
+      "name": "Letter of Credit",
+      "description": "Bank-backed guarantee. Preferred for large orders or new buyers.",
+      "deposit_percent": 0,
+      "balance_trigger": "on_lc_presentation",
+      "risk_level": "low",
+      "notes": "Irrevocable LC at sight via a recognised bank."
+    },
+    "SWIFT": {
+      "name": "SWIFT Transfer",
+      "description": "International bank transfer, same as TT but term used in EU.",
+      "deposit_percent": 30,
+      "balance_trigger": "on_shipping_docs",
+      "risk_level": "medium",
+      "notes": "Common for Cyprus, Malta, EU-adjacent markets."
+    },
+    "EFT": {
+      "name": "Electronic Funds Transfer",
+      "description": "Local bank transfer. Common in South Africa and New Zealand.",
+      "deposit_percent": 50,
+      "balance_trigger": "before_release",
+      "risk_level": "medium",
+      "notes": "Confirm cleared funds before releasing vehicle."
+    },
+    "ESCROW": {
+      "name": "Escrow",
+      "description": "Third-party escrow service. Used for high-value or first-time buyers.",
+      "deposit_percent": 100,
+      "balance_trigger": "on_delivery",
+      "risk_level": "low",
+      "notes": "Use for buyers with no track record. Increases trust."
+    }
+  },
+  "country_defaults": {
+    "UAE": "TT",
+    "Saudi Arabia": "TT",
+    "Qatar": "TT",
+    "Kuwait": "TT",
+    "Oman": "TT",
+    "Kenya": "TT",
+    "Uganda": "TT",
+    "Tanzania": "TT",
+    "Zambia": "TT",
+    "Zimbabwe": "TT",
+    "Botswana": "TT",
+    "South Africa": "TT",
+    "Mauritius": "TT",
+    "Seychelles": "TT",
+    "Cyprus": "SWIFT",
+    "Malta": "SWIFT",
+    "Singapore": "TT",
+    "Hong Kong": "TT",
+    "Macao": "TT",
+    "New Zealand": "TT",
+    "Brunei": "TT",
+    "Maldives": "TT",
+    "Bahamas": "TT",
+    "Barbados": "TT",
+    "Jamaica": "TT",
+    "Trinidad and Tobago": "TT",
+    "Guyana": "TT",
+    "Thailand": "TT",
+    "Sri Lanka": "LC",
+    "Indonesia": "LC"
+  }
+}

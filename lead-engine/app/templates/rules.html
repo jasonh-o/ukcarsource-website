@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}Rules — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Rules &amp; Configuration</h1>
+    <div class="subtitle">Country profiles, payment rules, brand weights — no code changes needed</div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- Tab nav -->
+  <div class="flex gap-2 mb-4" style="border-bottom:1px solid var(--border);padding-bottom:0;">
+    <button onclick="showTab('countries')" class="tab-btn active" id="tab-countries" style="background:none;border:none;padding:10px 16px;font-size:14px;cursor:pointer;color:var(--accent);border-bottom:2px solid var(--accent);">🌍 Country Rules</button>
+    <button onclick="showTab('payment')"  class="tab-btn"         id="tab-payment"   style="background:none;border:none;padding:10px 16px;font-size:14px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;">💳 Payment Rules</button>
+    <button onclick="showTab('brands')"   class="tab-btn"         id="tab-brands"    style="background:none;border:none;padding:10px 16px;font-size:14px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;">🚗 Brand Weights</button>
+    <button onclick="showTab('scoring')"  class="tab-btn"         id="tab-scoring"   style="background:none;border:none;padding:10px 16px;font-size:14px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;">📊 Scoring Rules</button>
+  </div>
+
+  <!-- Country Rules -->
+  <div id="pane-countries">
+    <div class="alert alert-info mb-4">Changes here update the database immediately. To reset, re-run <code>python -m app.seed</code>.</div>
+    {% for rule in country_rules %}
+    <details class="card mb-4" style="padding:0;">
+      <summary style="padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;list-style:none;">
+        <div class="flex gap-3 items-center">
+          <strong style="font-size:14px;">{{ rule.country }}</strong>
+          <span class="score {% if rule.luxury_market_score >= 80 %}score-high{% elif rule.luxury_market_score >= 60 %}score-mid{% else %}score-low{% endif %}">
+            Luxury: {{ rule.luxury_market_score }}
+          </span>
+          {% if rule.rhd_allowed %}<span class="badge badge-approved">RHD ✓</span>{% endif %}
+          {% if rule.lhd_allowed %}<span class="badge badge-new">LHD ✓</span>{% endif %}
+          {% if rule.max_age_years %}<span class="badge badge-pending">Max {{ rule.max_age_years }}y</span>{% endif %}
+        </div>
+        <span class="text-muted text-sm">▾ edit</span>
+      </summary>
+      <div style="padding:20px;border-top:1px solid var(--border);">
+        <form method="post" action="/rules/country/{{ rule.id }}">
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>Luxury Market Score (0–100)</label>
+              <input type="number" name="luxury_market_score" value="{{ rule.luxury_market_score }}" min="0" max="100">
+            </div>
+            <div class="form-group">
+              <label>Max Vehicle Age (years, blank = no limit)</label>
+              <input type="number" name="max_age_years" value="{{ rule.max_age_years or '' }}" min="1" max="30">
+            </div>
+            <div class="form-group">
+              <label>Import Restrictions</label>
+              <textarea name="import_restrictions" style="min-height:60px;">{{ rule.import_restrictions or '' }}</textarea>
+            </div>
+            <div class="form-group">
+              <label>Shipping Notes</label>
+              <textarea name="shipping_notes" style="min-height:60px;">{{ rule.shipping_notes or '' }}</textarea>
+            </div>
+            <div class="form-group">
+              <label style="margin-bottom:12px;">Drive Side &amp; Payment</label>
+              <div class="flex gap-3" style="flex-wrap:wrap;">
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text);">
+                  <input type="checkbox" name="rhd_allowed" {% if rule.rhd_allowed %}checked{% endif %}> RHD Allowed
+                </label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text);">
+                  <input type="checkbox" name="lhd_allowed" {% if rule.lhd_allowed %}checked{% endif %}> LHD Allowed
+                </label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text);">
+                  <input type="checkbox" name="tt_common" {% if rule.tt_common %}checked{% endif %}> TT Common
+                </label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text);">
+                  <input type="checkbox" name="lc_common" {% if rule.lc_common %}checked{% endif %}> LC Common
+                </label>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm" type="submit">Save {{ rule.country }}</button>
+        </form>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+
+  <!-- Payment Rules -->
+  <div id="pane-payment" style="display:none;">
+    <div class="alert alert-info mb-4">Payment rules are defined in <code>config/payment_rules.json</code>. Edit that file and restart to update.</div>
+    {% for method, details in payment_rules.methods.items() %}
+    <div class="card mb-4">
+      <div class="flex justify-between items-center mb-4">
+        <strong>{{ details.name }}</strong>
+        <span class="badge badge-new">{{ method }}</span>
+      </div>
+      <div class="text-muted text-sm mb-4">{{ details.description }}</div>
+      <div class="grid grid-2">
+        <div><span class="text-muted text-sm">Deposit</span><br><strong>{{ details.deposit_percent }}%</strong></div>
+        <div><span class="text-muted text-sm">Balance Trigger</span><br><strong>{{ details.balance_trigger }}</strong></div>
+        <div><span class="text-muted text-sm">Risk Level</span><br><strong>{{ details.risk_level|capitalize }}</strong></div>
+        <div><span class="text-muted text-sm">Notes</span><br><span class="text-sm">{{ details.notes }}</span></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Brand Weights -->
+  <div id="pane-brands" style="display:none;">
+    <div class="alert alert-info mb-4">Brand scoring weights are in <code>config/brand_rules.json</code>. Higher = more points added to lead score when a buyer stocks that brand.</div>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Brand</th><th>Score Weight</th><th>Category</th></tr></thead>
+          <tbody>
+            {% for brand, weight in brand_rules.scoring.items() %}
+            <tr>
+              <td>{{ brand }}</td>
+              <td><span class="score {% if weight >= 15 %}score-high{% elif weight >= 8 %}score-mid{% else %}score-low{% endif %}">+{{ weight }}</span></td>
+              <td class="text-muted text-sm">
+                {% if brand in brand_rules.luxury_brands %}Luxury
+                {% elif brand in brand_rules.premium_brands %}Premium
+                {% else %}Mainstream{% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scoring Rules -->
+  <div id="pane-scoring" style="display:none;">
+    <div class="alert alert-info mb-4">Scoring weights are in <code>config/scoring_rules.json</code>. Edit that file to rebalance the scoring engine.</div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="section-title">Positive Factors</div>
+        <table>
+          <thead><tr><th>Factor</th><th>Points</th></tr></thead>
+          <tbody>
+            {% for k, v in scoring_rules.factors.items() %}
+            <tr><td class="text-sm">{{ k.replace('_',' ')|title }}</td><td><span class="score score-high">+{{ v }}</span></td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="section-title">Penalties &amp; Multipliers</div>
+        <table>
+          <thead><tr><th>Factor</th><th>Adjustment</th></tr></thead>
+          <tbody>
+            {% for k, v in scoring_rules.penalties.items() %}
+            <tr><td class="text-sm">{{ k.replace('_',' ')|title }}</td><td><span class="score score-low">{{ v }}</span></td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="section-title mt-4">Buyer Type Multipliers</div>
+        <table>
+          <thead><tr><th>Type</th><th>Multiplier</th></tr></thead>
+          <tbody>
+            {% for k, v in scoring_rules.buyer_type_multipliers.items() %}
+            <tr><td class="text-sm">{{ k|title }}</td>
+                <td><span class="score {% if v >= 1.2 %}score-high{% elif v >= 1.0 %}score-mid{% else %}score-low{% endif %}">×{{ v }}</span></td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(name) {
+  ['countries','payment','brands','scoring'].forEach(t => {
+    document.getElementById('pane-' + t).style.display = t === name ? 'block' : 'none';
+    const btn = document.getElementById('tab-' + t);
+    if (t === name) {
+      btn.style.color = 'var(--accent)';
+      btn.style.borderBottom = '2px solid var(--accent)';
+    } else {
+      btn.style.color = 'var(--muted)';
+      btn.style.borderBottom = '2px solid transparent';
+    }
+  });
+}
+</script>
+{% endblock %}

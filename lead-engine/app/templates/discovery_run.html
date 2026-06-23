@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Run #{{ run.id }} — Lead Engine{% endblock %}
+{% block content %}
+<div class="page-header">
+  <a href="/discovery" class="btn btn-ghost btn-sm">← Discovery</a>
+  <div>
+    <h1>Discovery Run #{{ run.id }}</h1>
+    <div class="subtitle">{{ run.started_at.strftime('%d %B %Y at %H:%M') }}</div>
+  </div>
+  <span class="badge {% if run.status == 'completed' %}badge-approved{% elif run.status == 'running' %}badge-pending{% else %}badge-rejected{% endif %}" style="margin-left:auto;font-size:13px;padding:6px 12px;">
+    {{ run.status }}
+  </span>
+</div>
+
+<div class="page-body">
+
+  <div class="grid grid-4 mb-4">
+    <div class="card">
+      <div class="card-title">Queries Run</div>
+      <div class="stat-value">{{ run.queries_run }}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Results Found</div>
+      <div class="stat-value">{{ run.results_found }}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">New Buyers Added</div>
+      <div class="stat-value" style="color:var(--green)">+{{ run.new_buyers_added }}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Duplicates Skipped</div>
+      <div class="stat-value" style="color:var(--muted)">{{ run.duplicates_skipped }}</div>
+    </div>
+  </div>
+
+  {% if run.error_message %}
+  <div class="alert alert-error mb-4">{{ run.error_message }}</div>
+  {% endif %}
+
+  <div class="card">
+    <div class="section-title">Run Log</div>
+    <div style="background:var(--surface2);border-radius:6px;padding:16px;font-family:monospace;font-size:12px;max-height:600px;overflow-y:auto;line-height:1.8;">
+      {% if run.log %}
+        {% for line in run.log %}
+          <div style="{% if '✓' in line %}color:var(--green){% elif '⚠' in line %}color:var(--accent){% elif 'ERROR' in line %}color:var(--red){% else %}color:var(--muted){% endif %}">
+            {{ line }}
+          </div>
+        {% endfor %}
+      {% else %}
+        <span style="color:var(--muted)">No log entries.</span>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}
