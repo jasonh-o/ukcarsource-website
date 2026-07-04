@@ -4,7 +4,7 @@
   <!-- Core pages — highest priority -->
   <url>
     <loc>https://www.ukcarsource.com/</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -60,7 +60,7 @@
   <!-- Specialist brand export pages -->
   <url>
     <loc>https://www.ukcarsource.com/rolls-royce-export.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -240,7 +240,7 @@
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-seychelles.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -260,7 +260,7 @@
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-trinidad.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
