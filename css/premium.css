@@ -125,3 +125,36 @@ h1 > span,h2 > span{font-weight:700!important}
 a.type-card[href="parts.html"] .type-card-img{background-size:58%!important;background-position:center 8%!important}
 .stat-icon{display:inline-flex!important;align-items:flex-end;justify-content:center;height:1em}
 .stat-icon .stat-car{width:2.2em;height:1.1em;stroke-width:.9}
+
+/* Homepage dealer band */
+.dealer-band{background:#0d0d0d;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:clamp(56px,7vw,88px) clamp(22px,6vw,80px)}
+.dealer-inner{max-width:var(--max,1200px);margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(28px,5vw,72px);align-items:end}
+.dealer-band h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3.2rem);text-transform:uppercase;line-height:1.05;margin:0 0 18px;color:#fff}
+.dealer-band p{color:#a8a8a8;line-height:1.8;max-width:620px;margin:0}
+.dealer-actions{display:flex;flex-direction:column;gap:12px}
+.dealer-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:.92rem;text-decoration:none;border-radius:2px;transition:background .2s,border-color .2s}
+.dealer-wa{background:var(--ivory);color:#0a0a0a;border:1px solid var(--ivory)}
+.dealer-wa:hover{background:#fff}
+.dealer-wa svg{width:18px;height:18px;fill:#0a0a0a}
+.dealer-ghost{color:#fff;border:1px solid rgba(255,255,255,.3)}
+.dealer-ghost:hover{border-color:rgba(255,255,255,.6)}
+@media(max-width:768px){.dealer-inner{grid-template-columns:1fr}}
+
+/* Card headings: lighter weight to match the refined style */
+h3,h4{font-weight:600!important}
+h3[style*="uppercase"]{letter-spacing:.1em!important}
+
+/* Homepage About: quiet points instead of boxes; photo fills the right half on desktop */
+.home-about-points{list-style:none;padding:0;margin:clamp(26px,3vw,36px) 0 0;border-top:1px solid rgba(255,255,255,.08)}
+.home-about-points li{padding:14px 0 14px 26px;border-bottom:1px solid rgba(255,255,255,.08);color:#cfcfcf;font-size:.92rem;position:relative}
+.home-about-points li::before{content:"";position:absolute;left:2px;top:50%;width:12px;height:1px;background:var(--ivory)}
+@media(min-width:769px){
+  .home-about{overflow:hidden}
+  .home-about-inner{align-items:stretch!important}
+  .home-about-img{aspect-ratio:auto!important;border-radius:0!important;
+    margin:calc(-1 * clamp(64px,8vw,100px)) calc((min(var(--max,1200px), 100vw - 2 * clamp(22px,6vw,80px)) - 100vw) / 2) calc(-1 * clamp(64px,8vw,100px)) 0}
+  .home-about-img img{filter:brightness(.9);object-position:38% 70%}
+}
+@media(max-width:768px){
+  .home-about .home-about-img{display:block!important;aspect-ratio:16/10;margin:8px calc(-1 * clamp(22px,6vw,80px)) calc(-1 * clamp(64px,8vw,100px));border-radius:0}
+}
