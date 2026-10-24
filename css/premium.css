@@ -1,0 +1,58 @@
+/* UK Car Source — premium refinement (DRAFT).
+   One restrained palette: black, white and soft ivory. Orange is kept for the logo only.
+   WhatsApp/LINE keep their recognisable green, but only as a small icon accent on dark buttons. */
+:root{--ivory:#e9e4da;--line:rgba(255,255,255,.16);--muted:#8e8e8e}
+
+/* Headings: two-tone highlight becomes soft ivory instead of orange */
+h1 span,h2 span,.hero-title span,.section-title span,h1 span[style*="orange"],h2 span[style*="orange"]{color:var(--ivory)!important}
+.section-label{color:var(--muted)!important;letter-spacing:.28em!important}
+.divider{background:var(--line)!important;height:1px!important;width:40px!important}
+
+/* Inline links that were orange */
+a[style*="color:var(--orange)"]{color:var(--ivory)!important;text-decoration:underline;text-decoration-color:rgba(233,228,218,.35);text-underline-offset:3px}
+
+/* Navigation: active item marked with a fine underline, not colour */
+.nav-links a.active,.nav-links a:hover{color:#fff!important;text-decoration:underline;text-decoration-color:rgba(255,255,255,.45);text-underline-offset:6px}
+
+/* Primary buttons: solid ivory with black text (the luxury-brand "Enquire" look) */
+.btn-primary,.btn-orange,.btn-sm{background:var(--ivory)!important;color:#0a0a0a!important;border:1px solid var(--ivory)!important;font-weight:600!important;letter-spacing:.16em!important}
+.btn-primary:hover,.btn-orange:hover,.btn-sm:hover{background:#fff!important}
+/* Secondary buttons: fine outline */
+.btn-ghost,.btn-sec,.btn-secondary{background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,.35)!important}
+
+/* Small accents that were orange */
+.tl-num{border-color:rgba(255,255,255,.35)!important;color:#fff!important}
+.doc-item svg,.port-item svg,.ship-option svg{stroke:var(--ivory)!important}
+.info-box{border-left-color:rgba(233,228,218,.45)!important}
+.info-box h3,.article-tag{color:var(--ivory)!important}
+.article-tag{background:transparent!important;border:1px solid var(--line)!important}
+
+/* Language buttons: quiet outline pill */
+.btn-thai{background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,.35)!important;padding:12px 20px!important;font-weight:600!important}
+
+/* LINE button in the page: dark outline with a green LINE mark */
+.btn-line{background:transparent!important;color:#fff!important;border:1px solid rgba(6,199,85,.55)!important}
+.btn-line::before{content:"LINE";display:inline-block;background:#06C755;color:#fff;font-size:.62rem;font-weight:800;letter-spacing:.04em;padding:2px 5px;border-radius:3px;margin-right:9px;vertical-align:1px}
+
+/* Floating WhatsApp / LINE: dark glass pills, green only in the icon */
+.whatsapp-btn,.line-btn{background:rgba(14,14,14,.92)!important;color:#fff!important;border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.55)!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  font-weight:600!important;letter-spacing:.06em!important}
+.whatsapp-btn svg{fill:#25D366!important}
+.line-btn b{color:#06C755!important}
+.whatsapp-btn:hover,.line-btn:hover{border-color:rgba(255,255,255,.4)!important}
+@media(max-width:768px){
+  .whatsapp-btn,.line-btn{background:#0c0c0c!important;border:none!important;border-top:1px solid rgba(255,255,255,.14)!important;box-shadow:none!important}
+  .line-btn{border-left:1px solid rgba(255,255,255,.14)!important}
+}
+
+/* Cookie banner: drop the orange stripe */
+#ukcs-consent{border-top-color:rgba(255,255,255,.2)!important}
+#ukcs-consent .y{background:var(--ivory)!important;color:#0a0a0a!important;border-color:var(--ivory)!important}
+
+/* Master switch: the site's orange accent becomes soft ivory everywhere it was used */
+:root{--orange:#e9e4da;--orange-light:#ffffff}
+/* Anything with an ivory (formerly orange) background needs dark text */
+.hero-cta,.btn-submit,.btn-submit-sm,[style*="background:var(--orange"],[style*="background:var(--orange"] span{color:#0a0a0a!important}
+.article-tag{color:var(--ivory)!important}
+[onmouseover*="e07b20"]:hover{border-color:rgba(255,255,255,.4)!important}
