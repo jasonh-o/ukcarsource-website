@@ -56,3 +56,19 @@ a[style*="color:var(--orange)"]{color:var(--ivory)!important;text-decoration:und
 .hero-cta,.btn-submit,.btn-submit-sm,[style*="background:var(--orange"],[style*="background:var(--orange"] span{color:#0a0a0a!important}
 .article-tag{color:var(--ivory)!important}
 [onmouseover*="e07b20"]:hover{border-color:rgba(255,255,255,.4)!important}
+
+/* Globe flags (images/flags) and fine-line icons replace emoji */
+.gflag{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.22em;object-fit:contain}
+.country-flag-large .gflag{width:1em;height:1em}
+.lico{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.2em;color:var(--ivory)}
+.lmono{display:inline-flex;align-items:center;justify-content:center;width:2.1em;height:2.1em;border:1px solid rgba(233,228,218,.5);border-radius:50%;
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.08em;color:var(--ivory);font-size:.95em}
+[style*="background:var(--orange"] .lico{color:#0a0a0a!important}
+
+/* Headings: lead words regular, highlighted words bold (only headings that have a highlight) */
+h1:has(> span),h2:has(> span){font-weight:400!important}
+h1 > span,h2 > span{font-weight:700!important}
+
+/* One consistent logo size on every page */
+.logo-wrap img{width:160px!important;max-width:160px!important;height:auto!important}
+@media(max-width:768px){.logo-wrap img{width:112px!important;max-width:112px!important}}
