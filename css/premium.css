@@ -158,3 +158,21 @@ h3[style*="uppercase"]{letter-spacing:.1em!important}
 @media(max-width:768px){
   .home-about .home-about-img{display:block!important;aspect-ratio:16/10;margin:8px calc(-1 * clamp(22px,6vw,80px)) calc(-1 * clamp(64px,8vw,100px));border-radius:0}
 }
+
+/* Homepage trust strip: line icons with a small touch of brand colour (replaces large numerals) */
+.trust-icons{background:#0d0d0d!important}
+.trust-icons .trust-item{gap:16px!important;padding:clamp(30px,3.5vw,44px) 16px!important}
+.trust-icons svg{width:30px;height:30px;stroke:#e07b20}
+.trust-icons .trust-label{color:#dcdcdc!important;font-size:.74rem!important;letter-spacing:.16em!important;font-weight:500!important;line-height:1.7!important;max-width:none!important;min-height:0!important;text-transform:uppercase}
+
+/* Homepage "All destinations" tile: charcoal instead of ivory */
+a[href="export.html"][style*="background:var(--orange)"]{background:#262626!important;border-color:rgba(233,228,218,.35)!important}
+a[href="export.html"][style*="background:var(--orange)"] span{color:#fff!important}
+a[href="export.html"][style*="background:var(--orange)"]:hover{border-color:rgba(233,228,218,.7)!important}
+
+/* Small touch of brand orange on line icons only (rings, text and buttons stay ivory/black) */
+:root{--accent:#e07b20}
+.doc-item svg,.ship-option svg,.hs-icon svg,.qs-ring svg,.service-icon,.src-icon svg,.feat svg{stroke:var(--accent)!important}
+.port-item::before{background:var(--accent)!important}
+.lico{color:var(--accent)!important}
+[style*="background:var(--orange"] .lico{color:#0a0a0a!important}
