@@ -172,7 +172,22 @@ a[href="export.html"][style*="background:var(--orange)"]:hover{border-color:rgba
 
 /* Small touch of brand orange on line icons only (rings, text and buttons stay ivory/black) */
 :root{--accent:#e07b20}
-.doc-item svg,.ship-option svg,.hs-icon svg,.qs-ring svg,.service-icon,.src-icon svg,.feat svg{stroke:var(--accent)!important}
+.doc-item svg,.ship-option svg,.hs-icon svg,.qs-ring svg,.src-icon svg,.feat svg{stroke:var(--accent)!important}
 .port-item::before{background:var(--accent)!important}
 .lico{color:var(--accent)!important}
 [style*="background:var(--orange"] .lico{color:#0a0a0a!important}
+/* Icon strip base (also used on About) */
+.trust-icons{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #1e1e1e;border-bottom:1px solid #1e1e1e}
+.trust-icons .trust-item{display:flex;flex-direction:column;align-items:center;text-align:center;border-right:1px solid #1e1e1e}
+.trust-icons .trust-item:last-child{border-right:none}
+.about-strip{margin-top:clamp(48px,6vw,64px);background:transparent!important}
+@media(max-width:768px){
+  .trust-icons{grid-template-columns:repeat(2,1fr)}
+  .trust-icons .trust-item:nth-child(2){border-right:none}
+  .trust-icons .trust-item:nth-child(n+3){border-top:1px solid #1e1e1e}
+}
+
+/* Export page service cards: calm ivory icons, no orange hover */
+.service-icon{width:34px!important;height:34px!important;stroke:var(--ivory)!important;stroke-width:1.2!important;stroke-linecap:round;stroke-linejoin:round}
+.service-card:hover{border-color:rgba(233,228,218,.25)!important}
+.service-card::before{background:linear-gradient(to right,transparent,rgba(233,228,218,.5),transparent)!important}
