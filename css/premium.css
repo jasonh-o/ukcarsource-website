@@ -189,5 +189,5 @@ a[href="export.html"][style*="background:var(--orange)"]:hover{border-color:rgba
 
 /* Export page service cards: calm ivory icons, no orange hover */
 .service-icon{width:34px!important;height:34px!important;stroke:var(--ivory)!important;stroke-width:1.2!important;stroke-linecap:round;stroke-linejoin:round}
-.service-card:hover{border-color:rgba(233,228,218,.25)!important}
-.service-card::before{background:linear-gradient(to right,transparent,rgba(233,228,218,.5),transparent)!important}
+.service-card::before{background:linear-gradient(to right,#e07b20,transparent)!important}
+.service-card:hover{border-color:rgba(224,123,32,.3)!important}
