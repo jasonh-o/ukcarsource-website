@@ -189,3 +189,15 @@ a[href="export.html"][style*="background:var(--orange)"]:hover{border-color:rgba
 .service-icon{width:34px!important;height:34px!important;stroke:var(--ivory)!important;stroke-width:1.2!important;stroke-linecap:round;stroke-linejoin:round}
 .service-card::before{background:linear-gradient(to right,#e07b20,transparent)!important}
 .service-card:hover{border-color:rgba(224,123,32,.3)!important}
+
+/* Floating WhatsApp / LINE: solid official brand greens with white text (user's choice, 26 Oct) — the one place colour is used for action. */
+.whatsapp-btn{background:#25D366!important;border:1px solid #25D366!important;color:#fff!important;box-shadow:0 8px 24px rgba(37,211,102,.35)!important;text-shadow:0 1px 1px rgba(0,0,0,.18)}
+.whatsapp-btn svg{fill:#fff!important}
+.whatsapp-btn:hover{background:#1EBE5A!important;border-color:#1EBE5A!important}
+.line-btn{background:#06C755!important;border:1px solid #06C755!important;color:#fff!important;box-shadow:0 8px 24px rgba(6,199,85,.35)!important;text-shadow:0 1px 1px rgba(0,0,0,.18)}
+.line-btn b{color:#fff!important}
+.line-btn:hover{background:#05B24C!important;border-color:#05B24C!important}
+@media(max-width:768px){
+  .whatsapp-btn{background:#25D366!important;border:none!important;box-shadow:0 -2px 14px rgba(0,0,0,.35)!important}
+  .line-btn{background:#06C755!important;border:none!important;border-left:1px solid rgba(255,255,255,.35)!important;box-shadow:0 -2px 14px rgba(0,0,0,.35)!important}
+}
