@@ -74,6 +74,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 .data-table th{font-family:'Barlow Condensed',sans-serif;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--orange);text-align:left;padding:10px 0;border-bottom:1px solid #222}
 .data-table td{padding:11px 0;font-size:.88rem;color:#ccc;border-bottom:1px solid #1a1a1a;vertical-align:top}
 .data-table td:first-child{color:#888;width:40%;padding-right:16px}
+.wl-form{max-width:760px;margin:0 auto 24px;text-align:left}.wl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}.wl-w{grid-column:1/-1}.wl-f label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#e9e4da;margin-bottom:6px}.wl-f input,.wl-f select{width:100%;background:#fff;border:1px solid rgba(255,255,255,.25);border-radius:3px;padding:11px 12px;color:#111;font-family:'Barlow',sans-serif;font-size:16px}.wl-f input:focus,.wl-f select:focus{outline:2px solid #e9e4da;outline-offset:1px}.wl-send{display:block;width:100%;margin-top:20px;border:0;cursor:pointer}.article-cta p.wl-alt{margin-bottom:14px}@media(max-width:600px){.wl-grid{grid-template-columns:1fr}}
 .article-cta{background:var(--dark2);border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;padding:clamp(48px,6vw,72px) clamp(22px,6vw,80px);text-align:center}
 .article-cta h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;text-transform:uppercase;margin-bottom:12px}
 .article-cta p{font-size:clamp(.88rem,1.1vw,.96rem);color:#aaa;max-width:500px;margin:0 auto 24px;line-height:1.8}
@@ -203,9 +204,29 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 
 </div>
 
-<section class="article-cta">
+<section class="article-cta" id="wanted-list">
   <h2>Send Us Your <span style="color:var(--orange)">Wanted List</span></h2>
   <p>Tell us the models, specification, quantity and your market. We will source through UK main dealers and come back with options.</p>
+  <form class="wl-form" action="https://formspree.io/f/xwvzvndp" method="POST">
+    <div class="wl-grid">
+      <div class="wl-f"><label for="wl-name">Your name</label><input type="text" id="wl-name" name="name" autocomplete="name" required></div>
+      <div class="wl-f"><label for="wl-email">Email</label><input type="email" id="wl-email" name="email" autocomplete="email" required></div>
+      <div class="wl-f"><label for="wl-whatsapp">WhatsApp number</label><input type="tel" id="wl-whatsapp" name="whatsapp" placeholder="Include country code" autocomplete="tel"></div>
+      <div class="wl-f"><label for="wl-dest">Destination country</label><select id="wl-dest" name="destination" required><option value="">Select country</option><option>Thailand</option><option>Sri Lanka</option><option>Indonesia</option><option>Other</option></select></div>
+      <div class="wl-f"><label for="wl-make">Make</label><input type="text" id="wl-make" name="make" placeholder="For example, Land Rover" required></div>
+      <div class="wl-f"><label for="wl-model">Model</label><input type="text" id="wl-model" name="model" placeholder="For example, Range Rover" required></div>
+      <div class="wl-f wl-w"><label for="wl-spec">Specification</label><input type="text" id="wl-spec" name="specification" placeholder="Trim, engine, colours, new or used"></div>
+      <div class="wl-f"><label for="wl-drive">Drive side</label><select id="wl-drive" name="drive_side"><option value="">Select drive side</option><option>RHD</option><option>LHD</option></select></div>
+      <div class="wl-f"><label for="wl-qty">Quantity</label><input type="number" id="wl-qty" name="quantity" min="1" inputmode="numeric"></div>
+      <div class="wl-f"><label for="wl-budget">Budget per car</label><input type="text" id="wl-budget" name="budget" placeholder="Amount and currency"></div>
+      <div class="wl-f"><label for="wl-port">Port</label><input type="text" id="wl-port" name="port" placeholder="For example, Laem Chabang"></div>
+      <div class="wl-f wl-w"><label for="wl-pay">Payment method</label><select id="wl-pay" name="payment_method"><option value="">Select payment method</option><option>Letter of Credit</option><option>Telegraphic transfer</option><option>Not sure yet</option></select></div>
+    </div>
+    <input type="hidden" name="_subject" value="Wanted List – UK Car Source">
+    <input type="hidden" name="_next" value="https://www.ukcarsource.com/thank-you.html">
+    <button type="submit" class="btn-orange wl-send">Send Wanted List</button>
+  </form>
+  <p class="wl-alt">Prefer to talk? Use WhatsApp or our contact page.</p>
   <div class="cta-group">
     <a href="https://wa.me/447831921254?text=Hi%20UK%20Car%20Source%2C%20I%20am%20a%20dealer%20and%20would%20like%20to%20send%20a%20wanted%20list.%20My%20country%20is%3A%20" class="btn-orange" target="_blank" rel="noopener">WhatsApp Us</a>
     <a href="contact.html" class="btn-ghost">Contact Us</a>

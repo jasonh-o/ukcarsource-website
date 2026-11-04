@@ -25,20 +25,37 @@
 
   function track(name, params) { if (loaded) gtag('event', name, params || {}); }
 
+  // Market for each lead: the form's destination, otherwise the page being viewed
+  var PAGE_MARKET = {
+    'thailand-pi-dealers-th': 'thailand',
+    'guide-impor-mobil-inggris-id': 'indonesia',
+    'malaysia-recond-ms': 'malaysia',
+    'hong-kong-dealers-zh': 'hong-kong'
+  };
+  function pageMarket() {
+    var p = location.pathname.replace(/^.*\//, '').replace(/\.html$/, '');
+    if (PAGE_MARKET[p]) return PAGE_MARKET[p];
+    var m = p.match(/^(?:export|guide-import-car)-(.+)$/);
+    return m ? m[1].replace(/-salvage$/, '') : 'general';
+  }
+  function slug(v) { return String(v || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
   // Lead tracking
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href');
-    var base = { page_path: location.pathname, link_text: (a.textContent || '').trim().slice(0, 60) };
+    var base = { page_path: location.pathname, market: pageMarket(), link_text: (a.textContent || '').trim().slice(0, 60) };
     if (href.indexOf('wa.me/') > -1) track('whatsapp_click', base);
     else if (href.indexOf('line.me/') > -1) track('line_click', base);
     else if (href.indexOf('mailto:') === 0) track('email_click', base);
   }, true);
   document.addEventListener('submit', function (e) {
     var f = e.target;
-    var dest = f.querySelector && f.querySelector('input[name="destination"]');
-    track('enquiry_form_submit', { page_path: location.pathname, destination: dest ? dest.value : '' });
+    var dest = f.querySelector && f.querySelector('[name="destination"]');
+    var mkt = (dest && slug(dest.value)) || pageMarket();
+    try { sessionStorage.setItem('ukcs_lead_market', mkt); } catch (err) {}
+    track('enquiry_form_submit', { page_path: location.pathname, market: mkt, destination: dest ? dest.value : '' });
   }, true);
 
   // Consent banner
@@ -71,7 +88,9 @@
     else if (c !== 'denied') banner();
     // Thank-you page = a completed enquiry
     if (/thank-you\.html$/.test(location.pathname)) {
-      var fire = function () { track('generate_lead', { page_path: location.pathname, form: 'enquiry_thank_you' }); };
+      var leadMarket = 'general';
+      try { leadMarket = sessionStorage.getItem('ukcs_lead_market') || 'general'; } catch (err) {}
+      var fire = function () { track('generate_lead', { page_path: location.pathname, market: leadMarket, form: 'enquiry_thank_you' }); };
       if (loaded) setTimeout(fire, 800);
     }
   }
