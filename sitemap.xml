@@ -136,7 +136,7 @@
   <!-- Export destination pages — South Asia -->
   <url>
     <loc>https://www.ukcarsource.com/export-sri-lanka.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -254,61 +254,61 @@
   <!-- Export destination pages — Caribbean -->
   <url>
     <loc>https://www.ukcarsource.com/export-jamaica.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-barbados.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-trinidad.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-guyana.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-grenada.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-dominica.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-bahamas.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-saint-lucia.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-saint-kitts.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/export-saint-vincent.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -438,7 +438,7 @@
   </url>
   <url>
     <loc>https://www.ukcarsource.com/commercial-vehicle-export.html</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -474,13 +474,13 @@
   </url>
   <url>
     <loc>https://www.ukcarsource.com/trade-dealer-supply.html</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.ukcarsource.com/caribbean-vehicle-export.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -519,5 +519,11 @@
     <lastmod>2026-11-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.ukcarsource.com/toyota-hilux-commuter-export.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
