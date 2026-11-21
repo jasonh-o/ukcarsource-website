@@ -441,48 +441,18 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
       <div class="sidebar-card" id="country-enquiry">
         <h3>Export Enquiry: Dominica</h3>
         <form action="https://formspree.io/f/xwvzvndp" method="POST">
-          <div class="sidebar-enquiry-item">
-            <label>Your Name</label>
-            <input type="text" name="name" placeholder="Full name" required>
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="your@email.com" required>
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>Phone / WhatsApp</label>
-            <input type="tel" name="phone" placeholder="Include country code">
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>Vehicle Required</label>
-            <input type="text" name="vehicle" placeholder="Make, model, year, spec" required>
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>I am a</label>
-            <select name="buyer_type"><option value="">Select option</option><option>Dealer / importer</option><option>Fleet or company</option><option>Private buyer</option></select>
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>Payment</label>
-            <select name="payment"><option value="">Select option</option><option>Letter of Credit</option><option>Bank transfer (TT)</option><option>Not sure yet</option></select>
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>Budget (optional)</label>
-            <input type="text" name="budget" placeholder="e.g. £60,000 or US$75,000">
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>Shipping Preference</label>
-            <select name="shipping">
-              <option value="">Select option</option>
-              <option>RoRo Shipping</option>
-              <option>Container Shipping</option>
-              <option>Air Freight</option>
-              <option>Not sure, please advise</option>
-            </select>
-          </div>
-          <div class="sidebar-enquiry-item">
-            <label>Additional Notes</label>
-            <textarea name="message" placeholder="Any additional requirements..."></textarea>
-          </div>
+          <div class="sidebar-enquiry-item"><label for="ce-name" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Your Name</label><input type="text" id="ce-name" name="name" placeholder="Full name" autocomplete="name" required></div>
+          <div class="sidebar-enquiry-item"><label for="ce-email" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Email</label><input type="email" id="ce-email" name="email" placeholder="your@email.com" autocomplete="email" required></div>
+          <div class="sidebar-enquiry-item"><label for="ce-phone" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Phone / WhatsApp</label><input type="tel" id="ce-phone" name="phone" placeholder="Include country code" autocomplete="tel"></div>
+          <div class="sidebar-enquiry-item"><label for="ce-vehicle" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Vehicle Required</label><input type="text" id="ce-vehicle" name="vehicle" placeholder="Make, model, year, spec" required></div>
+          <div class="sidebar-enquiry-item"><label for="ce-port" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Destination Port</label><input type="text" id="ce-port" name="port" placeholder="e.g. Roseau"></div>
+          <div class="sidebar-enquiry-item"><label for="ce-buyer" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">I am a</label><select id="ce-buyer" name="buyer_type" required><option value="">Select option</option><option>Dealer / importer</option><option>Fleet or company</option><option>Private buyer</option></select></div>
+          <details><summary style="cursor:pointer;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#ccc;margin:4px 0 12px;list-style-position:inside">Add more details (optional)</summary>
+          <div class="sidebar-enquiry-item"><label for="ce-payment" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Payment</label><select id="ce-payment" name="payment"><option value="">Select option</option><option>Letter of Credit</option><option>Bank transfer (TT)</option><option>Not sure yet</option></select></div>
+          <div class="sidebar-enquiry-item"><label for="ce-shipping" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Shipping Preference</label><select id="ce-shipping" name="shipping"><option value="">Select option</option><option>RoRo Shipping</option><option>Container Shipping</option><option>Air Freight</option><option>Not sure, please advise</option></select><p style="font-size:.74rem;color:#999;line-height:1.5;margin:6px 0 0">RoRo: the car is driven onto a car-carrier ship, usually the lowest cost. Container: shipped inside a sealed container, recommended for prestige cars. Air freight: fastest, at a much higher cost.</p></div>
+          <div class="sidebar-enquiry-item"><label for="ce-message" style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange,#e07b20);margin-bottom:5px">Additional Notes</label><textarea id="ce-message" name="message" placeholder="Budget, colours, timing or anything else"></textarea></div>
+          </details>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
  <input type="hidden" name="_subject" value="Export Enquiry: Dominica">
  <input type="hidden" name="_next" value="https://www.ukcarsource.com/thank-you.html">
  <input type="hidden" name="destination" value="Dominica">
