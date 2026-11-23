@@ -79,14 +79,14 @@ p{font-size:clamp(.88rem,1vw,.92rem);color:#ccc;line-height:1.82;margin-bottom:1
 /* ARRIVALS SECTION */
 .arrivals-preview{padding:clamp(64px,8vw,100px) 0;background:var(--dark2)}
 .arrivals-inner{max-width:var(--max);margin:0 auto;padding:0 clamp(22px,6vw,80px)}
-.gallery-hero-img{width:100%;height:auto;display:block;margin-bottom:10px}
+.gallery-hero-img{width:100%;height:auto;display:block;margin-bottom:10px;object-fit:cover}
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;min-height:320px}
 .gi{overflow:hidden;border-radius:2px;aspect-ratio:4/3}
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .3s;filter:brightness(.82)}
 .gi img:hover{transform:scale(1.05);filter:brightness(1.05)}
-.gallery-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
-.gallery-dot{width:8px;height:8px;border-radius:50%;background:#2a2a2a;border:1px solid #444;cursor:pointer;transition:background .3s;padding:0}
-.gallery-dot.active{background:var(--orange);border-color:var(--orange)}
+.gallery-dots{display:flex;justify-content:center;gap:2px;margin-top:8px}
+.gallery-dot{width:24px;height:24px;border:0;padding:0;cursor:pointer;background:radial-gradient(circle,#2a2a2a 3.5px,#444 3.5px 4.5px,transparent 5px)}
+.gallery-dot.active{background:radial-gradient(circle,var(--orange) 4.5px,transparent 5px)}
 
 /* SOURCING INLINE SECTION */
 .home-sourcing{background:#000;display:grid;grid-template-columns:38% 1fr;min-height:70vh}
@@ -527,15 +527,15 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   <div style="max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,4vw,56px)">
     <div>
       <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;margin-bottom:12px">UK Car Sourcing</h2>
-      <p style="font-size:clamp(.82rem,.95vw,.88rem);color:#aaa;line-height:1.8;margin:0">UK Car Source provides a professional car sourcing service across the UK. Whether you're looking to source a prestige saloon, performance car, luxury SUV or specialist import, we locate the right vehicle from our established dealer and supplier network. <a href="sourcing.html" style="color:var(--orange);text-decoration:none">Car sourcing UK →</a></p>
+      <p style="font-size:clamp(.82rem,.95vw,.88rem);color:#aaa;line-height:1.8;margin:0">UK Car Source provides a professional car sourcing service across the UK. Whether you're looking to source a prestige saloon, performance car, luxury SUV or specialist import, we locate the right vehicle from our established dealer and supplier network. <a href="sourcing.html" style="color:var(--orange);text-decoration:underline;text-underline-offset:3px">Car sourcing UK →</a></p>
     </div>
     <div>
       <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;margin-bottom:12px">UK Car Export</h2>
-      <p style="font-size:clamp(.82rem,.95vw,.88rem);color:#aaa;line-height:1.8;margin:0">We export cars from the UK worldwide. Our UK car export service covers full export documentation and RoRo or container shipping to your destination port. Export or import a car from the UK with confidence. <a href="export.html" style="color:var(--orange);text-decoration:none">UK car export →</a></p>
+      <p style="font-size:clamp(.82rem,.95vw,.88rem);color:#aaa;line-height:1.8;margin:0">We export cars from the UK worldwide. Our UK car export service covers full export documentation and RoRo or container shipping to your destination port. Export or import a car from the UK with confidence. <a href="export.html" style="color:var(--orange);text-decoration:underline;text-underline-offset:3px">UK car export →</a></p>
     </div>
     <div>
       <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;margin-bottom:12px">Import a Car from the UK</h2>
-      <p style="font-size:clamp(.82rem,.95vw,.88rem);color:#aaa;line-height:1.8;margin:0">Looking to import a car from the UK? UK Car Source manages the entire process from sourcing to shipment. We export RHD and LHD vehicles to the Caribbean, Africa, SE Asia, the Middle East and beyond. Import your car from the UK with end-to-end support. <a href="contact.html" style="color:var(--orange);text-decoration:none">Get in touch →</a></p>
+      <p style="font-size:clamp(.82rem,.95vw,.88rem);color:#aaa;line-height:1.8;margin:0">Looking to import a car from the UK? UK Car Source manages the entire process from sourcing to shipment. We export RHD and LHD vehicles to the Caribbean, Africa, SE Asia, the Middle East and beyond. Import your car from the UK with end-to-end support. <a href="contact.html" style="color:var(--orange);text-decoration:underline;text-underline-offset:3px">Get in touch →</a></p>
     </div>
   </div>
 </div>
@@ -587,8 +587,8 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   // Gallery
   var ALL=['images/arrivals-page-gallery-1.webp','images/arrivals-page-gallery-2.webp','images/arrivals-page-gallery-3.webp','images/arrivals-page-gallery-4.webp','images/arrivals-page-gallery-6.webp','images/arrivals-page-gallery-5.webp','images/arrivals-page-gallery-7.webp','images/arrivals-page-gallery-8.webp','images/arrivals-page-gallery-9.webp','images/arrivals-page-gallery-10.webp','images/arrivals-page-gallery-11.webp','images/arrivals-page-gallery-12.webp'];
   var PER=6,DELAY=4000,grid=document.getElementById('gallery-grid'),dotsW=document.getElementById('gallery-dots'),valid=[],page=0,timer=null;
-  function testImg(s){return new Promise(function(r){var i=new Image();i.onload=function(){r(s)};i.onerror=function(){r(null)};i.src=s});}
-  function render(p){page=p;var sl=valid.slice(p*PER,p*PER+PER);grid.innerHTML='';sl.forEach(function(s){var d=document.createElement('div');d.className='gi';var img=document.createElement('img');img.src=s;img.alt='Vehicle';img.loading='lazy';d.appendChild(img);grid.appendChild(d);});document.querySelectorAll('.gallery-dot').forEach(function(d,i){d.classList.toggle('active',i===p);});}
+  function testImg(s){return new Promise(function(r){var i=new Image();i.onload=function(){r(s)};i.onerror=function(){r(null)};i.src=s.replace('.webp','-sm.webp')});}
+  function render(p){page=p;var sl=valid.slice(p*PER,p*PER+PER);grid.innerHTML='';sl.forEach(function(s){var d=document.createElement('div');d.className='gi';var img=document.createElement('img');img.src=s.replace('.webp','-sm.webp');img.srcset=s.replace('.webp','-sm.webp')+' 600w, '+s+' 1200w';img.sizes='(max-width:768px) 48vw, 380px';img.alt='Vehicle';img.loading='lazy';d.appendChild(img);grid.appendChild(d);});document.querySelectorAll('.gallery-dot').forEach(function(d,i){d.classList.toggle('active',i===p);});}
   function goTo(p){var t=Math.ceil(valid.length/PER);render((p+t)%t);}
   function startTimer(){timer=setInterval(function(){goTo(page+1);},DELAY);}
   Promise.all(ALL.map(testImg)).then(function(res){valid=res.filter(Boolean);if(!valid.length)return;var t=Math.ceil(valid.length/PER);dotsW.innerHTML='';if(t>1){for(var i=0;i<t;i++){(function(idx){var d=document.createElement('button');d.className='gallery-dot'+(idx===0?' active':'');d.setAttribute('aria-label','Page '+(idx+1));d.addEventListener('click',function(){goTo(idx);clearInterval(timer);startTimer();});dotsW.appendChild(d);})(i);}}render(0);if(t>1)startTimer();});
