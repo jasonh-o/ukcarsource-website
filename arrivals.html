@@ -102,6 +102,14 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   .whatsapp-text{display:none!important}
 }
 /* wa-standard */.whatsapp-btn{position:fixed!important;bottom:28px!important;right:28px!important;left:auto!important;z-index:999!important;display:flex!important;align-items:center!important;gap:10px!important;background:#25D366!important;color:#fff!important;text-decoration:none!important;padding:12px 18px 12px 14px!important;border-radius:50px!important;width:auto!important;height:auto!important;box-shadow:0 4px 20px rgba(37,211,102,.4)!important;font-family:'Barlow',sans-serif!important;font-size:.82rem!important;font-weight:600!important}.whatsapp-btn svg{width:22px!important;height:22px!important;fill:#fff!important;flex-shrink:0}.whatsapp-btn .wa-short{display:inline!important}.whatsapp-btn .wa-long{display:none!important}@media(max-width:768px){.whatsapp-btn{bottom:0!important;right:0!important;left:0!important;border-radius:0!important;justify-content:center!important;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px))!important;font-size:.92rem!important;box-shadow:0 -2px 16px rgba(0,0,0,.35)!important}.whatsapp-btn .wa-short{display:none!important}.whatsapp-btn .wa-long{display:inline!important}body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))!important}}
+.gi{cursor:zoom-in}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:10000}
+.lb.open{display:flex}
+.lb img{max-width:92vw;max-height:84vh;object-fit:contain;border-radius:2px}
+.lb button{position:absolute;background:none;border:0;color:#e9e4da;font-size:2.6rem;line-height:1;cursor:pointer;padding:12px 16px}
+.lb button:hover{color:#e07b20}
+.lb-x{top:10px;right:14px}.lb-p{left:8px;top:50%;transform:translateY(-50%)}.lb-n{right:8px;top:50%;transform:translateY(-50%)}
+.lb-c{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#8e8e8e;font-size:.8rem;letter-spacing:.12em}
 </style>
 <link rel="preload" as="image" href="images/arrivals-page-hero.webp">
 <meta property="og:title" content="Latest Vehicle Arrivals | Recent UK Car Source Deliveries">
@@ -172,27 +180,30 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
     <div class="cats-grid">
       <div class="cat-card">
         <h3>Prestige &amp; Luxury Saloons</h3>
-        <p>Bentley Continental, Rolls-Royce Ghost, Mercedes S-Class, BMW 7 Series, Audi A8. Sourced from UK dealer networks and European supply.</p>
+        <p><a href="bentley-export.html" style="color:var(--orange)">Bentley Continental</a>, <a href="rolls-royce-export.html" style="color:var(--orange)">Rolls-Royce Ghost</a>, <a href="mercedes-export.html" style="color:var(--orange)">Mercedes S-Class</a>, BMW 7 Series, Audi A8. Sourced from UK dealer networks and European supply.</p>
       </div>
       <div class="cat-card">
         <h3>Performance &amp; Sports Cars</h3>
-        <p>Porsche 911, Ferrari, Lamborghini Urus, McLaren, BMW M3/M4, Mercedes-AMG GT. Many sourced against specific build specifications or limited allocation.</p>
+        <p><a href="porsche-export.html" style="color:var(--orange)">Porsche 911</a>, Ferrari, Lamborghini Urus, McLaren, BMW M3/M4, Mercedes-AMG GT. Many sourced against specific build specifications or limited allocation.</p>
       </div>
       <div class="cat-card">
         <h3>Premium SUVs</h3>
-        <p>Range Rover SV, Land Rover Defender V8, Bentley Bentayga, Porsche Cayenne Turbo, Mercedes G-Class G63. High demand export models for SE Asia, Middle East and Caribbean.</p>
+        <p><a href="land-rover-export.html" style="color:var(--orange)">Range Rover SV</a>, Land Rover Defender V8, <a href="bentley-export.html" style="color:var(--orange)">Bentley Bentayga</a>, <a href="porsche-export.html" style="color:var(--orange)">Porsche Cayenne Turbo</a>, <a href="mercedes-export.html" style="color:var(--orange)">Mercedes G-Class G63</a>. High demand export models for SE Asia, Middle East and Caribbean.</p>
       </div>
       <div class="cat-card">
-        <h3>Japanese Imports</h3>
-        <p>Nissan GT-R, Toyota Land Cruiser, Subaru WRX STI, Lexus. Right-hand drive vehicles sourced from Japan for UK buyers and international clients.</p>
+        <h3>Left-Hand Drive from Germany</h3>
+        <p>New and used left-hand drive cars sourced in Germany for buyers in the UAE, Africa and other left-hand drive markets.</p>
+        <p style="margin:12px 0 0;font-size:.78rem;letter-spacing:.06em"><a href="cars-from-germany-export.html" style="color:var(--orange)">Cars from Germany →</a></p>
       </div>
       <div class="cat-card">
         <h3>Export Consignments</h3>
         <p>Multi-vehicle orders for repeat trade customers in Sri Lanka, Indonesia and Thailand. Full container and RoRo shipping managed end-to-end.</p>
+        <p style="margin:12px 0 0;font-size:.78rem;letter-spacing:.06em"><a href="trade-dealer-supply.html" style="color:var(--orange)">Trade supply →</a></p>
       </div>
       <div class="cat-card">
         <h3>Commercial &amp; Specialist</h3>
-        <p>Mercedes Sprinter, Toyota HiLux, Land Rover Defender commercial and specialist vehicles, sourced for export markets including Africa, the Caribbean and South Asia.</p>
+        <p>Mercedes Sprinter, <a href="toyota-hilux-commuter-export.html" style="color:var(--orange)">Toyota HiLux</a>, Land Rover Defender commercial and specialist vehicles, sourced for export markets including Africa, the Caribbean and South Asia.</p>
+        <p style="margin:12px 0 0;font-size:.78rem;letter-spacing:.06em"><a href="commercial-vehicle-export.html" style="color:var(--orange)">Commercial vehicles →</a></p>
       </div>
     </div>
   </div>
@@ -247,7 +258,20 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
   var ALL=['images/arrivals-page-gallery-1.webp','images/arrivals-page-gallery-2.webp','images/arrivals-page-gallery-3.webp','images/arrivals-page-gallery-4.webp','images/arrivals-page-gallery-6.webp','images/arrivals-page-gallery-5.webp','images/arrivals-page-gallery-7.webp','images/arrivals-page-gallery-8.webp','images/arrivals-page-gallery-9.webp','images/arrivals-page-gallery-10.webp','images/arrivals-page-gallery-11.webp','images/arrivals-page-gallery-12.webp'];
   var PER=6,DELAY=4000,grid=document.getElementById('gallery-grid'),dotsW=document.getElementById('gallery-dots'),valid=[],page=0,timer=null;
   function testImg(s){return new Promise(function(r){var i=new Image();i.onload=function(){r(s)};i.onerror=function(){r(null)};i.src=s.replace('.webp','-sm.webp')});}
-  function render(p){page=p;var sl=valid.slice(p*PER,p*PER+PER);grid.innerHTML='';sl.forEach(function(s){var d=document.createElement('div');d.className='gi';var img=document.createElement('img');img.src=s.replace('.webp','-sm.webp');img.srcset=s.replace('.webp','-sm.webp')+' 600w, '+s+' 1200w';img.sizes='(max-width:768px) 48vw, 380px';img.alt='Vehicle';img.loading='lazy';d.appendChild(img);grid.appendChild(d);});document.querySelectorAll('.gallery-dot').forEach(function(d,i){d.classList.toggle('active',i===p);});}
+  function render(p){page=p;var sl=valid.slice(p*PER,p*PER+PER);grid.innerHTML='';sl.forEach(function(s){var d=document.createElement('div');d.className='gi';var img=document.createElement('img');img.src=s.replace('.webp','-sm.webp');img.srcset=s.replace('.webp','-sm.webp')+' 600w, '+s+' 1200w';img.sizes='(max-width:768px) 48vw, 380px';img.alt='Prestige car collected on a transporter for export';img.loading='lazy';d.appendChild(img);d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label','View larger photo');(function(full){d.addEventListener('click',function(){openLb(valid.indexOf(full));});d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb(valid.indexOf(full));}});})(s);grid.appendChild(d);});document.querySelectorAll('.gallery-dot').forEach(function(d,i){d.classList.toggle('active',i===p);});}
+
+  var lb=document.createElement('div');lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','Photo viewer');
+  lb.innerHTML='<button class="lb-x" aria-label="Close">&times;</button><button class="lb-p" aria-label="Previous photo">&#8249;</button><img alt="Prestige car collected on a transporter for export"><button class="lb-n" aria-label="Next photo">&#8250;</button><div class="lb-c"></div>';
+  document.body.appendChild(lb);var lbImg=lb.querySelector('img'),lbC=lb.querySelector('.lb-c'),cur=0,lastFocus=null;
+  function showLb(i){cur=(i+valid.length)%valid.length;lbImg.src=valid[cur];lbC.textContent=(cur+1)+' / '+valid.length;}
+  function openLb(i){if(i<0)i=0;lastFocus=document.activeElement;clearInterval(timer);showLb(i);lb.classList.add('open');document.body.style.overflow='hidden';lb.querySelector('.lb-x').focus();}
+  function closeLb(){lb.classList.remove('open');document.body.style.overflow='';if(valid.length>PER)startTimer();if(lastFocus)lastFocus.focus();}
+  lb.querySelector('.lb-x').addEventListener('click',closeLb);
+  lb.querySelector('.lb-p').addEventListener('click',function(e){e.stopPropagation();showLb(cur-1);});
+  lb.querySelector('.lb-n').addEventListener('click',function(e){e.stopPropagation();showLb(cur+1);});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')showLb(cur-1);if(e.key==='ArrowRight')showLb(cur+1);});
+  var tx=null;lb.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});lb.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)showLb(cur+(dx<0?1:-1));tx=null;});
   function goTo(p){var t=Math.ceil(valid.length/PER);render((p+t)%t);}
   function startTimer(){timer=setInterval(function(){goTo(page+1);},DELAY);}
   Promise.all(ALL.map(testImg)).then(function(res){valid=res.filter(Boolean);if(!valid.length)return;var t=Math.ceil(valid.length/PER);dotsW.innerHTML='';if(t>1){for(var i=0;i<t;i++){(function(idx){var d=document.createElement('button');d.className='gallery-dot'+(idx===0?' active':'');d.setAttribute('aria-label','Page '+(idx+1));d.addEventListener('click',function(){goTo(idx);clearInterval(timer);startTimer();});dotsW.appendChild(d);})(i);}}render(0);if(t>1)startTimer();});
