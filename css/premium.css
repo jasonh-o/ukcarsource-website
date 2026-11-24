@@ -1,5 +1,5 @@
 /* UK Car Source — premium refinement (DRAFT).
-   One restrained palette: black, white and soft ivory. Orange is kept for the logo only.
+   One restrained palette: black, white and soft ivory. Orange is kept for the logo and as a soft underline on text links.
    WhatsApp/LINE keep their recognisable green, but only as a small icon accent on dark buttons. */
 :root{--ivory:#e9e4da;--line:rgba(255,255,255,.16);--muted:#8e8e8e}
 
@@ -9,7 +9,7 @@ h1 span,h2 span,.hero-title span,.section-title span,h1 span[style*="orange"],h2
 .divider{background:var(--line)!important;height:1px!important;width:40px!important}
 
 /* Inline links that were orange */
-a[style*="color:var(--orange)"]{color:var(--ivory)!important;text-decoration:underline;text-decoration-color:rgba(233,228,218,.35);text-underline-offset:3px}
+a[style*="color:var(--orange)"]{color:var(--ivory)!important;text-decoration:underline;text-decoration-color:rgba(224,123,32,.6);text-underline-offset:3px;transition:color .2s}a[style*="color:var(--orange)"]:hover{color:#e07b20!important;text-decoration-color:#e07b20}
 
 /* Navigation: active item marked with a fine underline, not colour */
 .nav-links a.active,.nav-links a:hover{color:#fff!important;text-decoration:underline;text-decoration-color:rgba(255,255,255,.45);text-underline-offset:6px}
