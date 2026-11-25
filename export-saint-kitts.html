@@ -265,7 +265,12 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
 </script>
 <script src="/js/analytics.js" defer></script>
 <link rel="stylesheet" href="/css/premium.css?v=20261031">
-</head>
+<style>.hx{position:relative}.xt{display:inline-block;background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:4px 2px 4px 5px;line-height:1}.xt::after{content:"";display:inline-block;width:5px;height:5px;border-right:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:translateY(-3px) rotate(45deg)}
+.xm{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#0b0b0b;border:1px solid #2a2a2a;border-radius:4px;padding:20px 24px;gap:34px;box-shadow:0 14px 40px rgba(0,0,0,.7);z-index:1001}.hx::after{content:"";position:absolute;left:-30px;right:-30px;top:100%;height:14px;display:none}
+.xm b{display:block;font-family:'Barlow',sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#999;font-weight:600;margin-bottom:8px}.nav-links .xm a{display:block;border:0!important;padding:7px 0!important;font-size:.86rem!important;letter-spacing:.02em!important;text-transform:none!important;color:#eee!important}.nav-links .xm a:hover,.nav-links .xm a:focus{text-decoration:underline!important;text-underline-offset:4px}
+@media(min-width:1001px){.xt{padding:0 2px 0 5px;height:8px;line-height:8px;vertical-align:baseline}.xm{margin-top:10px}.hx:hover .xm,.hx:focus-within .xm,.hx.o .xm{display:flex}.hx:hover::after{display:block}.hx.c .xm{display:none!important}}
+@media(max-width:1000px){.nav-links{max-height:calc(100vh - 70px);overflow-y:auto}.hx{display:flex;flex-wrap:wrap;align-items:center}.hx>a{flex:1}.xt{padding:14px 26px}.hx.o .xt::after{transform:translateY(1px) rotate(225deg)}.xm{position:static;transform:none;width:100%;border:0;border-radius:0;box-shadow:none;padding:4px 24px 14px 36px;gap:0;background:#111}.hx.o .xm{display:block}.xm b{margin:12px 0 2px}}
+</style></head>
 <body>
 <nav id="main-nav">
   <a href="/" class="logo-wrap">
@@ -278,7 +283,7 @@ footer{background:#050505;border-top:1px solid #181818;padding:clamp(22px,2.5vw,
     <li><a href="about.html">About Us</a></li>
     <li><a href="arrivals.html">Arrivals</a></li>
     <li><a href="sourcing.html">Sourcing</a></li>
-    <li><a href="export.html" class="active">Export</a></li>
+    <li class="hx"><a href="export.html" class="active">Export</a><button type="button" class="xt" aria-label="Show export menu" aria-expanded="false" aria-controls="xm"></button><div class="xm" id="xm"><div><b>Buy</b><a href="/export.html">All export</a><a href="/uk-cars-for-export.html">UK export cars</a><a href="/toyota-hilux-commuter-export.html">New Toyota</a><a href="/kia-hybrid-caribbean-dealers.html">New Kia hybrids</a><a href="/cars-from-germany-export.html">Left-hand drive</a><a href="/commercial-vehicle-export.html">Commercial</a><a href="/parts.html">Parts</a></div><div><b>Prestige</b><a href="/rolls-royce-export.html">Rolls-Royce</a><a href="/bentley-export.html">Bentley</a><a href="/mercedes-export.html">Mercedes-Benz</a><a href="/land-rover-export.html">Land Rover</a><a href="/porsche-export.html">Porsche</a></div><div><b>Where</b><a href="/export.html#destinations">All countries</a><a href="/asia-rhd-vehicle-export.html">Asia</a><a href="/caribbean-vehicle-export.html">Caribbean</a></div></div></li>
     <li><a href="trade-dealer-supply.html">Trade</a></li>
     <li><a href="market-insights.html">Insights</a></li>
     <li><a href="guides.html">Guides</a></li>
@@ -575,5 +580,5 @@ window.addEventListener('scroll',()=>{document.getElementById('main-nav').classL
 document.getElementById('nav-toggle').addEventListener('click',()=>{document.getElementById('nav-links').classList.toggle('open')});
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav-links').classList.remove('open')));
 </script>
-</body>
+<script>(function(){var h=document.querySelector(".hx");if(!h)return;var b=h.querySelector(".xt");function s(o){h.classList.toggle("o",o);b.setAttribute("aria-expanded",o)}b.onclick=function(e){e.preventDefault();e.stopPropagation();h.classList.remove("c");s(!h.classList.contains("o"))};document.addEventListener("click",function(e){if(!h.contains(e.target))s(false)});h.addEventListener("keydown",function(e){if(e.key=="Escape"){s(false);h.classList.add("c");b.focus()}});h.addEventListener("mouseleave",function(){h.classList.remove("c")})})();</script></body>
 </html>
