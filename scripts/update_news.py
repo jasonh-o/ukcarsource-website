@@ -20,7 +20,7 @@ FEEDS = [
 # Only headlines mentioning the brands we source are shown.
 PRIORITY = re.compile(
     r"range rover|land rover|defender|bentley|rolls-royce|porsche|mercedes|amg|bmw|audi|"
-    r"toyota|land cruiser|hilux|lexus|mclaren|aston martin|ferrari|lamborghini",
+    r"toyota|land cruiser|hilux|kia|mazda|hyundai|jaecoo|omoda|mustang|ferrari|lamborghini",
     re.I,
 )
 # Photo galleries and videos duplicate the main story.
