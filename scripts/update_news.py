@@ -17,10 +17,10 @@ FEEDS = [
     ("Auto Express", "https://www.autoexpress.co.uk/feed/all"),
     ("Motor1 UK", "https://uk.motor1.com/rss/news/all/"),
 ]
-# Headlines mentioning the brands we source are shown first.
+# Only headlines mentioning the brands we source are shown.
 PRIORITY = re.compile(
-    r"range rover|land rover|defender|bentley|rolls-royce|porsche|mercedes|amg|bmw|"
-    r"toyota|land cruiser|hilux|lexus|mclaren|aston martin|ferrari|lamborghini|price",
+    r"range rover|land rover|defender|bentley|rolls-royce|porsche|mercedes|amg|bmw|audi|"
+    r"toyota|land cruiser|hilux|lexus|mclaren|aston martin|ferrari|lamborghini",
     re.I,
 )
 # Photo galleries and videos duplicate the main story.
@@ -52,7 +52,7 @@ def fetch(source, url):
 def pick(items):
     items.sort(key=lambda i: i["date"] or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
     seen, chosen, per_source = set(), [], {}
-    for want_priority in (True, False):
+    for want_priority in (True,):
         for i in items:
             key = i["title"].lower()
             if key in seen or bool(PRIORITY.search(i["title"])) != want_priority:
@@ -79,7 +79,7 @@ def render(items):
     <ul class="news-list">
 {rows}
     </ul>
-    <p class="news-note">Headlines from Autocar, Auto Express and Motor1 UK, updated daily. Links open the original article.</p>
+    <p class="news-note">Headlines about the brands we source, from Autocar, Auto Express and Motor1 UK, updated daily. Links open the original article.</p>
   </div>
   {END}"""
 
